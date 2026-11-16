@@ -1,0 +1,3102 @@
+
+
+local _0x0515, _0xAF53 = 10772794231, 117419079466193
+
+
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+do
+    local _0x1747 = os.clock()
+    while game.GameId == 0 and game.PlaceId == 0 and os.clock() - _0x1747 < 60 do task.wait(0.2) end
+end
+if game.GameId ~= _0x0515 and game.PlaceId ~= _0xAF53 then
+    warn(string.char(91,84,119,111,75,93,32,82,97,121,99,105,116,121,32,104,117,98,58,32,110,111,116,32,105,110,32,82,97,121,99,105,116,121,32,82,66,44,32,110,111,116,32,108,111,97,100,105,110,103))
+    return
+end
+
+
+local _0xA9F9 = tick()
+if _G.TwoKRaycityCleanup then
+    pcall(_G.TwoKRaycityCleanup)
+    task.wait(0.3)
+end
+_G.TwoKRaycityToken = _0xA9F9
+_G.TwoKRaycityRunning = true
+
+local function _0x198E()
+    return _G.TwoKRaycityRunning and _G.TwoKRaycityToken == _0xA9F9
+end
+
+local _0xCDE5, _0xFFE8 = {}, {}
+local function _0x189E(_0x5FF8)
+    table.insert(_0xCDE5, _0x5FF8)
+    return _0x5FF8
+end
+local function _0x4F8F(_0x94B8)
+    table.insert(_0xFFE8, _0x94B8)
+end
+
+_G.TwoKRaycityCleanup = function()
+    _G.TwoKRaycityRunning = false
+    _G.TwoKRaycityToken = nil
+    for _0xB1B4, _0x94B8 in ipairs(_0xFFE8) do pcall(_0x94B8) end
+    table.clear(_0xFFE8)
+    for _0xB1B4, _0x5FF8 in ipairs(_0xCDE5) do pcall(function() _0x5FF8:Disconnect() end) end
+    table.clear(_0xCDE5)
+end
+
+
+local _0x8EFC = game:GetService(string.char(80,108,97,121,101,114,115))
+local _0x8DBA = game:GetService(string.char(82,101,112,108,105,99,97,116,101,100,83,116,111,114,97,103,101))
+local _0x5C1F = game:GetService(string.char(72,116,116,112,83,101,114,118,105,99,101))
+
+
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+local _0x0683 = _0x8EFC.LocalPlayer
+while not _0x0683 do
+    task.wait(0.1)
+    _0x0683 = _0x8EFC.LocalPlayer
+end
+_0x0683:WaitForChild(string.char(80,108,97,121,101,114,71,117,105), 60)
+
+local _0x05A2 = (getrenv and getrenv()) or _G
+local function _0xBFFC()
+    return (_0x05A2 and _0x05A2.shared) or shared
+end
+
+pcall(function()
+    local _0x70D9 = game:GetService(string.char(86,105,114,116,117,97,108,85,115,101,114))
+    _0x189E(_0x0683.Idled:Connect(function()
+        _0x70D9:CaptureController()
+        _0x70D9:ClickButton2(Vector2.new())
+    end))
+end)
+
+
+local _0x1E35 = {
+    AutoMission = false,
+    AutoCoin = false,
+    PickMoney = true,
+    PickSP = true,
+    PickItem = true,
+    NoTraffic = false,
+    CruiseKmh = 130,
+    NoProps = true,
+    AutoGetItems = true,
+    AutoStore = true,
+    AutoSell = true,
+    AutoSellAll = false,
+    SendTarget = "",
+    SendAmount = 10000,
+    AutoSend = false,
+    SendKeep = 0,
+    AutoTakeMail = false,
+    HudScale = 1,
+    AutoBoost = true,
+    BoostKeepSP = 20,
+    FastCorners = true,
+    No3D = false,
+    CapFps = false,
+    FpsCap = 30,
+    SellKeep = 1,
+    MissionPick = string.char(224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180,32,40,224,184,167,224,184,153,224,184,151,224,184,184,224,184,129,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,41),
+    KeepUploading = true,
+    AutoEnter = true,
+    CoinRange = 600,
+}
+local _0x897E = { AutoMission = true, AutoCoin = true }
+local _0x12E6, _0xB352 = string.char(50,75,83,99,114,105,112,116,95,82,97,121,99,105,116,121), string.char(50,75,83,99,114,105,112,116,95,82,97,121,99,105,116,121,47,99,111,110,102,105,103,46,106,115,111,110)
+
+pcall(function()
+    if not (isfile and readfile and isfile(_0xB352)) then return end
+    local _0x287D = _0x5C1F:JSONDecode(readfile(_0xB352))
+    for _0x18D6, _0x21D3 in pairs(_0x287D) do
+        if _0x1E35[_0x18D6] ~= nil and not _0x897E[_0x18D6] and type(_0x21D3) == type(_0x1E35[_0x18D6]) then _0x1E35[_0x18D6] = _0x21D3 end
+    end
+end)
+
+
+
+
+
+local _0xEC95 = _0x12E6 .. string.char(47,112,114,111,102,105,108,101,115)
+local _0x419A = _0x12E6 .. string.char(47,97,117,116,111,108,111,97,100,46,116,120,116)
+
+local function _0xBFC8(_0x8C9A)
+    _0x8C9A = tostring(_0x8C9A or ""):gsub(string.char(91,47,92,58,37,42,37,63,34,60,62,124,93), ""):gsub(string.char(94,37,115,43), ""):gsub(string.char(37,115,43,36), "")
+    return _0x8C9A ~= "" and _0x8C9A:sub(1, 40) or nil
+end
+
+local function _0xC77B()
+    local _0x7CA8 = {}
+    pcall(function()
+        if not (listfiles and isfolder and isfolder(_0xEC95)) then return end
+        for _0xB1B4, _0x2828 in ipairs(listfiles(_0xEC95)) do
+            local _0x8C9A = tostring(_0x2828):match(string.char(40,91,94,47,92,93,43,41,37,46,106,115,111,110,36))
+            if _0x8C9A then _0x7CA8[#_0x7CA8 + 1] = _0x8C9A end
+        end
+    end)
+    table.sort(_0x7CA8, function(_0x2C46, _0x6A39) return _0x2C46:lower() < _0x6A39:lower() end)
+    return _0x7CA8
+end
+
+local function _0x1798(_0x8C9A)
+    _0x8C9A = _0xBFC8(_0x8C9A)
+    if not _0x8C9A then return false, string.char(224,184,149,224,184,177,224,185,137,224,184,135,224,184,138,224,184,183,224,185,136,224,184,173,32,99,111,110,102,105,103,32,224,184,129,224,185,136,224,184,173,224,184,153) end
+    if not writefile then return false, string.char(101,120,101,99,117,116,111,114,32,224,184,153,224,184,181,224,185,137,224,185,128,224,184,130,224,184,181,224,184,162,224,184,153,224,185,132,224,184,159,224,184,165,224,185,140,224,185,132,224,184,161,224,185,136,224,185,132,224,184,148,224,185,137) end
+    local _0xFDD5, _0x29E8 = pcall(function()
+        if makefolder and isfolder then
+            if not isfolder(_0x12E6) then makefolder(_0x12E6) end
+            if not isfolder(_0xEC95) then makefolder(_0xEC95) end
+        end
+        local _0x7CA8 = {}
+        for _0x18D6, _0x21D3 in pairs(_0x1E35) do _0x7CA8[_0x18D6] = _0x21D3 end
+        writefile(_0xEC95 .. string.char(47) .. _0x8C9A .. string.char(46,106,115,111,110), _0x5C1F:JSONEncode(_0x7CA8))
+    end)
+    return _0xFDD5, _0xFDD5 and _0x8C9A or tostring(_0x29E8)
+end
+
+local function _0x87F9(_0x8C9A)
+    _0x8C9A = _0xBFC8(_0x8C9A)
+    if not (_0x8C9A and isfile and readfile) then return nil end
+    local _0x2828 = _0xEC95 .. string.char(47) .. _0x8C9A .. string.char(46,106,115,111,110)
+    if not isfile(_0x2828) then return nil end
+    local _0xFDD5, _0x287D = pcall(function() return _0x5C1F:JSONDecode(readfile(_0x2828)) end)
+    return _0xFDD5 and type(_0x287D) == string.char(116,97,98,108,101) and _0x287D or nil
+end
+
+
+local function _0xDDA9(_0x287D)
+    local _0xAC71 = 0
+    for _0x18D6, _0x21D3 in pairs(_0x287D or {}) do
+        if _0x1E35[_0x18D6] ~= nil and type(_0x21D3) == type(_0x1E35[_0x18D6]) then
+            _0x1E35[_0x18D6] = _0x21D3
+            _0xAC71 += 1
+        end
+    end
+    return _0xAC71
+end
+
+local function _0x228E(_0x8C9A)
+    _0x8C9A = _0xBFC8(_0x8C9A)
+    if not (_0x8C9A and delfile and isfile) then return false end
+    local _0x2828 = _0xEC95 .. string.char(47) .. _0x8C9A .. string.char(46,106,115,111,110)
+    if not isfile(_0x2828) then return false end
+    return (pcall(delfile, _0x2828))
+end
+
+local function _0x5901()
+    local _0xFDD5, _0x21D3 = pcall(function()
+        return isfile and readfile and isfile(_0x419A) and readfile(_0x419A) or nil
+    end)
+    return _0xFDD5 and _0xBFC8(_0x21D3) or nil
+end
+
+local function _0xD339(_0x8C9A)
+    pcall(function()
+        if not _0x8C9A then
+            if delfile and isfile and isfile(_0x419A) then delfile(_0x419A) end
+            return
+        end
+        if makefolder and isfolder and not isfolder(_0x12E6) then makefolder(_0x12E6) end
+        writefile(_0x419A, _0x8C9A)
+    end)
+end
+
+do
+    local _0x8C9A = _0x5901()
+    local _0x287D = _0x8C9A and _0x87F9(_0x8C9A)
+    if _0x287D then _0xDDA9(_0x287D) end
+end
+
+local _0x3AD1 = false
+local function _0x51BB()
+    if _0x3AD1 or not writefile then return end
+    _0x3AD1 = true
+    task.delay(1, function()
+        _0x3AD1 = false
+        pcall(function()
+            if makefolder and isfolder and not isfolder(_0x12E6) then makefolder(_0x12E6) end
+            local _0x7CA8 = {}
+            for _0x18D6, _0x21D3 in pairs(_0x1E35) do
+                if not _0x897E[_0x18D6] then _0x7CA8[_0x18D6] = _0x21D3 end
+            end
+            writefile(_0xB352, _0x5C1F:JSONEncode(_0x7CA8))
+        end)
+    end)
+end
+
+local _0xCA58 = {
+    Mission = string.char(224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136),
+    Coin = string.char(224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136),
+    MissionsDone = 0,
+    MissionsFailed = 0,
+    Coins = 0,
+    Gauge = nil,
+    Remaining = nil,
+}
+
+
+
+
+
+
+
+
+local function _0x5F47(_0xC28F)
+    if getconnections then
+        local _0xAC71 = 0
+        for _0xB1B4, sig in ipairs({ string.char(65,99,116,105,118,97,116,101,100), string.char(77,111,117,115,101,66,117,116,116,111,110,49,67,108,105,99,107) }) do
+            local _0xFDD5, _0xDA3D = pcall(getconnections, _0xC28F[sig])
+            if _0xFDD5 and type(_0xDA3D) == string.char(116,97,98,108,101) then
+                for _0xB1B4, _0x5FF8 in ipairs(_0xDA3D) do
+                    if _0x5FF8.Function then pcall(_0x5FF8.Function); _0xAC71 += 1 end
+                end
+            end
+            if _0xAC71 > 0 then return true end
+        end
+    end
+    if firesignal and pcall(firesignal, _0xC28F.Activated) then return true end
+    return pcall(function()
+        local _0x74A3 = game:GetService(string.char(86,105,114,116,117,97,108,73,110,112,117,116,77,97,110,97,103,101,114))
+        local _0xFBF6 = game:GetService(string.char(71,117,105,83,101,114,118,105,99,101)):GetGuiInset()
+        local _0xAA62 = _0xC28F.AbsolutePosition + _0xC28F.AbsoluteSize / 2 + _0xFBF6
+        _0x74A3:SendMouseButtonEvent(_0xAA62.X, _0xAA62.Y, 0, true, game, 0)
+        task.wait(0.05)
+        _0x74A3:SendMouseButtonEvent(_0xAA62.X, _0xAA62.Y, 0, false, game, 0)
+    end)
+end
+
+local function _0x6ACF(_0x26A1)
+    if not (_0x26A1 and _0x26A1.Parent) then return false end
+    local _0xAA62 = _0x26A1
+    while _0xAA62 and not _0xAA62:IsA(string.char(76,97,121,101,114,67,111,108,108,101,99,116,111,114)) do
+        if _0xAA62:IsA(string.char(71,117,105,79,98,106,101,99,116)) and not _0xAA62.Visible then return false end
+        _0xAA62 = _0xAA62.Parent
+    end
+    return _0xAA62 == nil or (_0xAA62:IsA(string.char(83,99,114,101,101,110,71,117,105)) and _0xAA62.Enabled)
+end
+
+
+
+
+
+local function _0x31EA()
+    local _0x42DC = _0x0683:FindFirstChildOfClass(string.char(80,108,97,121,101,114,71,117,105))
+    local _0x08E8 = _0x42DC and _0x42DC:FindFirstChild(string.char(82,97,121,99,105,116,121,69,110,116,114,121,67,104,97,110,110,101,108))
+    local _0x5050 = _0x42DC and _0x42DC:FindFirstChild(string.char(82,97,121,99,105,116,121,67,104,97,110,110,101,108))
+    if not (_0x08E8 and _0x08E8.Enabled) then return nil end
+    
+    local _0x3C8E = _0x08E8:FindFirstChild(string.char(67,111,110,110,101,99,116), true)
+    if not (_0x3C8E and _0x3C8E:IsA(string.char(71,117,105,66,117,116,116,111,110))) and _0x5050 then
+        _0x3C8E = _0x5050:FindFirstChild(string.char(67,111,110,110,101,99,116), true)
+    end
+    if not (_0x3C8E and _0x3C8E:IsA(string.char(71,117,105,66,117,116,116,111,110))) then return nil end
+    local _0x8367, _0xC7C3
+    for _0xB1B4, _0x34C1 in ipairs(_0x08E8:GetDescendants()) do
+        if _0x34C1:IsA(string.char(71,117,105,66,117,116,116,111,110)) and _0x34C1.Name:match(string.char(94,67,104,97,110,110,101,108,37,100,43,36)) then
+            local _0xFF8A = _0x34C1:FindFirstChild(string.char(67,111,117,110,116), true)
+            local _0x2B24 = _0x34C1:FindFirstChild(string.char(77,115), true)
+            local _0x2C46, _0x6A39 = tostring(_0xFF8A and _0xFF8A.Text or ""):match(string.char(40,37,100,43,41,37,115,42,47,37,115,42,40,37,100,43,41))
+            _0x2C46, _0x6A39 = tonumber(_0x2C46), tonumber(_0x6A39)
+            local _0x0CF8 = tonumber(tostring(_0x2B24 and _0x2B24.Text or ""):match(string.char(40,37,100,43,41))) or 999
+            if _0x2C46 and _0x6A39 and _0x2C46 < _0x6A39 then
+                local _0x7CAD = _0x2C46 * 1000 + _0x0CF8
+                if not _0xC7C3 or _0x7CAD < _0xC7C3 then _0x8367, _0xC7C3 = _0x34C1, _0x7CAD end
+            end
+        end
+    end
+    return _0x3C8E, _0x8367
+end
+
+_0xCA58.Enter = string.char(45)
+task.spawn(function()
+    if not _0x1E35.AutoEnter then return end
+    local _0x1747 = os.clock()
+    local _0x5E00 = 0
+    while _0x198E() and os.clock() - _0x1747 < 300 do
+        if workspace:FindFirstChild(string.char(77,121,67,97,114)) and not _0x0683.PlayerGui:FindFirstChild(string.char(82,97,121,99,105,116,121,83,116,97,114,116,101,114,71,117,105)) then
+            _0xCA58.Enter = string.char(224,185,128,224,184,130,224,185,137,224,184,178,224,185,128,224,184,129,224,184,161,224,185,129,224,184,165,224,185,137,224,184,167)
+            break
+        end
+        local _0x42DC = _0x0683.PlayerGui
+        
+        local _0x035D = _0x42DC:FindFirstChild(string.char(82,97,121,99,105,116,121,67,117,116,115,99,101,110,101,83,107,105,112)) or game:GetService(string.char(67,111,114,101,71,117,105)):FindFirstChild(string.char(82,97,121,99,105,116,121,67,117,116,115,99,101,110,101,83,107,105,112), true)
+        local _0x4166 = _0x035D and _0x035D:FindFirstChild(string.char(83,107,105,112), true)
+        if _0x4166 and _0x4166:IsA(string.char(71,117,105,66,117,116,116,111,110)) then
+            _0xCA58.Enter = string.char(224,184,130,224,185,137,224,184,178,224,184,161,224,184,173,224,184,153,224,184,180,224,185,128,224,184,161,224,184,138,224,184,177,224,184,153)
+            _0x5F47(_0x4166)
+            pcall(function()
+                local _0x74A3 = game:GetService(string.char(86,105,114,116,117,97,108,73,110,112,117,116,77,97,110,97,103,101,114))
+                _0x74A3:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
+                task.wait(0.05)
+                _0x74A3:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
+            end)
+        end
+        
+        if os.clock() - _0x5E00 > 6 then
+            local _0x3C8E, _0x1EF2 = _0x31EA()
+            if _0x3C8E and _0x1EF2 then
+                _0x5E00 = os.clock()
+                local _0x1273 = _0x1EF2:FindFirstChild(string.char(84,101,120,116), true)
+                _0xCA58.Enter = string.char(224,185,128,224,184,130,224,185,137,224,184,178,32) .. tostring(_0x1273 and _0x1273.Text or _0x1EF2.Name)
+                _0x5F47(_0x1EF2)
+                task.wait(0.5)
+                _0x5F47(_0x3C8E)
+            end
+        end
+        
+        local _0x9FDA = _0x42DC:FindFirstChild(string.char(82,97,121,99,105,116,121,83,116,97,114,116,101,114,71,117,105))
+        local _0xCCC3 = _0x9FDA and _0x9FDA:FindFirstChild(string.char(98,116,71,97,109,101,83,116,97,114,116), true)
+        if _0xCCC3 and _0xCCC3:IsA(string.char(71,117,105,66,117,116,116,111,110)) and _0x6ACF(_0xCCC3) then
+            _0xCA58.Enter = string.char(224,184,129,224,184,148,224,185,128,224,184,163,224,184,180,224,185,136,224,184,161,224,185,128,224,184,129,224,184,161,224,184,148,224,185,137,224,184,167,224,184,162,224,184,149,224,184,177,224,184,167,224,184,165,224,184,176,224,184,132,224,184,163,224,184,153,224,184,181,224,185,137)
+            _0x5F47(_0xCCC3)
+            task.wait(2)
+        end
+        task.wait(0.5)
+    end
+end)
+
+
+
+local _0x39EE = require(_0x8DBA:WaitForChild(string.char(82,97,121,99,105,116,121,85,105)):WaitForChild(string.char(65,117,116,111,68,114,105,118,101)))
+local _0x4E84
+for _0xB1B4, _0x94B8 in ipairs({ _0x39EE.start, _0x39EE.isActive, _0x39EE.stop }) do
+    for _0xB1B4, _0x21D3 in pairs(debug.getupvalues(_0x94B8)) do
+        if type(_0x21D3) == string.char(116,97,98,108,101) and rawget(_0x21D3, string.char(97,99,116,105,118,101)) ~= nil then
+            _0x4E84 = _0x21D3
+            break
+        end
+    end
+    if _0x4E84 then break end
+end
+
+
+
+local _0x8A59 = _0x39EE.C and _0x39EE.C.maxSpeed
+local function _0x4D6D()
+    if _0x39EE.C and _0x8A59 then
+        _0x39EE.C.maxSpeed = math.max(_0x8A59, _0x1E35.CruiseKmh / 3.6)
+    end
+end
+_0x4D6D()
+_0x4F8F(function()
+    if _0x39EE.C and _0x8A59 then _0x39EE.C.maxSpeed = _0x8A59 end
+end)
+
+local function _0xDA59() return workspace:FindFirstChild(string.char(77,121,67,97,114)) end
+local function _0xF6D9(_0x8C9A)
+    local _0x1938 = _0xDA59()
+    local _0xAA62 = _0x1938 and _0x1938:FindFirstChild(_0x8C9A)
+    return (_0xAA62 and _0xAA62:IsA(string.char(66,97,115,101,80,97,114,116))) and _0xAA62 or nil
+end
+local function _0x33D7(_0x2C46, _0x6A39) return ((_0x2C46 - _0x6A39) * Vector3.new(1, 0, 1)).Magnitude end
+
+local function _0x2B79()
+    pcall(function()
+        require(_0x8DBA.RaycityMultiplayer.RemoteCars).PAUSE_WHEN_UNFOCUSED = not _0x1E35.KeepUploading
+    end)
+end
+_0x2B79()
+_0x4F8F(function()
+    pcall(function()
+        require(_0x8DBA.RaycityMultiplayer.RemoteCars).PAUSE_WHEN_UNFOCUSED = true
+    end)
+end)
+
+local function _0x790D() pcall(_0x39EE.stop, string.char(50,107)) end
+local function _0xEE9E()
+    local _0xFDD5, _0x21D3 = pcall(_0x39EE.isActive)
+    return _0xFDD5 and _0x21D3
+end
+local function _0xD786(_0xF405)
+    if not _0x4E84 then return false end
+    _0x790D()
+    _0x4E84.pending = { _0xF405 = _0xF405 }
+    local _0xFDD5, _0x068E = pcall(_0x39EE.start)
+    return _0xFDD5 and _0x068E ~= false
+end
+
+local function _0x4D01(_0xF8AE, _0x6A39, _0xEC3F)
+    local _0x1938 = _0xDA59()
+    if not _0x1938 then return end
+    _0x1938:SetAttribute(string.char(65,117,116,111,84,104,114,111,116,116,108,101), _0xF8AE)
+    _0x1938:SetAttribute(string.char(65,117,116,111,66,114,97,107,101), _0x6A39)
+    _0x1938:SetAttribute(string.char(65,117,116,111,83,116,101,101,114), _0xEC3F)
+end
+local function _0x7C78()
+    local _0x1938 = _0xDA59()
+    if not _0x1938 then return end
+    for _0xB1B4, _0x18D6 in ipairs({ string.char(65,117,116,111,84,104,114,111,116,116,108,101), string.char(65,117,116,111,66,114,97,107,101), string.char(65,117,116,111,83,116,101,101,114) }) do _0x1938:SetAttribute(_0x18D6, nil) end
+end
+_0x4F8F(function()
+    _0x790D()
+    _0x7C78()
+end)
+
+local function _0x130B(_0x21D3) return math.atan2(-_0x21D3.X, -_0x21D3.Z) end
+
+local function _0x96A7(_0x9366, _0x82DA)
+    local _0xE9C7 = (_0x82DA - _0x9366.Position) * Vector3.new(1, 0, 1)
+    local _0x29E8 = _0x130B(_0xE9C7) - _0x130B(_0x9366.CFrame.LookVector)
+    _0x29E8 = (_0x29E8 + math.pi) % (2 * math.pi) - math.pi
+    return math.deg(_0x29E8), _0xE9C7.Magnitude
+end
+
+
+
+
+local function _0x565B(getPos, radius, _0x49D3, stopCond, rolling)
+    local _0x9366 = _0xF6D9(string.char(72,117,108,108))
+    if not _0x9366 then return false end
+    local _0x1747 = os.clock()
+    local _0xA9AC = false
+    local _0xE76C, _0x6858 = nil, 0
+    while os.clock() - _0x1747 < _0x49D3 and _0x198E() do
+        if stopCond and stopCond() then _0xA9AC = true break end
+        local _0x82DA = getPos()
+        if not _0x82DA or not _0x9366.Parent then break end
+        local _0x2D19, _0x8530 = _0x96A7(_0x9366, _0x82DA)
+        if _0x8530 <= radius then _0xA9AC = true break end
+        local _0x405C = _0x9366.AssemblyLinearVelocity.Magnitude
+
+        if _0x405C < 3 and os.clock() - _0x1747 > 1 then
+            _0xE76C = _0xE76C or os.clock()
+            if os.clock() - _0xE76C > 1.2 then
+                _0x6858 += 1
+                if _0x6858 > 2 then
+                    _0x4D01(0, 1, 0)
+                    task.wait(0.3)
+                    _0x7C78()
+                    return string.char(115,116,117,99,107)
+                end
+                
+                _0x4D01(0, 1, -math.clamp(_0x2D19 / 25, -1, 1))
+                task.wait(0.9)
+                _0xE76C = nil
+            end
+        else
+            _0xE76C = nil
+        end
+
+        local _0x1F47, _0x3F79 = 0.7, 0
+        local _0x8213 = math.abs(_0x2D19)
+        if _0x8213 > 70 then
+            _0x1F47 = 0.3
+        elseif _0x8213 > 30 then
+            _0x1F47 = 0.5
+        end
+        
+        if _0x8530 < 30 and _0x8213 > 25 and _0x405C > 25 then _0x1F47, _0x3F79 = 0, 0.4 end
+        _0x4D01(_0x1F47, _0x3F79, math.clamp(_0x2D19 / 25, -1, 1))
+        task.wait(0.03)
+    end
+    if rolling and _0xA9AC then
+        _0x7C78()
+    else
+        _0x4D01(0, 1, 0)
+        task.wait(0.4)
+        _0x7C78()
+    end
+    return _0xA9AC
+end
+
+local function _0x4190(_0x82DA, radius, stopCond, keepGoing, rolling)
+    local _0x9366 = _0xF6D9(string.char(72,117,108,108))
+    if not _0x9366 then return false end
+    if _0x33D7(_0x82DA, _0x9366.Position) > 60 then
+        _0xD786(_0x82DA)
+        local _0x1747 = os.clock()
+        
+        local _0x64DC, _0x55F0 = _0x33D7(_0x82DA, _0x9366.Position), os.clock()
+        while os.clock() - _0x1747 < 150 and _0x198E() and (not keepGoing or keepGoing()) do
+            if stopCond and stopCond() then break end
+            local _0xE9C7 = _0x33D7(_0x82DA, _0x9366.Position)
+            if _0xE9C7 < 35 then break end
+            if _0xE9C7 < _0x64DC - 10 then
+                _0x64DC, _0x55F0 = _0xE9C7, os.clock()
+            elseif os.clock() - _0x55F0 > 6 then
+                _0x790D()
+                _0x7C78()
+                return string.char(115,116,117,99,107)
+            end
+            if not _0xEE9E() then
+                
+                if os.clock() - _0x1747 > 2 and not _0xD786(_0x82DA) then break end
+            end
+            task.wait(0.1)
+        end
+        _0x790D()
+    end
+    if not _0x198E() or (keepGoing and not keepGoing()) then return false end
+    if stopCond and stopCond() then return true end
+    local _0x8530 = _0x33D7(_0x82DA, _0x9366.Position)
+    return _0x565B(function() return _0x82DA end, radius, 3 + _0x8530 / 12, stopCond, rolling)
+end
+
+
+
+
+
+
+local _0x788C = { boostFn = nil, stockCaps = nil }
+local function _0xF254()
+    if _0x788C.boostFn ~= nil then return _0x788C.boostFn or nil end
+    _0x788C.boostFn = false
+    for _0xB1B4, _0xD0B8 in ipairs(getgc and getgc() or {}) do
+        if type(_0xD0B8) == string.char(102,117,110,99,116,105,111,110) and islclosure and islclosure(_0xD0B8) then
+            local _0xFDD5, _0xB92D = pcall(debug.info, _0xD0B8, string.char(115))
+            if _0xFDD5 and tostring(_0xB92D):find(string.char(82,67,68,114,105,118,101,67,108,105,101,110,116)) and debug.info(_0xD0B8, string.char(110)) == string.char(98,111,111,115,116) then
+                _0x788C.boostFn = _0xD0B8
+                break
+            end
+        end
+    end
+    return _0x788C.boostFn or nil
+end
+
+local function _0xCEE5()
+    local _0xFE17 = _0x39EE.C
+    if not _0xFE17 then return end
+    if not _0x788C.stockCaps then _0x788C.stockCaps = { _0xFE17.cap1, _0xFE17.cap2, _0xFE17.cap3 } end
+    local _0xEC3F = _0x788C.stockCaps
+    if _0x1E35.FastCorners then
+        _0xFE17.cap1, _0xFE17.cap2, _0xFE17.cap3 = math.max(_0xEC3F[1], 46), math.max(_0xEC3F[2], 24), math.max(_0xEC3F[3], 16)
+    else
+        _0xFE17.cap1, _0xFE17.cap2, _0xFE17.cap3 = _0xEC3F[1], _0xEC3F[2], _0xEC3F[3]
+    end
+end
+_0xCEE5()
+_0x4F8F(function()
+    local _0xFE17, _0xEC3F = _0x39EE.C, _0x788C.stockCaps
+    if _0xFE17 and _0xEC3F then _0xFE17.cap1, _0xFE17.cap2, _0xFE17.cap3 = _0xEC3F[1], _0xEC3F[2], _0xEC3F[3] end
+end)
+
+task.spawn(function()
+    while _0x198E() do
+        if _0x1E35.AutoBoost and (_0x1E35.AutoMission or _0x1E35.AutoCoin) and _0xEE9E() then
+            local _0xF7EA = _0xBFFC().RCDrive
+            local _0x2108 = _0xF7EA and _0xF7EA.phys
+            local _0x1938 = _0xDA59()
+            local _0x9366 = _0xF6D9(string.char(72,117,108,108))
+            if _0x2108 and _0x9366 and _0x1938 and not _0x2108.boosting then
+                local _0xD6E6 = _0x9366.AssemblyLinearVelocity.Magnitude / 2 * 3.6
+                local _0xE5B2 = tostring(_0x1938:GetAttribute(string.char(65,117,116,111,68,114,105,118,101,68,101,98,117,103)) or "")
+                local _0x89D0 = tonumber(_0xE5B2:match(string.char(99,97,112,61,40,91,37,100,37,46,93,43,41))) or 0
+                local _0xB16A, _0xB47C = pcall(_0xF7EA.sp)
+                _0xB47C = _0xB16A and tonumber(_0xB47C) or 0
+                
+                if _0xD6E6 > 60 and _0x89D0 >= 40 and _0xB47C >= (tonumber(_0x1E35.BoostKeepSP) or 20) then
+                    local _0x94B8 = _0xF254()
+                    if _0x94B8 then pcall(_0x94B8) end
+                end
+            end
+        end
+        task.wait(0.25)
+    end
+end)
+
+
+local _0x8A6F = _0x8DBA:WaitForChild(string.char(82,97,121,99,105,116,121,80,105,99,107,117,112,115))
+local _0xD1F1 = _0x8A6F:WaitForChild(string.char(82,101,109,111,116,101,115))
+local _0xF3CD
+do
+    local _0x101F = require(_0x8A6F:WaitForChild(string.char(80,105,99,107,117,112,67,108,105,101,110,116)))
+    local function _0x6938(_0x94B8, depth)
+        if _0xF3CD or depth > 3 then return end
+        for _0xB1B4, _0x21D3 in pairs(debug.getupvalues(_0x94B8)) do
+            if type(_0x21D3) == string.char(102,117,110,99,116,105,111,110) then
+                _0x6938(_0x21D3, depth + 1)
+            elseif type(_0x21D3) == string.char(116,97,98,108,101) then
+                local _0x18D6, _0xD5BA = next(_0x21D3)
+                if type(_0x18D6) == string.char(110,117,109,98,101,114) and type(_0xD5BA) == string.char(116,97,98,108,101) and _0xD5BA.uid and _0xD5BA.base then
+                    _0xF3CD = _0x21D3
+                    return
+                end
+            end
+        end
+    end
+    pcall(_0x6938, _0x101F.start, 0)
+end
+
+
+local _0xBFBB = { [0] = string.char(224,185,128,224,184,171,224,184,163,224,184,181,224,184,162,224,184,141), [1] = string.char(83,80), [2] = string.char(224,184,129,224,184,165,224,185,136,224,184,173,224,184,135,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161) }
+local function _0x5993(_0xF8AE)
+    if _0xF8AE == 0 then return _0x1E35.PickMoney end
+    if _0xF8AE == 1 then return _0x1E35.PickSP end
+    if _0xF8AE == 2 then return _0x1E35.PickItem end
+    return false
+end
+
+_0xCA58.Picked = { [0] = 0, [1] = 0, [2] = 0 }
+_0x189E(_0xD1F1.PickupResult.OnClientEvent:Connect(function(_0x2C46)
+    if type(_0x2C46) == string.char(116,97,98,108,101) and _0x2C46.ok and _0x2C46.uid then
+        _0xCA58.Coins += 1
+        if _0x2C46.type and _0xCA58.Picked[_0x2C46.type] then _0xCA58.Picked[_0x2C46.type] += 1 end
+    end
+end))
+
+
+
+
+local function _0x0A38(_0xD5BA, keepGoing)
+    local _0x9366 = _0xF6D9(string.char(72,117,108,108))
+    if not _0x9366 then return false end
+    local _0x05D5 = _0x33D7(_0xD5BA.base, _0x9366.Position)
+    local _0x1747 = os.clock()
+    local _0x49D3 = 4 + _0x05D5 / 10
+    local _0xE76C, _0x6858 = nil, 0
+    local _0x1BF3 = false
+    while os.clock() - _0x1747 < _0x49D3 and _0x198E() and (not keepGoing or keepGoing()) do
+        if _0xD5BA.eatT or _0xD5BA.dead or not _0x9366.Parent then break end
+        local _0x2D19, _0x8530 = _0x96A7(_0x9366, _0xD5BA.base)
+        local _0x5994 = _0x9366.AssemblyLinearVelocity
+        local _0x405C = _0x5994.Magnitude
+        local _0x5DEB = _0x5994:Dot(_0x9366.CFrame.LookVector)
+
+        
+        if _0x8530 < 30 and math.abs(_0x2D19) > 115 then
+            _0x1BF3 = true
+        elseif math.abs(_0x2D19) < 65 or _0x8530 > 40 then
+            _0x1BF3 = false
+        end
+
+        if _0x405C < 2 and os.clock() - _0x1747 > 1.2 then
+            _0xE76C = _0xE76C or os.clock()
+            if os.clock() - _0xE76C > 1.5 then
+                _0x6858 += 1
+                if _0x6858 > 2 then
+                    _0x4D01(0, 1, 0)
+                    task.wait(0.3)
+                    _0x7C78()
+                    return string.char(115,116,117,99,107)
+                end
+                
+                _0x4D01(0, 1, -math.clamp(_0x2D19 / 25, -1, 1))
+                task.wait(0.9)
+                _0xE76C = nil
+            end
+        else
+            _0xE76C = nil
+        end
+
+        if _0x1BF3 then
+            local _0x661A = (_0x2D19 + 360) % 360 - 180 
+            if _0x5DEB > 6 then
+                _0x4D01(0, 1, 0) 
+            else
+                _0x4D01(0, 0.8, math.clamp(-_0x661A / 20, -1, 1))
+            end
+        else
+            
+            local _0x9820 = math.clamp(_0x8530 * 1.1, 14, 70)
+            if math.abs(_0x2D19) > 40 then _0x9820 = math.min(_0x9820, 22) end
+            local _0x1F47, _0x3F79 = 0, 0
+            if _0x5DEB < _0x9820 - 3 then
+                _0x1F47 = math.abs(_0x2D19) > 70 and 0.35 or 0.75
+            elseif _0x5DEB > _0x9820 + 6 then
+                _0x3F79 = math.clamp((_0x5DEB - _0x9820) / 25, 0.2, 0.8)
+            else
+                _0x1F47 = 0.25
+            end
+            _0x4D01(_0x1F47, _0x3F79, math.clamp(_0x2D19 / 20, -1, 1))
+        end
+        task.wait(0.03)
+    end
+    _0x7C78()
+    return (_0xD5BA.eatT ~= nil) or (_0xD5BA.dead == true)
+end
+
+local _0x0E4C = {}
+local function _0x4A62(keepGoing)
+    local _0x9366 = _0xF6D9(string.char(72,117,108,108))
+    if not (_0xF3CD and _0x9366) then
+        _0xCA58.Coin = string.char(224,184,163,224,184,173,224,184,163,224,184,150,46,46,46)
+        task.wait(1)
+        return
+    end
+    
+    local _0x8367, _0x5EBF, _0x8FE3
+    for uid, _0xD5BA in pairs(_0xF3CD) do
+        if _0x5993(_0xD5BA.type) and not _0xD5BA.eatT and not _0xD5BA.dead and (_0x0E4C[uid] or 0) < os.clock() then
+            local _0x2D19, _0xE9C7 = _0x96A7(_0x9366, _0xD5BA.base)
+            if _0xE9C7 <= _0x1E35.CoinRange then
+                local _0x1CF1 = _0xE9C7 + math.abs(_0x2D19) * 1.2
+                if _0xD5BA.type ~= 0 then _0x1CF1 -= 80 end 
+                if not _0x5EBF or _0x1CF1 < _0x5EBF then _0x8367, _0x5EBF, _0x8FE3 = _0xD5BA, _0x1CF1, _0xE9C7 end
+            end
+        end
+    end
+    if not _0x8367 then
+        _0xCA58.Coin = string.char(224,185,132,224,184,161,224,185,136,224,184,161,224,184,181,224,184,130,224,184,173,224,184,135,224,185,131,224,184,171,224,185,137,224,185,128,224,184,129,224,185,135,224,184,154,224,185,131,224,184,129,224,184,165,224,185,137,224,185,134,32,224,184,163,224,184,173,224,185,128,224,184,129,224,184,180,224,184,148,224,185,131,224,184,171,224,184,161,224,185,136)
+        _0x7C78()
+        task.wait(2)
+        return
+    end
+    _0x0E4C[_0x8367.uid] = os.clock() + 20
+    _0xCA58.Coin = string.format(string.char(224,185,132,224,184,155,224,185,128,224,184,129,224,185,135,224,184,154,37,115,32,40,224,184,171,224,185,136,224,184,178,224,184,135,32,37,100,41), _0xBFBB[_0x8367.type] or string.char(224,184,130,224,184,173,224,184,135), _0x8FE3)
+    local function _0x7554() return _0x8367.eatT ~= nil or _0x8367.dead == true end
+    local _0x068E
+    local _0x1A90 = _0xF6D9(string.char(72,117,108,108))
+    if _0x1A90 and _0x33D7(_0x8367.base, _0x1A90.Position) > 70 then
+        
+        _0xD786(_0x8367.base)
+        local _0x1747 = os.clock()
+        local _0x64DC, _0x55F0 = _0x33D7(_0x8367.base, _0x1A90.Position), os.clock()
+        while os.clock() - _0x1747 < 120 and _0x198E() and keepGoing() and not _0x7554() do
+            local _0xE9C7 = _0x33D7(_0x8367.base, _0x1A90.Position)
+            if _0xE9C7 < 45 then break end
+            if _0xE9C7 < _0x64DC - 10 then
+                _0x64DC, _0x55F0 = _0xE9C7, os.clock()
+            elseif os.clock() - _0x55F0 > 6 then
+                _0x068E = string.char(115,116,117,99,107)
+                break
+            end
+            if not _0xEE9E() and os.clock() - _0x1747 > 2 and not _0xD786(_0x8367.base) then break end
+            task.wait(0.1)
+        end
+        _0x790D()
+    end
+    if _0x068E ~= string.char(115,116,117,99,107) and not _0x7554() and _0x198E() and keepGoing() then
+        _0x068E = _0x0A38(_0x8367, keepGoing)
+    end
+    _0xCA58.CoinLast = tostring(_0x068E) .. (_0x7554() and string.char(43) or "")
+    if _0x068E == true or _0x7554() then
+        _0xCA58.CoinMiss, _0xCA58.CoinStuck = 0, 0
+        local _0x7D0B = _0xF6D9(string.char(72,117,108,108))
+        if _0x7D0B then _0xCA58.CoinGoodPos = _0x7D0B.Position end
+    else
+        _0xCA58.CoinMiss = (_0xCA58.CoinMiss or 0) + 1
+    end
+    if _0x068E == string.char(115,116,117,99,107) then
+        _0xCA58.CoinStuck = (_0xCA58.CoinStuck or 0) + 1
+        if _0xCA58.CoinStuck >= 2 then
+            
+            
+            _0xCA58.Coin = string.char(224,184,163,224,184,150,224,184,149,224,184,180,224,184,148,32,224,184,129,224,184,179,224,184,165,224,184,177,224,184,135,224,184,150,224,184,173,224,184,162,224,184,129,224,184,165,224,184,177,224,184,154,224,184,150,224,184,153,224,184,153)
+            for i = 1, 2 do
+                local _0x0136 = (i % 2 == 0) and -1 or 1
+                _0x4D01(0, 1, _0x0136)
+                task.wait(1.3)
+                _0x4D01(0.8, 0, -_0x0136)
+                task.wait(1.2)
+            end
+            _0x7C78()
+            if _0xCA58.CoinGoodPos then
+                _0x565B(function() return _0xCA58.CoinGoodPos end, 10, 20, nil, false)
+            end
+            _0xCA58.CoinStuck = 0
+        end
+    end
+    if _0x068E == string.char(115,116,117,99,107) then
+        
+        for uid, _0xD5BA in pairs(_0xF3CD) do
+            if _0x33D7(_0xD5BA.base, _0x8367.base) < 150 then _0x0E4C[uid] = os.clock() + 300 end
+        end
+        _0xCA58.Coin = string.char(224,184,151,224,184,178,224,184,135,224,184,149,224,184,177,224,184,153,32,224,184,130,224,185,137,224,184,178,224,184,161,224,184,136,224,184,184,224,184,148,224,184,153,224,184,181,224,185,137,224,185,132,224,184,155)
+    end
+end
+
+
+
+
+
+local _0x3F39 = { _0x94B8 = nil, maxIdx = nil, maxOrig = nil, hits = {} }
+
+local function _0x47A7()
+    if _0x3F39.fn then return _0x3F39.fn end
+    if not getconnections then return nil end
+    for _0xB1B4, _0x5FF8 in ipairs(getconnections(game:GetService(string.char(82,117,110,83,101,114,118,105,99,101)).RenderStepped)) do
+        local _0xD0B8 = _0x5FF8.Function
+        local _0xFDD5, _0xE432 = pcall(function() return getfenv(_0xD0B8).script end)
+        if _0xFDD5 and typeof(_0xE432) == string.char(73,110,115,116,97,110,99,101) and _0xE432.Name == string.char(82,66,82,67,84,114,97,102,102,105,99,67,108,105,101,110,116) then
+            _0x3F39.fn = _0xD0B8
+            local _0xDD75 = _0x8DBA.RBRCTraffic:GetAttribute(string.char(77,97,120,82,101,110,100,101,114,67,97,114,115))
+            local _0xC250 = (type(_0xDD75) == string.char(110,117,109,98,101,114) and _0xDD75 > 0) and _0xDD75 or 90
+            for idx, _0x21D3 in pairs(debug.getupvalues(_0xD0B8)) do
+                if type(_0x21D3) == string.char(102,117,110,99,116,105,111,110) then
+                    local _0xAC71 = debug.info(_0x21D3, string.char(110))
+                    if _0xAC71 == string.char(110,97,116,105,118,101,72,105,116) or _0xAC71 == string.char(114,101,115,111,108,118,101,72,105,116) then _0x3F39.hits[idx] = _0x21D3 end
+                elseif type(_0x21D3) == string.char(110,117,109,98,101,114) and _0x21D3 == _0xC250 and not _0x3F39.maxIdx then
+                    _0x3F39.maxIdx, _0x3F39.maxOrig = idx, _0x21D3
+                end
+            end
+            return _0xD0B8
+        end
+    end
+    return nil
+end
+
+local function _0x536E() return nil end
+local function _0x2C69()
+    local _0xD0B8 = _0x47A7()
+    if not _0xD0B8 then return false end
+    if _0x3F39.maxIdx then
+        pcall(debug.setupvalue, _0xD0B8, _0x3F39.maxIdx, _0x1E35.NoTraffic and 0 or _0x3F39.maxOrig)
+    end
+    for idx, orig in pairs(_0x3F39.hits) do
+        pcall(debug.setupvalue, _0xD0B8, idx, _0x1E35.NoTraffic and _0x536E or orig)
+    end
+    return true
+end
+if _0x1E35.NoTraffic then task.defer(_0x2C69) end
+
+
+
+
+local _0x7A77 = { orig = nil, hidden = setmetatable({}, { __mode = string.char(107) }) }
+local _0xB79A = (function()
+    local _0xFDD5, _0xFDC8 = pcall(require, _0x8DBA:WaitForChild(string.char(75,114,67,111,108,108,105,115,105,111,110,66,117,105,108,100,101,114), 10))
+    return (_0xFDD5 and type(_0xFDC8) == string.char(116,97,98,108,101) and _0xFDC8.setPropHidden) and _0xFDC8 or nil
+end)()
+
+local function _0x3826(_0x87A9)
+    local _0xE337 = workspace:FindFirstChild(string.char(75,114,67,105,116,121))
+    if not _0xE337 then return end
+    for _0xB1B4, tile in ipairs(_0xE337:GetChildren()) do
+        local _0x8439 = tile:FindFirstChild(string.char(84,114,101,101,115))
+        if _0x8439 and (_0x87A9 and not _0x7A77.hidden[_0x8439] or not _0x87A9 and _0x7A77.hidden[_0x8439]) then
+            _0x7A77.hidden[_0x8439] = _0x87A9 or nil
+            for _0xB1B4, _0xE9C7 in ipairs(_0x8439:GetDescendants()) do
+                if _0xE9C7:IsA(string.char(66,97,115,101,80,97,114,116)) then _0xE9C7.LocalTransparencyModifier = _0x87A9 and 1 or 0 end
+            end
+        end
+    end
+end
+
+local function _0x721F()
+    if not _0xB79A then return false end
+    if not _0x7A77.orig then
+        _0x7A77.orig = {
+            at = _0xB79A.PROP_ALLOW.trees, ap = _0xB79A.PROP_ALLOW.poles,
+            ht = _0xB79A.PROP_HIDE.trees, hp = _0xB79A.PROP_HIDE.poles,
+        }
+    end
+    if _0x1E35.NoProps then
+        _0xB79A.PROP_ALLOW.trees, _0xB79A.PROP_ALLOW.poles = true, true
+        pcall(_0xB79A.setPropHidden, true, true)
+    else
+        local _0x951C = _0x7A77.orig
+        _0xB79A.PROP_ALLOW.trees, _0xB79A.PROP_ALLOW.poles = _0x951C.at, _0x951C.ap
+        pcall(_0xB79A.setPropHidden, _0x951C.ht, _0x951C.hp)
+    end
+    pcall(_0x3826, _0x1E35.NoProps)
+    return true
+end
+task.spawn(function()
+    
+    while _0x198E() do
+        if _0x1E35.NoProps and _0xB79A and not (_0xB79A.PROP_PASS.trees and _0xB79A.PROP_PASS.poles) then _0x721F() end
+        if _0x1E35.NoProps then pcall(_0x3826, true) end
+        task.wait(3)
+    end
+end)
+_0x4F8F(function()
+    if _0x1E35.NoProps and _0x7A77.orig then
+        _0x1E35.NoProps = false
+        _0x721F()
+        _0x1E35.NoProps = true
+    end
+end)
+_0x4F8F(function()
+    if _0x1E35.NoTraffic then
+        _0x1E35.NoTraffic = false
+        _0x2C69()
+        _0x1E35.NoTraffic = true
+    end
+end)
+
+
+local _0xC75D = _0x8DBA:WaitForChild(string.char(82,66,82,67,81,117,101,115,116)):WaitForChild(string.char(82,101,109,111,116,101,115))
+local _0xB77E = _0xC75D:WaitForChild(string.char(81,117,101,115,116,82,101,113,117,101,115,116))
+local _0xEBD9 = _0xC75D:WaitForChild(string.char(81,117,101,115,116,80,117,115,104))
+
+local _0x24B2, _0xCEB3 = {}, nil
+_0x189E(_0xEBD9.OnClientEvent:Connect(function(_0x2C46)
+    if type(_0x2C46) ~= string.char(116,97,98,108,101) then return end
+    if _0x2C46.op == string.char(117,112,100,97,116,101) then
+        _0x24B2 = _0x2C46
+        _0xCA58.UpdateAt = os.clock()
+        _0xCA58.Gauge = _0x2C46.gauge
+        _0xCA58.Remaining = _0x2C46.remainingMs
+    elseif _0x2C46.op == string.char(114,101,115,117,108,116) then
+        _0xCEB3 = _0x2C46
+    end
+end))
+
+local function _0xB8AE(payload)
+    local _0xFDD5, _0x068E = pcall(_0xB77E.InvokeServer, _0xB77E, payload)
+    if _0xFDD5 and type(_0x068E) == string.char(116,97,98,108,101) then return _0x068E end
+    return nil
+end
+
+
+local _0xC98C = {}
+local function _0xA2DF()
+    local _0xADE6 = workspace:FindFirstChild(string.char(82,66,82,67,78,112,99,115))
+    if not _0xADE6 then return end
+    for _0xB1B4, _0xFDC8 in ipairs(_0xADE6:GetChildren()) do
+        local _0x2DFB = _0xFDC8:GetAttribute(string.char(82,66,82,67,78,112,99,73,100))
+        
+        if type(_0x2DFB) == string.char(115,116,114,105,110,103) and (_0x2DFB:match(string.char(94,109,105,115,115,105,111,110,58)) or _0x2DFB:match(string.char(94,109,105,115,115,105,111,110,50,52,58)) or _0x2DFB:match(string.char(94,116,104,116,97,108,107,58))) then
+            local _0xFDD5, _0xEEED = pcall(_0xFDC8.GetPivot, _0xFDC8)
+            if _0xFDD5 then
+                _0xC98C[_0x2DFB] = _0xC98C[_0x2DFB] or {}
+                _0xC98C[_0x2DFB].pos = _0xEEED.Position
+                _0xC98C[_0x2DFB].mark = _0xFDC8:GetAttribute(string.char(77,97,114,107,84,121,112,101))
+            end
+        end
+    end
+end
+
+
+
+
+local function _0x420C()
+    _0xA2DF()
+    local _0x2F77 = _0xF6D9(string.char(82,111,111,116))
+    if not _0x2F77 then return nil end
+    local _0x15DD, _0x8367, _0x5EBF
+    local _0x9010 = os.clock()
+    for _0x2DFB, _0x26A1 in pairs(_0xC98C) do
+        if (_0x26A1.blockedUntil or 0) < _0x9010 then
+            local _0xE9C7 = _0x33D7(_0x26A1.pos, _0x2F77.Position)
+            local _0xBC79 = _0x26A1.money or 500
+            local _0x1CF1 = _0xBC79 / (_0xE9C7 + 600)
+            
+            if (_0x26A1.restUntil or 0) > _0x9010 then _0x1CF1 -= 10 end
+            if not _0x5EBF or _0x1CF1 > _0x5EBF then _0x15DD, _0x8367, _0x5EBF = _0x2DFB, _0x26A1, _0x1CF1 end
+        end
+    end
+    return _0x15DD, _0x8367
+end
+
+
+local function _0x2195()
+    local _0xB555 = _0x0683.PlayerGui:FindFirstChild(string.char(82,97,121,99,105,116,121,81,117,101,115,116,85,105))
+    local _0xF3E7 = _0xB555 and _0xB555:FindFirstChild(string.char(77,105,115,115,105,111,110,79,102,102,101,114))
+    local _0xEB15 = _0xF3E7 and _0xF3E7:FindFirstChild(string.char(78,111))
+    if _0xEB15 and _0xEB15:IsA(string.char(71,117,105,66,117,116,116,111,110)) and getconnections then
+        for _0xB1B4, _0x5FF8 in ipairs(getconnections(_0xEB15.Activated)) do pcall(_0x5FF8.Function) end
+    end
+end
+
+local function _0x154C()
+    local _0xA3A0 = _0xBFFC().RaycityNavigation
+    if not (_0xA3A0 and _0xA3A0.getGuide) then return nil end
+    local _0xFDD5, _0x26A1 = pcall(_0xA3A0.getGuide)
+    if _0xFDD5 and type(_0x26A1) == string.char(116,97,98,108,101) and _0x26A1.source == string.char(109,105,115,115,105,111,110) and _0x26A1.points and #_0x26A1.points > 0 then
+        return _0x26A1.points[#_0x26A1.points], _0x26A1.version
+    end
+    return nil
+end
+
+local _0xFBDB 
+local _0xCB63 = (function()
+    local _0xFDD5, _0xFDC8 = pcall(function() return require(_0x8DBA.RCDrive.Physics) end)
+    return _0xFDD5 and type(_0xFDC8) == string.char(116,97,98,108,101) and _0xFDC8 or nil
+end)()
+
+
+
+
+
+local _0x3701 = _0xC75D:WaitForChild(string.char(82,111,97,100,70,105,103,104,116,82,101,113,117,101,115,116))
+local _0x34A7 = (function()
+    local _0xFDD5, _0xFDC8 = pcall(require, _0x8DBA.RBRCQuest:WaitForChild(string.char(82,111,97,100,70,105,103,104,116,68,97,116,97)))
+    return _0xFDD5 and _0xFDC8 or nil
+end)()
+local _0xAC61 = {}
+
+local function _0xDBFD()
+    return tonumber(_0x0683:GetAttribute(string.char(82,97,121,99,105,116,121,80,108,97,121,101,114,76,118))) or 1
+end
+
+local function _0xB7CA()
+    local _0xADF1 = _0xBFFC().RaycityTownServices
+    if _0xADF1 and _0xADF1.holdRef then pcall(_0xADF1.holdRef, string.char(114,98,114,99,82,102,84,97,108,107), false) end
+end
+
+local function _0xBE38(payload)
+    local _0xFDD5, _0x068E = pcall(_0x3701.InvokeServer, _0x3701, payload)
+    if _0xFDD5 and type(_0x068E) == string.char(116,97,98,108,101) then return _0x068E end
+    return nil
+end
+
+local function _0x28C9(npcId)
+    if not (_0x34A7 and type(_0x34A7.fights) == string.char(116,97,98,108,101)) then return nil end
+    for _0xB1B4, _0xD0B8 in pairs(_0x34A7.fights) do
+        if _0xD0B8.npcId == npcId and type(_0xD0B8.pos) == string.char(116,97,98,108,101) then
+            local _0x26A1 = _0xAC61[npcId] or {}
+            _0xAC61[npcId] = _0x26A1
+            _0x26A1.npcId, _0x26A1.level = _0xD0B8.npcId, _0xD0B8.level or 0
+            _0x26A1.name = _0xD0B8.nativeName or _0xD0B8.nameFallback or tostring(_0xD0B8.npcId)
+            _0x26A1.pos = Vector3.new(_0xD0B8.pos[1], _0xD0B8.pos[2], _0xD0B8.pos[3])
+            return _0x26A1
+        end
+    end
+    return nil
+end
+
+
+local _0xE539
+local function _0x252E(_0x2DFB)
+    if not _0xE539 then
+        _0xE539 = {}
+        pcall(function()
+            local _0xA71E = require(_0x8DBA.RBRCQuest:WaitForChild(string.char(81,117,101,115,116,68,97,116,97)))
+            for _0xB1B4, _0xAC1C in pairs(_0xA71E.npcRows) do
+                if type(_0xAC1C) == string.char(116,97,98,108,101) and type(_0xAC1C[1]) == string.char(115,116,114,105,110,103) and tonumber(_0xAC1C[7]) then
+                    _0xE539[_0xAC1C[1]] = Vector3.new(_0xAC1C[7], _0xAC1C[8], _0xAC1C[9])
+                end
+            end
+        end)
+    end
+    return _0xE539[_0x2DFB]
+end
+
+
+local _0xD5B9 = {
+    { _0x1273 = string.char(224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180,32,40,224,184,167,224,184,153,224,184,151,224,184,184,224,184,129,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,41) },
+    { _0x1273 = string.char(82,111,97,100,32,70,105,103,104,116,58,32,68,101,114,105,120,32,40,76,118,52,41), rf = 1676 },
+    { _0x1273 = string.char(82,111,97,100,32,70,105,103,104,116,58,32,68,111,32,121,111,117,110,103,32,40,76,118,55,41), rf = 1681 },
+    { _0x1273 = string.char(83,55,48,32,224,184,132,224,184,153,224,184,130,224,185,137,224,184,178,224,184,135,224,184,150,224,184,153,224,184,153,32,40,76,118,52,41), npc = string.char(109,105,115,115,105,111,110,50,52,58,55,48) },
+    { _0x1273 = string.char(83,55,49,32,224,184,138,224,184,178,224,184,162,224,184,171,224,184,153,224,184,184,224,185,136,224,184,161,224,184,156,224,184,185,224,185,137,224,185,130,224,184,148,224,184,148,224,185,128,224,184,148,224,184,181,224,185,136,224,184,162,224,184,167,32,40,76,118,52,41), npc = string.char(109,105,115,115,105,111,110,50,52,58,55,49) },
+    { _0x1273 = string.char(83,55,54,32,224,184,170,224,184,178,224,184,167,224,184,156,224,184,185,224,185,137,224,184,155,224,184,163,224,184,176,224,184,170,224,184,154,224,184,160,224,184,177,224,184,162,32,40,76,118,49,50,41), npc = string.char(109,105,115,115,105,111,110,50,52,58,55,54) },
+    { _0x1273 = string.char(82,111,97,100,32,70,105,103,104,116,58,32,75,97,111,114,105,32,40,76,118,49,49,41), rf = 1689 },
+    { _0x1273 = string.char(82,111,97,100,32,70,105,103,104,116,58,32,89,111,107,111,32,40,76,118,49,51,41), rf = 1693 },
+}
+local _0xC376 = {}
+for _0xB1B4, _0x5FF8 in ipairs(_0xD5B9) do _0xC376[_0x5FF8.label] = _0x5FF8 end
+
+local function _0x6910(missions)
+    local _0x8367, _0xC7C3
+    for _0xB1B4, _0xFDC8 in ipairs(missions or {}) do
+        if _0xFDC8.canAccept and _0xFDC8.playable ~= false and _0xFDC8.questId then
+            
+            local _0x7CAD = (_0xFDC8.cleared and 0 or 100) + ((_0xFDC8.reasons and #_0xFDC8.reasons > 0) and 0 or 10) + (_0xFDC8.slot or 0)
+            if not _0xC7C3 or _0x7CAD > _0xC7C3 then _0x8367, _0xC7C3 = _0xFDC8, _0x7CAD end
+        end
+    end
+    return _0x8367
+end
+
+local function _0xFAB9(_0x26A1, keepGoing)
+    _0xCA58.Mission = string.char(224,184,130,224,184,177,224,184,154,224,185,132,224,184,155,224,184,171,224,184,178,32,82,111,97,100,32,70,105,103,104,116,32) .. _0x26A1.name
+    
+    local _0x59C1 = _0x4190(_0x26A1.pos, 8, nil, keepGoing)
+    if _0x59C1 ~= true then
+        if _0x59C1 == string.char(115,116,117,99,107) then _0x26A1.blockedUntil = os.clock() + 60 end
+        return
+    end
+    if not keepGoing() then return end
+    _0x4D01(0, 1, 0)
+    task.wait(0.8)
+
+    local _0x2F77 = _0xF6D9(string.char(82,111,111,116))
+    if not _0x2F77 then return end
+    local _0x93C5 = _0xBE38({ op = string.char(116,97,108,107), npcId = _0x26A1.npcId, carPos = _0x2F77.Position })
+    if not (_0x93C5 and _0x93C5.ok) then
+        _0xB7CA()
+        _0x7C78()
+        _0xCA58.Mission = string.char(224,184,132,224,184,184,224,184,162,32,82,111,97,100,32,70,105,103,104,116,32,224,185,132,224,184,161,224,185,136,224,184,170,224,184,179,224,185,128,224,184,163,224,185,135,224,184,136,58,32) .. tostring(_0x93C5 and (_0x93C5.reason or _0x93C5.reasonKey) or string.char(63))
+        _0x26A1.blockedUntil = os.clock() + 120
+        return
+    end
+    local _0xFDC8 = _0x6910(_0x93C5.missions)
+    if not _0xFDC8 then
+        _0xB7CA()
+        _0x7C78()
+        _0xCA58.Mission = _0x26A1.name .. string.char(58,32,224,185,132,224,184,161,224,185,136,224,184,161,224,184,181,224,184,163,224,184,173,224,184,154,224,184,151,224,184,181,224,185,136,224,184,163,224,184,177,224,184,154,224,185,132,224,184,148,224,185,137)
+        _0x26A1.blockedUntil = os.clock() + 1800
+        return
+    end
+
+    _0xCEB3, _0x24B2 = nil, {}
+    local _0xFE0C = _0xBE38({ op = string.char(97,99,99,101,112,116), questId = _0xFDC8.questId, carPos = _0x2F77.Position })
+    _0x7C78()
+    if not (_0xFE0C and _0xFE0C.ok) then
+        _0xB7CA()
+        _0xCA58.Mission = string.char(224,184,163,224,184,177,224,184,154,32,82,111,97,100,32,70,105,103,104,116,32,224,185,132,224,184,161,224,185,136,224,185,132,224,184,148,224,185,137,58,32) .. tostring(_0xFE0C and (_0xFE0C.reason or _0xFE0C.reasonKey) or string.char(63))
+        _0x26A1.blockedUntil = os.clock() + 300
+        return
+    end
+    
+    task.wait(1.5)
+    _0xB7CA()
+
+    local _0x1569 = _0x1E35.CruiseKmh
+    if _0x39EE.C and _0x8A59 then
+        _0x39EE.C.maxSpeed = math.max(_0x8A59, math.max(_0x1569, 160) / 3.6)
+    end
+    local _0xE23D = _0xCA58.MissionsDone
+    _0xFBDB(tostring(_0xFDC8.title or _0xFDC8.questId), keepGoing)
+    _0x4D6D()
+    if _0xCA58.MissionsDone == _0xE23D then _0x26A1.blockedUntil = os.clock() + 120 end
+end
+
+local function _0x6B18(keepGoing)
+    
+    local _0x5A74 = workspace:FindFirstChild(string.char(82,66,82,67,77,105,115,115,105,111,110,67,97,114,115))
+    local _0x9493 = _0x5A74 and _0x5A74:FindFirstChild(string.char(77,111,118,67,97,114)) and os.clock() - (_0xCA58.UpdateAt or 0) < 3
+    if _0x154C() or _0x9493 then
+        _0xCEB3 = nil
+        _0xFBDB(string.char(224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,184,151,224,184,181,224,185,136,224,184,132,224,185,137,224,184,178,224,184,135,224,184,173,224,184,162,224,184,185,224,185,136), keepGoing)
+        return
+    end
+
+    
+    _0x1E35.MissionPick = _0xD5B9[1].label 
+    local _0x2A16 = _0xC376[_0x1E35.MissionPick]
+    if _0x2A16 and _0x2A16.rf then
+        local _0x26A1 = _0x28C9(_0x2A16.rf)
+        
+        if _0x26A1 and (_0x26A1.blockedUntil or 0) > os.clock() + 10 then _0x26A1.blockedUntil = os.clock() + 10 end
+        if not _0x26A1 then
+            _0xCA58.Mission = string.char(224,184,171,224,184,178,32,82,111,97,100,32,70,105,103,104,116,32,224,184,153,224,184,181,224,185,137,224,185,132,224,184,161,224,185,136,224,185,128,224,184,136,224,184,173)
+            task.wait(3)
+        elseif (_0x26A1.blockedUntil or 0) > os.clock() then
+            _0xCA58.Mission = string.format(string.char(37,115,58,32,224,184,163,224,184,173,32,78,80,67,32,224,184,158,224,184,163,224,185,137,224,184,173,224,184,161,32,224,184,165,224,184,173,224,184,135,224,185,131,224,184,171,224,184,161,224,185,136,224,185,131,224,184,153,32,37,100,32,224,184,167,224,184,180), _0x26A1.name, _0x26A1.blockedUntil - os.clock())
+            task.wait(1)
+        else
+            _0xFAB9(_0x26A1, keepGoing)
+        end
+        return
+    end
+
+    local _0x2DFB, _0x3B54
+    if _0x2A16 and _0x2A16.npc then
+        _0x2DFB = _0x2A16.npc
+        _0xA2DF()
+        _0x3B54 = _0xC98C[_0x2DFB] or {}
+        _0xC98C[_0x2DFB] = _0x3B54
+        _0x3B54.pos = _0x3B54.pos or _0x252E(_0x2DFB)
+        _0x3B54.restUntil = nil
+        if (_0x3B54.blockedUntil or 0) > os.clock() + 10 then _0x3B54.blockedUntil = os.clock() + 10 end
+        if not _0x3B54.pos then
+            _0xCA58.Mission = string.char(224,184,171,224,184,178,224,184,149,224,184,179,224,185,129,224,184,171,224,184,153,224,185,136,224,184,135,32,78,80,67,32) .. _0x2DFB .. string.char(32,224,185,132,224,184,161,224,185,136,224,185,128,224,184,136,224,184,173)
+            task.wait(3)
+            return
+        end
+        if (_0x3B54.blockedUntil or 0) > os.clock() then
+            _0xCA58.Mission = string.format(string.char(37,115,58,32,224,184,163,224,184,173,32,78,80,67,32,224,184,158,224,184,163,224,185,137,224,184,173,224,184,161,32,224,184,165,224,184,173,224,184,135,224,185,131,224,184,171,224,184,161,224,185,136,224,185,131,224,184,153,32,37,100,32,224,184,167,224,184,180), _0x2A16.label, _0x3B54.blockedUntil - os.clock())
+            task.wait(1)
+            return
+        end
+    else
+        
+        _0x2DFB, _0x3B54 = _0x420C()
+    end
+    if not _0x2DFB then
+        _0xCA58.Mission = string.char(224,185,132,224,184,161,224,185,136,224,185,128,224,184,136,224,184,173,32,78,80,67,32,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,32,40,224,184,165,224,184,173,224,184,135,224,184,130,224,184,177,224,184,154,224,185,132,224,184,155,224,185,129,224,184,150,224,184,167,224,184,151,224,184,181,224,185,136,224,184,161,224,184,181,32,78,80,67,41)
+        task.wait(3)
+        return
+    end
+
+    _0xCA58.Mission = string.char(224,184,130,224,184,177,224,184,154,224,185,132,224,184,155,224,184,171,224,184,178,32,78,80,67,32) .. _0x2DFB
+    local _0x59C1 = _0x4190(_0x3B54.pos, 5, nil, keepGoing)
+    if _0x59C1 ~= true then
+        if _0x59C1 == string.char(115,116,117,99,107) then _0x3B54.blockedUntil = os.clock() + 30 end
+        return
+    end
+    if not keepGoing() then return end
+    task.wait(0.4)
+
+    local _0x2F77 = _0xF6D9(string.char(82,111,111,116))
+    if not _0x2F77 then return end
+    local _0x93C5 = _0xB8AE({ op = string.char(116,97,108,107), npcId = _0x2DFB, carPos = _0x2F77.Position })
+    if not (_0x93C5 and _0x93C5.ok and _0x93C5.offers) then
+        _0xCA58.Mission = string.char(224,184,132,224,184,184,224,184,162,224,184,129,224,184,177,224,184,154,32,78,80,67,32,224,185,132,224,184,161,224,185,136,224,184,170,224,184,179,224,185,128,224,184,163,224,185,135,224,184,136,58,32) .. tostring(_0x93C5 and (_0x93C5.reason or _0x93C5.why) or string.char(63))
+        _0x3B54.blockedUntil = os.clock() + 60
+        _0x2195()
+        task.wait(1)
+        return
+    end
+
+    local _0xF3E7
+    for _0xB1B4, _0x951C in ipairs(_0x93C5.offers) do
+        if _0x951C.playable ~= false and _0x951C.questId then _0xF3E7 = _0x951C break end
+    end
+    if not _0xF3E7 then
+        _0xCA58.Mission = string.char(78,80,67,32,224,184,153,224,184,181,224,185,137,224,185,132,224,184,161,224,185,136,224,184,161,224,184,181,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,184,151,224,184,181,224,185,136,224,184,163,224,184,177,224,184,154,224,185,132,224,184,148,224,185,137)
+        _0x3B54.blockedUntil = os.clock() + 600
+        _0x2195()
+        _0xB8AE({ op = string.char(116,97,108,107,69,110,100), npcId = _0x2DFB })
+        return
+    end
+    local _0xFEF1 = _0xF3E7.rewardPreview and _0xF3E7.rewardPreview[1]
+    if _0xFEF1 and _0xFEF1.money then _0x3B54.money = _0xFEF1.money end
+
+    _0xCEB3, _0x24B2 = nil, {}
+    local _0xFE0C = _0xB8AE({ op = string.char(97,99,99,101,112,116), questId = _0xF3E7.questId, carPos = _0x2F77.Position, carLook = _0x2F77.CFrame.LookVector })
+    if not (_0xFE0C and _0xFE0C.ok) then
+        _0xCA58.Mission = string.char(224,184,163,224,184,177,224,184,154,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,185,132,224,184,161,224,185,136,224,185,132,224,184,148,224,185,137,58,32) .. tostring(_0xFE0C and (_0xFE0C.reason or _0xFE0C.reasonKey) or string.char(63))
+        _0x3B54.blockedUntil = os.clock() + 120
+        _0x2195()
+        return
+    end
+    
+    _0x3B54.restUntil = os.clock() + 240
+    if _0xFE0C.needsBoarding then
+        _0xCA58.Mission = string.char(224,184,163,224,184,173,224,184,156,224,184,185,224,185,137,224,185,130,224,184,148,224,184,162,224,184,170,224,184,178,224,184,163,224,184,130,224,184,182,224,185,137,224,184,153,224,184,163,224,184,150)
+        task.wait(2.5)
+        _0xB8AE({ op = string.char(98,111,97,114,100,101,100), questId = _0xF3E7.questId })
+    end
+
+    _0xFBDB(tostring(_0xF3E7.title or _0xF3E7.questId), keepGoing)
+end
+
+
+_0xFBDB = function(_0x3B2F, keepGoing)
+    local _0x2145, _0x87C3, _0xF85B
+    local _0x1747 = os.clock()
+    while _0x198E() and keepGoing() and not _0xCEB3 and os.clock() - _0x1747 < 600 do
+        local _0xF405, _0x9E1D = _0x154C()
+        local _0x9366 = _0xF6D9(string.char(72,117,108,108))
+        local _0xB701 = _0xF6D9(string.char(82,111,111,116))
+        if _0xB701 and _0xB701.Anchored then _0xB7CA() end
+        
+        
+        local _0x5A74 = workspace:FindFirstChild(string.char(82,66,82,67,77,105,115,115,105,111,110,67,97,114,115))
+        local _0xA535 = (not _0xF405) and _0x5A74 and _0x5A74:FindFirstChild(string.char(77,111,118,67,97,114))
+        if _0xA535 and os.clock() - (_0xCA58.UpdateAt or 0) > 8 then
+            break 
+        end
+        if _0xA535 and _0x9366 then
+            local _0xA4F6, _0xC6B3 = pcall(function() return _0xA535:GetPivot().Position end)
+            if _0xA4F6 then
+                local _0xE9C7 = _0x33D7(_0xC6B3, _0x9366.Position)
+                if _0x39EE.C and _0x8A59 then
+                    _0x39EE.C.maxSpeed = math.max(_0x8A59, 200 / 3.6)
+                end
+                if _0xE9C7 > 70 then
+                    if not _0x87C3 or _0x33D7(_0xC6B3, _0x87C3) > 40 or not _0xEE9E() then
+                        _0x87C3 = _0xC6B3
+                        _0xD786(_0xC6B3)
+                    end
+                else
+                    
+                    _0x790D()
+                    _0x87C3 = nil
+                    local _0x5675, _0x110B = _0xC6B3, os.clock()
+                    local _0x820D = os.clock()
+                    while os.clock() - _0x820D < 4 and _0xA535.Parent and not _0xCEB3 and _0x198E() and keepGoing() do
+                        local _0xC5CA, _0x6BF3 = pcall(function() return _0xA535:GetPivot().Position end)
+                        if not _0xC5CA then break end
+                        local _0x9010 = os.clock()
+                        local _0x5994 = (_0x9010 > _0x110B) and (_0x6BF3 - _0x5675) / (_0x9010 - _0x110B) or Vector3.zero
+                        _0x5675, _0x110B = _0x6BF3, _0x9010
+                        local _0x2D19, _0x0CE3 = _0x96A7(_0x9366, _0x6BF3 + _0x5994 * math.clamp(_0x33D7(_0x6BF3, _0x9366.Position) / 60, 0, 0.8))
+                        if _0x0CE3 > 120 then break end
+                        _0x4D01(1, 0, math.clamp(_0x2D19 / 18, -1, 1))
+                        
+                        
+                        local _0x2D77 = (_0x6BF3 - _0x9366.Position) * Vector3.new(1, 0, 1)
+                        local _0xA9B3 = _0x2D77:Dot(_0x9366.CFrame.RightVector)
+                        if _0x2D77.Magnitude < 24 and math.abs(_0xA9B3) > 2 and _0x9010 - (_0xF85B or 0) > 1.6 then
+                            _0xF85B = _0x9010
+                            local _0x2108 = _0xBFFC().RCDrive and _0xBFFC().RCDrive.phys
+                            if _0x2108 and _0xCB63 and _0xCB63.sideSlide then
+                                pcall(_0xCB63.sideSlide, _0x2108, _0xA9B3 < 0)
+                            end
+                        end
+                        task.wait(0.03)
+                    end
+                    _0x7C78()
+                end
+                _0xCA58.Mission = string.format(string.char(37,115,32,226,128,162,32,224,185,132,224,184,165,224,185,136,224,184,136,224,184,177,224,184,154,32,224,184,171,224,185,136,224,184,178,224,184,135,32,37,100,32,226,128,162,32,224,184,132,224,184,167,224,184,178,224,184,161,224,184,158,224,184,173,224,185,131,224,184,136,32,37,115,32,226,128,162,32,224,185,128,224,184,171,224,184,165,224,184,183,224,184,173,32,37,115,32,224,184,167,224,184,180), _0x3B2F, _0xE9C7,
+                    _0xCA58.Gauge and string.format(string.char(37,46,48,102), _0xCA58.Gauge) or string.char(45),
+                    _0xCA58.Remaining and string.format(string.char(37,46,48,102), _0xCA58.Remaining / 1000) or string.char(45))
+            end
+            task.wait(0.3)
+            continue
+        end
+        if _0xF405 and _0x9366 and _0x33D7(_0xF405, _0x9366.Position) < 45 then
+            
+            
+            _0x790D()
+            local _0xB889 = _0x9E1D
+            local function _0xBADC()
+                local _0xB1B4, _0x21D3 = _0x154C()
+                return _0xCEB3 ~= nil or _0x21D3 ~= _0xB889
+            end
+            
+            local _0xE110 = os.clock()
+            while os.clock() - _0xE110 < 10 and _0x198E() and keepGoing() and not _0xBADC() do
+                local _0xAA62 = _0x154C()
+                if not _0xAA62 then break end
+                local _0x2D19, _0x8530 = _0x96A7(_0x9366, _0xAA62)
+                if _0x8530 <= 3 then break end
+                local _0x5DEB = _0x9366.AssemblyLinearVelocity:Dot(_0x9366.CFrame.LookVector)
+                local _0x9820 = math.clamp(_0x8530 * 0.9, 8, 55)
+                if math.abs(_0x2D19) > 40 then _0x9820 = math.min(_0x9820, 18) end
+                local _0x1F47, _0x3F79 = 0, 0
+                if _0x5DEB < _0x9820 - 3 then
+                    _0x1F47 = math.abs(_0x2D19) > 70 and 0.35 or 0.7
+                elseif _0x5DEB > _0x9820 + 5 then
+                    _0x3F79 = math.clamp((_0x5DEB - _0x9820) / 25, 0.2, 0.8)
+                else
+                    _0x1F47 = 0.2
+                end
+                _0x4D01(_0x1F47, _0x3F79, math.clamp(_0x2D19 / 20, -1, 1))
+                task.wait(0.03)
+            end
+            if not _0xBADC() then
+                
+                
+                local _0xCFCE = os.clock()
+                while os.clock() - _0xCFCE < 4 and _0x198E() and keepGoing() and not _0xBADC() do
+                    _0x4D01(0, 1, 0)
+                    
+                    if _0x9366.AssemblyLinearVelocity.Magnitude < 1 then _0x4D01(0, 0, 0) end
+                    task.wait(0.05)
+                end
+            end
+            _0x7C78()
+            _0x2145 = nil
+        elseif _0xF405 and (_0x9E1D ~= _0x2145 or not _0xEE9E()) then
+            _0x2145 = _0x9E1D
+            _0xD786(_0xF405)
+        end
+        _0xCA58.Mission = string.format(string.char(37,115,32,226,128,162,32,224,184,132,224,184,167,224,184,178,224,184,161,224,184,158,224,184,173,224,185,131,224,184,136,32,37,115,32,226,128,162,32,224,185,128,224,184,171,224,184,165,224,184,183,224,184,173,32,37,115,32,224,184,167,224,184,180), _0x3B2F,
+            _0xCA58.Gauge and string.format(string.char(37,46,48,102), _0xCA58.Gauge) or string.char(45),
+            _0xCA58.Remaining and string.format(string.char(37,46,48,102), _0xCA58.Remaining / 1000) or string.char(45))
+        task.wait(0.5)
+    end
+    _0x790D()
+    _0x7C78()
+    _0x4D6D()
+
+    if _0xCEB3 then
+        if _0xCEB3.success ~= false and _0xCEB3.reasonKey ~= string.char(115,116,77,105,115,115,105,111,110,69,114,114,111,114) then
+            _0xCA58.MissionsDone += 1
+            local _0x0333 = type(_0xCEB3.items) == string.char(116,97,98,108,101) and #_0xCEB3.items or 0
+            _0xCA58.Items = (_0xCA58.Items or 0) + _0x0333
+            _0xCA58.Mission = string.format(string.char(224,184,170,224,184,179,224,185,128,224,184,163,224,185,135,224,184,136,32,37,115,32,43,37,115,32,224,185,128,224,184,135,224,184,180,224,184,153,32,43,37,100,32,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161), _0x3B2F, tostring(_0xCEB3.money or 0), _0x0333)
+        else
+            _0xCA58.MissionsFailed += 1
+            _0xCA58.Mission = string.char(224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,185,132,224,184,161,224,185,136,224,184,156,224,185,136,224,184,178,224,184,153,32,224,185,128,224,184,163,224,184,180,224,185,136,224,184,161,224,185,131,224,184,171,224,184,161,224,185,136)
+        end
+        task.wait(3)
+    elseif not keepGoing() then
+        _0xB8AE({ op = string.char(97,98,97,110,100,111,110) })
+    end
+end
+
+
+
+local function _0x953A(_0xC28F)
+    if getconnections then
+        local _0xAC71 = 0
+        for _0xB1B4, sig in ipairs({ string.char(65,99,116,105,118,97,116,101,100), string.char(77,111,117,115,101,66,117,116,116,111,110,49,67,108,105,99,107) }) do
+            local _0xFDD5, _0xDA3D = pcall(getconnections, _0xC28F[sig])
+            if _0xFDD5 and type(_0xDA3D) == string.char(116,97,98,108,101) then
+                for _0xB1B4, _0x5FF8 in ipairs(_0xDA3D) do
+                    if _0x5FF8.Function then pcall(_0x5FF8.Function); _0xAC71 += 1 end
+                end
+            end
+            if _0xAC71 > 0 then return true end
+        end
+    end
+    if firesignal then
+        if pcall(firesignal, _0xC28F.Activated) then return true end
+    end
+    local _0xFDD5 = pcall(function()
+        local _0x74A3 = game:GetService(string.char(86,105,114,116,117,97,108,73,110,112,117,116,77,97,110,97,103,101,114))
+        local _0xFBF6 = game:GetService(string.char(71,117,105,83,101,114,118,105,99,101)):GetGuiInset()
+        local _0xAA62 = _0xC28F.AbsolutePosition + _0xC28F.AbsoluteSize / 2 + _0xFBF6
+        _0x74A3:SendMouseButtonEvent(_0xAA62.X, _0xAA62.Y, 0, true, game, 0)
+        task.wait(0.05)
+        _0x74A3:SendMouseButtonEvent(_0xAA62.X, _0xAA62.Y, 0, false, game, 0)
+    end)
+    return _0xFDD5
+end
+
+
+
+
+task.spawn(function()
+    while _0x198E() do
+        
+        pcall(function()
+            if _0x1E35.AutoGetItems then
+                local _0x42DC = _0x0683:FindFirstChildOfClass(string.char(80,108,97,121,101,114,71,117,105))
+                local _0x7873 = _0x42DC and _0x42DC:FindFirstChild(string.char(82,97,121,99,105,116,121,77,105,115,115,105,111,110,69,120,116,114,97))
+                if _0x7873 then
+                    for _0xB1B4, dlg in ipairs(_0x7873:GetChildren()) do
+                        local _0xC28F = dlg.Name:match(string.char(94,68,114,111,112,73,116,101,109,68,108,103,95)) and dlg:FindFirstChild(string.char(66,116,71,101,116,65,108,108))
+                        if _0xC28F and _0xC28F:IsA(string.char(71,117,105,66,117,116,116,111,110)) then
+                            _0x953A(_0xC28F)
+                            _0xCA58.ItemsClaimed = (_0xCA58.ItemsClaimed or 0) + 1
+                        end
+                    end
+                end
+            end
+        end)
+        task.wait(1)
+    end
+end)
+
+
+
+
+
+
+local _0x78BA = { badIds = {} }
+local function _0xD550()
+    if _0x78BA.T == nil then
+        local _0xFDD5, _0xFDC8 = pcall(function()
+            return require(_0x8DBA:WaitForChild(string.char(82,97,121,99,105,116,121,84,111,119,110), 5):WaitForChild(string.char(84,111,119,110,83,101,114,118,105,99,101,115), 5))
+        end)
+        _0x78BA.T = (_0xFDD5 and type(_0xFDC8) == string.char(116,97,98,108,101) and _0xFDC8.request) and _0xFDC8 or false
+    end
+    return _0x78BA.T or nil
+end
+local function _0x4D34()
+    local _0xFDD5, _0x101F = pcall(require, _0x8DBA.RaycityProfile.ProfileClient)
+    if not _0xFDD5 then return nil end
+    local _0x6527, _0xA4B2 = pcall(_0x101F.get)
+    return _0x6527 and type(_0xA4B2) == string.char(116,97,98,108,101) and _0xA4B2 or nil
+end
+
+local function _0x0272(force)
+    local _0xADF1, _0xA4B2 = _0xD550(), _0x4D34()
+    if not (_0xADF1 and _0xA4B2 and type(_0xA4B2.inventory) == string.char(116,97,98,108,101)) then return end
+    local _0x83E5, _0x165A, _0x327D = 0, {}, {}
+    for cell, it in pairs(_0xA4B2.inventory) do
+        _0x83E5 += 1
+        local _0x5FF8 = tonumber(cell)
+        if _0x5FF8 and type(it) == string.char(116,97,98,108,101) and it.id then
+            _0x165A[#_0x165A + 1] = { cell = _0x5FF8, _0x2DFB = it.id }
+            _0x327D[it.id] = (_0x327D[it.id] or 0) + 1
+        end
+    end
+    local _0xED3F = tonumber(_0xA4B2.invSize) or 30
+    if not force and _0xED3F - _0x83E5 > 2 then
+        _0xCA58.Store = string.format(string.char(224,184,129,224,184,163,224,184,176,224,185,128,224,184,155,224,185,139,224,184,178,32,37,100,47,37,100), _0x83E5, _0xED3F)
+        return
+    end
+    local _0xA9A2 = _0xADF1.request(string.char(115,116,111,114,97,103,101), string.char(111,112,101,110), { index = 1 })
+    if not (type(_0xA9A2) == string.char(116,97,98,108,101) and _0xA9A2.ok) then
+        _0xCA58.Store = string.char(224,185,128,224,184,155,224,184,180,224,184,148,224,185,130,224,184,129,224,184,148,224,184,177,224,184,135,224,185,132,224,184,161,224,185,136,224,185,132,224,184,148,224,185,137)
+        return
+    end
+    
+    table.sort(_0x165A, function(_0x2C46, _0x6A39)
+        local _0xC38B, _0xFAD8 = _0x327D[_0x2C46.id] > 1, _0x327D[_0x6A39.id] > 1
+        if _0xC38B ~= _0xFAD8 then return _0xC38B end
+        return _0x2C46.cell > _0x6A39.cell
+    end)
+    local _0x9DD2 = 0
+    for _0xB1B4, _0x5FF8 in ipairs(_0x165A) do
+        if _0xED3F - (_0x83E5 - _0x9DD2) >= 8 then break end
+        if not _0x78BA.badIds[_0x5FF8.id] then
+            local _0xAC1C = _0xADF1.request(string.char(115,116,111,114,97,103,101), string.char(100,101,112,111,115,105,116), { index = 1, from = _0x5FF8.cell })
+            if type(_0xAC1C) == string.char(116,97,98,108,101) and _0xAC1C.ok then
+                _0x9DD2 += 1
+                _0x327D[_0x5FF8.id] -= 1
+            elseif type(_0xAC1C) == string.char(116,97,98,108,101) and _0xAC1C.msgKey == string.char(115,116,67,97,110,78,111,116,77,111,118,101,73,116,101,109) then
+                _0x78BA.badIds[_0x5FF8.id] = true
+            else
+                _0xCA58.Store = string.char(224,185,130,224,184,129,224,184,148,224,184,177,224,184,135,224,185,128,224,184,149,224,185,135,224,184,161,224,184,171,224,184,163,224,184,183,224,184,173,224,184,157,224,184,178,224,184,129,224,185,132,224,184,161,224,185,136,224,185,132,224,184,148,224,185,137,58,32) .. tostring(type(_0xAC1C) == string.char(116,97,98,108,101) and (_0xAC1C.msgKey or _0xAC1C.err) or string.char(63))
+                break
+            end
+            task.wait(0.3)
+        end
+    end
+    _0xCA58.StoredTotal = (_0xCA58.StoredTotal or 0) + _0x9DD2
+    if _0x9DD2 > 0 then
+        _0xCA58.Store = string.format(string.char(224,184,157,224,184,178,224,184,129,224,185,128,224,184,130,224,185,137,224,184,178,224,185,130,224,184,129,224,184,148,224,184,177,224,184,135,224,185,129,224,184,165,224,185,137,224,184,167,32,37,100,32,224,184,138,224,184,180,224,185,137,224,184,153,32,40,224,184,163,224,184,167,224,184,161,32,37,100,41), _0x9DD2, _0xCA58.StoredTotal)
+    end
+end
+
+
+
+
+
+local _0xDA2A = {}
+local function _0x56C2(it)
+    if _0xDA2A.items == nil then
+        local _0xFDD5, _0xFDC8 = pcall(require, _0x8DBA.RaycityShop.ShopItems)
+        _0xDA2A.items = _0xFDD5 and _0xFDC8 or false
+        local _0x6527, _0xAA62 = pcall(require, _0x8DBA.RaycityShop.ItemSellPrice)
+        _0xDA2A.price = _0x6527 and type(_0xAA62) == string.char(116,97,98,108,101) and _0xAA62.ofDef and _0xAA62 or false
+    end
+    local _0xE9C7 = _0xDA2A.items and _0xDA2A.items[it.id]
+    if not _0xE9C7 then return 0, nil end
+    local _0xB3B0 = (_0xE9C7.serverPrice and _0xE9C7.serverPrice[2]) or _0xE9C7.sell or 0
+    if _0xDA2A.price then
+        local _0xFDD5, _0x21D3 = pcall(_0xDA2A.price.ofDef, _0xE9C7, it.id)
+        if _0xFDD5 and type(_0x21D3) == string.char(110,117,109,98,101,114) then _0xB3B0 = _0x21D3 end
+    end
+    
+    if it.bound or it.expires ~= nil then return 0, _0xE9C7 end
+    if _0xE9C7.type and _0xE9C7.type >= 5 and _0xE9C7.type <= 8 then return 0, _0xE9C7 end
+    if _0xE9C7.bonding and _0xE9C7.bonding ~= 0 then return 0, _0xE9C7 end
+    return tonumber(_0xB3B0) or 0, _0xE9C7
+end
+
+local function _0xFDE9()
+    local _0xA4B2 = _0x4D34()
+    if not (_0xA4B2 and type(_0xA4B2.inventory) == string.char(116,97,98,108,101)) then return end
+    local _0x8DAA = _0x8DBA.RaycityShop.Remotes:FindFirstChild(string.char(83,104,111,112,82,101,113,117,101,115,116))
+    if not _0x8DAA then return end
+    local _0x92EB = math.max(0, tonumber(_0x1E35.SellKeep) or 1)
+    local _0xC6A1 = {}
+    for cell, it in pairs(_0xA4B2.inventory) do
+        local _0x5FF8 = tonumber(cell)
+        if _0x5FF8 and type(it) == string.char(116,97,98,108,101) and it.id and it.uid then
+            local _0xDA3D = _0xC6A1[it.id] or {}
+            _0xC6A1[it.id] = _0xDA3D
+            _0xDA3D[#_0xDA3D + 1] = { cell = _0x5FF8, it = it }
+        end
+    end
+    local _0xB391, _0x8261 = 0, 0
+    for _0xB1B4, _0xDA3D in pairs(_0xC6A1) do
+        local _0x63F4 = 0
+        for _0xB1B4, _0xD5BA in ipairs(_0xDA3D) do _0x63F4 += (tonumber(_0xD5BA.it.count) or 1) end
+        local _0x7873 = _0x63F4 - _0x92EB
+        if _0x7873 > 0 then
+            local _0xDC3A, _0x1BC4 = _0x56C2(_0xDA3D[1].it)
+            if _0xDC3A > 0 and _0x1BC4 and _0x1BC4.type ~= 2 then
+                
+                table.sort(_0xDA3D, function(_0x2C46, _0x6A39) return _0x2C46.cell > _0x6A39.cell end)
+                for _0xB1B4, _0xD5BA in ipairs(_0xDA3D) do
+                    if _0x7873 <= 0 then break end
+                    if _0xD5BA.it.opt == nil then
+                        local _0xAC71 = math.min(_0x7873, tonumber(_0xD5BA.it.count) or 1)
+                        local _0xFDD5, _0xAC1C = pcall(_0x8DAA.InvokeServer, _0x8DAA, string.char(115,101,108,108), { cell = _0xD5BA.cell, count = _0xAC71, uid = _0xD5BA.it.uid })
+                        if _0xFDD5 and type(_0xAC1C) == string.char(116,97,98,108,101) and _0xAC1C.ok then
+                            _0x7873 -= _0xAC71
+                            _0x8261 += _0xAC71
+                            _0xB391 += tonumber(_0xAC1C.paid or _0xAC1C.total) or 0
+                        end
+                        task.wait(0.4)
+                    end
+                end
+            end
+        end
+    end
+    if _0x8261 > 0 then
+        _0xCA58.SoldTotal = (_0xCA58.SoldTotal or 0) + _0x8261
+        _0xCA58.SoldMoney = (_0xCA58.SoldMoney or 0) + _0xB391
+        _0xCA58.Store = string.format(string.char(224,184,130,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,139,224,185,137,224,184,179,32,37,100,32,224,184,138,224,184,180,224,185,137,224,184,153,32,43,37,100,32,224,185,128,224,184,135,224,184,180,224,184,153,32,40,224,184,163,224,184,167,224,184,161,32,43,37,100,41), _0x8261, _0xB391, _0xCA58.SoldMoney)
+    end
+end
+
+
+local function _0xD47D()
+    local _0xA4B2 = _0x4D34()
+    if not (_0xA4B2 and type(_0xA4B2.inventory) == string.char(116,97,98,108,101)) then return 0, 0 end
+    local _0x8DAA = _0x8DBA.RaycityShop.Remotes:FindFirstChild(string.char(83,104,111,112,82,101,113,117,101,115,116))
+    if not _0x8DAA then return 0, 0 end
+    local _0xDA3D = {}
+    for cell, it in pairs(_0xA4B2.inventory) do
+        local _0x5FF8 = tonumber(cell)
+        if _0x5FF8 and type(it) == string.char(116,97,98,108,101) and it.uid then _0xDA3D[#_0xDA3D + 1] = { cell = _0x5FF8, it = it } end
+    end
+    table.sort(_0xDA3D, function(_0x2C46, _0x6A39) return _0x2C46.cell > _0x6A39.cell end)
+    local _0x8261, _0xB391 = 0, 0
+    for _0xB1B4, _0xD5BA in ipairs(_0xDA3D) do
+        if _0x56C2(_0xD5BA.it) > 0 then
+            local _0xAC71 = tonumber(_0xD5BA.it.count) or 1
+            local _0xFDD5, _0xAC1C = pcall(_0x8DAA.InvokeServer, _0x8DAA, string.char(115,101,108,108), { cell = _0xD5BA.cell, count = _0xAC71, uid = _0xD5BA.it.uid })
+            if _0xFDD5 and type(_0xAC1C) == string.char(116,97,98,108,101) and _0xAC1C.ok then
+                _0x8261 += _0xAC71
+                _0xB391 += tonumber(_0xAC1C.paid or _0xAC1C.total) or 0
+            end
+            task.wait(0.35)
+        end
+    end
+    _0xCA58.SoldTotal = (_0xCA58.SoldTotal or 0) + _0x8261
+    _0xCA58.SoldMoney = (_0xCA58.SoldMoney or 0) + _0xB391
+    if _0x8261 > 0 then
+        _0xCA58.Store = string.format(string.char(224,184,130,224,184,178,224,184,162,224,185,129,224,184,165,224,185,137,224,184,167,32,37,100,32,224,184,138,224,184,180,224,185,137,224,184,153,32,43,37,100,32,224,185,128,224,184,135,224,184,180,224,184,153,32,40,224,184,163,224,184,167,224,184,161,32,43,37,100,41), _0x8261, _0xB391, _0xCA58.SoldMoney)
+    end
+    return _0x8261, _0xB391
+end
+
+task.spawn(function()
+    while _0x198E() do
+        if _0x1E35.AutoSellAll then
+            pcall(_0xD47D)
+        elseif _0x1E35.AutoSell then
+            pcall(_0xFDE9)
+        end
+        task.wait(10)
+    end
+end)
+
+task.spawn(function()
+    while _0x198E() do
+        if _0x1E35.AutoStore then pcall(_0x0272) end
+        task.wait(5)
+    end
+end)
+
+
+
+
+
+
+
+local _0x8311 = { log = {}, taken = {} }
+local function _0x0F75()
+    if _0x8311.SC == nil then
+        local _0xFDD5, _0xFDC8 = pcall(function() return require(_0x8DBA.RaycitySocial.SocialClient) end)
+        _0x8311.SC = (_0xFDD5 and type(_0xFDC8) == string.char(116,97,98,108,101) and _0xFDC8.request) and _0xFDC8 or false
+    end
+    return _0x8311.SC or nil
+end
+
+local function _0xF1D6(_0x77CC)
+    _0xCA58.Trade = _0x77CC
+    table.insert(_0x8311.log, 1, os.date(string.char(37,72,58,37,77,58,37,83,32)) .. _0x77CC)
+    if #_0x8311.log > 6 then table.remove(_0x8311.log) end
+end
+
+
+local function _0xFDF4(targetName, amount)
+    local _0x75B9 = _0x0F75()
+    if not _0x75B9 then return false, string.char(224,184,171,224,184,178,224,184,163,224,184,176,224,184,154,224,184,154,224,184,136,224,184,148,224,184,171,224,184,161,224,184,178,224,184,162,224,185,132,224,184,161,224,185,136,224,185,128,224,184,136,224,184,173) end
+    targetName = tostring(targetName or ""):gsub(string.char(94,37,115,43), ""):gsub(string.char(37,115,43,36), "")
+    if targetName == "" then return false, string.char(224,185,131,224,184,170,224,185,136,224,184,138,224,184,183,224,185,136,224,184,173,224,184,156,224,184,185,224,185,137,224,184,163,224,184,177,224,184,154,224,184,129,224,185,136,224,184,173,224,184,153) end
+    amount = math.floor(tonumber(amount) or 0)
+    if amount <= 0 then return false, string.char(224,184,136,224,184,179,224,184,153,224,184,167,224,184,153,224,185,128,224,184,135,224,184,180,224,184,153,224,185,132,224,184,161,224,185,136,224,184,150,224,184,185,224,184,129,224,184,149,224,185,137,224,184,173,224,184,135) end
+    local _0x35EB = tonumber(_0x0683:GetAttribute(string.char(82,97,121,99,105,116,121,82,97,105,110))) or 0
+    if amount > _0x35EB then return false, string.format(string.char(224,185,128,224,184,135,224,184,180,224,184,153,224,185,132,224,184,161,224,185,136,224,184,158,224,184,173,32,40,224,184,161,224,184,181,32,37,100,41), _0x35EB) end
+
+    local _0xFDD5, _0xAC1C = pcall(_0x75B9.request, string.char(109,97,105,108,46,115,101,110,100), {
+        to = targetName,
+        subject = string.char(50,75,32,83,67,82,73,80,84),
+        content = string.format(string.char(224,184,170,224,185,136,224,184,135,32,82,97,105,110,32,37,100), amount),
+        _0xBC79 = amount,
+        auto = { subject = true, content = true },
+    })
+    if _0xFDD5 and type(_0xAC1C) == string.char(116,97,98,108,101) and _0xAC1C.ok then
+        local _0xDCE1 = type(_0xAC1C.receipt) == string.char(116,97,98,108,101) and _0xAC1C.receipt or {}
+        _0xCA58.SentTotal = (_0xCA58.SentTotal or 0) + amount
+        _0xCA58.SentFee = (_0xCA58.SentFee or 0) + (tonumber(_0xDCE1.fee) or 0)
+        local _0x77CC = string.format(string.char(224,184,170,224,185,136,224,184,135,32,37,100,32,224,185,131,224,184,171,224,185,137,32,37,115,32,224,185,129,224,184,165,224,185,137,224,184,167,32,40,224,184,132,224,185,136,224,184,178,224,184,170,224,185,136,224,184,135,32,37,115,41), amount, tostring(_0xDCE1.to or targetName), tostring(_0xDCE1.fee or string.char(63)))
+        _0xF1D6(_0x77CC)
+        return true, _0x77CC
+    end
+    local _0x2A23 = string.char(63)
+    if _0xFDD5 and type(_0xAC1C) == string.char(116,97,98,108,101) then
+        local _0x1BAA, _0x7948 = pcall(_0x75B9.text, _0xAC1C)
+        _0x2A23 = (_0x1BAA and _0x7948 and _0x7948 ~= "") and _0x7948 or tostring(_0xAC1C.key or _0xAC1C.err or _0xAC1C.msg or string.char(63))
+    elseif not _0xFDD5 then
+        _0x2A23 = tostring(_0xAC1C)
+    end
+    local _0x77CC = string.char(224,184,170,224,185,136,224,184,135,224,185,132,224,184,161,224,185,136,224,184,170,224,184,179,224,185,128,224,184,163,224,185,135,224,184,136,58,32) .. _0x2A23
+    _0xF1D6(_0x77CC)
+    return false, _0x77CC
+end
+
+
+local function _0x3DD2()
+    local _0x75B9 = _0x0F75()
+    local _0x84EF = _0x75B9 and _0x75B9.box
+    if not (_0x84EF and type(_0x84EF.mails) == string.char(116,97,98,108,101)) then return end
+    for _0xB1B4, _0xFDC8 in ipairs(_0x84EF.mails) do
+        if type(_0xFDC8) == string.char(116,97,98,108,101) and _0xFDC8.id and not _0x8311.taken[_0xFDC8.id] then
+            _0x8311.taken[_0xFDC8.id] = true
+            local _0xFDD5, _0xAC1C = pcall(_0x75B9.request, string.char(109,97,105,108,46,116,97,107,101), { _0x2DFB = _0xFDC8.id })
+            if _0xFDD5 and type(_0xAC1C) == string.char(116,97,98,108,101) and _0xAC1C.ok then
+                _0xCA58.MailTaken = (_0xCA58.MailTaken or 0) + 1
+                _0xF1D6(string.char(224,184,163,224,184,177,224,184,154,224,184,136,224,184,148,224,184,171,224,184,161,224,184,178,224,184,162,224,184,136,224,184,178,224,184,129,32) .. tostring(_0xFDC8.from or string.char(63)) .. (_0xFDC8.money and (string.char(32,43) .. tostring(_0xFDC8.money)) or ""))
+            end
+            task.wait(0.5)
+        end
+    end
+end
+
+task.spawn(function()
+    local _0xBE7E = 0
+    while _0x198E() do
+        if _0x1E35.AutoSend and os.clock() - _0xBE7E > 60 then
+            local _0x35EB = tonumber(_0x0683:GetAttribute(string.char(82,97,121,99,105,116,121,82,97,105,110))) or 0
+            local _0xDEB0 = math.floor(tonumber(_0x1E35.SendAmount) or 0)
+            
+            if _0xDEB0 > 0 and _0x1E35.SendTarget ~= "" and _0x35EB - _0xDEB0 - 200 >= (tonumber(_0x1E35.SendKeep) or 0) then
+                _0xBE7E = os.clock()
+                pcall(_0xFDF4, _0x1E35.SendTarget, _0xDEB0)
+            end
+        end
+        if _0x1E35.AutoTakeMail then pcall(_0x3DD2) end
+        task.wait(3)
+    end
+end)
+
+
+task.spawn(function()
+    while _0x198E() do
+        if _0x1E35.AutoMission then
+            _0xCA58.Coin = _0x1E35.AutoCoin and string.char(224,184,158,224,184,177,224,184,129,224,185,132,224,184,167,224,185,137,224,184,163,224,184,176,224,184,171,224,184,167,224,185,136,224,184,178,224,184,135,224,184,151,224,184,179,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136) or string.char(224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136)
+            local _0xFDD5, _0x29E8 = pcall(_0x6B18, function() return _0x1E35.AutoMission end)
+            if not _0xFDD5 then
+                _0xCA58.Mission = string.char(224,184,156,224,184,180,224,184,148,224,184,158,224,184,165,224,184,178,224,184,148,58,32) .. tostring(_0x29E8):sub(1, 80)
+                _0x790D()
+                _0x7C78()
+                task.wait(2)
+            end
+        elseif _0x1E35.AutoCoin then
+            _0xCA58.Mission = string.char(224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136)
+            local _0xFDD5, _0x29E8 = pcall(_0x4A62, function() return _0x1E35.AutoCoin and not _0x1E35.AutoMission end)
+            if not _0xFDD5 then
+                _0xCA58.Coin = string.char(224,184,156,224,184,180,224,184,148,224,184,158,224,184,165,224,184,178,224,184,148,58,32) .. tostring(_0x29E8):sub(1, 80)
+                _0x790D()
+                _0x7C78()
+                task.wait(2)
+            end
+        else
+            _0xCA58.Mission, _0xCA58.Coin = string.char(224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136), string.char(224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136)
+            task.wait(0.5)
+        end
+        task.wait(0.1)
+    end
+end)
+
+
+local _0xA9E1 = (function()
+
+local _0xEDC2 = (getgenv and getgenv()) or _G
+if _0xEDC2.__TwoKSupportUI then
+    pcall(function() _0xEDC2.__TwoKSupportUI:Destroy() end)
+    _0xEDC2.__TwoKSupportUI = nil
+end
+
+local _0x5DA8 = game:GetService(string.char(67,111,114,101,71,117,105))
+local _0x8EFC = game:GetService(string.char(80,108,97,121,101,114,115))
+local _0xD9BC = game:GetService(string.char(84,119,101,101,110,83,101,114,118,105,99,101))
+local _0x4E42 = game:GetService(string.char(85,115,101,114,73,110,112,117,116,83,101,114,118,105,99,101))
+local _0x2E8F = game:GetService(string.char(84,101,120,116,83,101,114,118,105,99,101))
+local _0x5C1F = game:GetService(string.char(72,116,116,112,83,101,114,118,105,99,101))
+local _0x567C = game:GetService(string.char(76,105,103,104,116,105,110,103))
+
+local _0x4015 = _0x8EFC.LocalPlayer
+local _0x8F40 = _0x4015 and _0x4015:FindFirstChildOfClass(string.char(80,108,97,121,101,114,71,117,105))
+local _0xEE93 = workspace.CurrentCamera
+
+
+pcall(function()
+    local _0xC0E2 = _0x567C:FindFirstChild(string.char(84,119,111,75,80,114,105,115,109,70,114,111,115,116))
+    if _0xC0E2 then _0xC0E2:Destroy() end
+end)
+for _0xB1B4, _0x2F77 in ipairs({ _0x5DA8, _0x8F40, (gethui and gethui()) or nil }) do
+    pcall(function()
+        for _0xB1B4, child in ipairs(_0x2F77:GetChildren()) do
+            if child:IsA(string.char(83,99,114,101,101,110,71,117,105)) and (child.Name == string.char(84,119,111,75,80,114,105,115,109) or child.Name == string.char(83,117,112,112,111,114,116,83,95,85,73)) then
+                child:Destroy()
+            end
+        end
+    end)
+end
+
+
+local _0xAFB4 = {}
+local function _0x38EF(_0x7FAB)
+    _0xAFB4[#_0xAFB4 + 1] = _0x7FAB
+    return _0x7FAB
+end
+
+local function _0xE944(class, props, parent)
+    local _0xFD5B = Instance.new(class)
+    for _0x18D6, _0x21D3 in pairs(props or {}) do _0xFD5B[_0x18D6] = _0x21D3 end
+    if parent then _0xFD5B.Parent = parent end
+    return _0xFD5B
+end
+
+local function _0x6803(parent, _0xAC1C)
+    return _0xE944(string.char(85,73,67,111,114,110,101,114), { CornerRadius = UDim.new(0, _0xAC1C) }, parent)
+end
+
+local function _0xEE0C(parent, color, thickness, transparency)
+    return _0xE944(string.char(85,73,83,116,114,111,107,101), {
+        Color = color,
+        Thickness = thickness or 1,
+        Transparency = transparency or 0,
+        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+    }, parent)
+end
+
+local function _0x348D(_0x94B8, ...)
+    if type(_0x94B8) ~= string.char(102,117,110,99,116,105,111,110) then return end
+    local _0x8B16 = { ... }
+    task.spawn(function()
+        local _0xFDD5, _0x29E8 = pcall(_0x94B8, unpack(_0x8B16))
+        if not _0xFDD5 then warn(string.char(91,83,85,80,80,79,82,84,32,83,32,85,73,93,58,32) .. tostring(_0x29E8)) end
+    end)
+end
+
+local function _0x7546(_0x6EF4, _0xED3F, font, width)
+    local _0xFDD5, _0x21D3 = pcall(function()
+        return _0x2E8F:GetTextSize(tostring(_0x6EF4), _0xED3F, font, Vector2.new(width, 10000))
+    end)
+    return _0xFDD5 and _0x21D3 or Vector2.new(width, _0xED3F + 2)
+end
+
+
+local _0xFE17 = {
+    _0xC4FF = Color3.fromRGB(12, 12, 14),
+    windowTop = Color3.fromRGB(30, 13, 15),
+    border = Color3.fromRGB(176, 32, 38),
+    _0x2EB2 = Color3.fromRGB(18, 18, 22),
+    cardHover = Color3.fromRGB(23, 23, 28),
+    cardStroke = Color3.fromRGB(32, 32, 38),
+    red = Color3.fromRGB(235, 46, 46),
+    redDim = Color3.fromRGB(120, 28, 32),
+    _0x6EF4 = Color3.fromRGB(246, 246, 248),
+    sub = Color3.fromRGB(150, 150, 158),
+    chip = Color3.fromRGB(30, 30, 34),
+    chipStroke = Color3.fromRGB(48, 48, 54),
+    line = Color3.fromRGB(44, 28, 31),
+    off = Color3.fromRGB(38, 38, 44),
+    field = Color3.fromRGB(11, 11, 14),
+}
+
+local _0x40CA = { Title = string.char(83,85,80,80,79,82,84,32,83), Sub = string.char(82,65,89,67,73,84,89,32,82,66), ToggleKey = Enum.KeyCode.RightControl }
+local _0x31F5, _0x7D6B = 720, 440
+local _0x8D88, _0xF1A0 = 64, 40
+local _0x6B4E = _0x31F5 - 40
+
+
+local _0x142E = string.char(50,75,83,117,112,112,111,114,116,85,73)
+local _0x8C52 = _0x142E .. string.char(47,115,101,116,116,105,110,103,115,46,106,115,111,110)
+local _0x2483 = {}
+pcall(function()
+    if isfile and isfile(_0x8C52) then _0x2483 = _0x5C1F:JSONDecode(readfile(_0x8C52)) end
+end)
+if type(_0x2483) ~= string.char(116,97,98,108,101) then _0x2483 = {} end
+
+local _0xA9E1 = { Visible = false, _0xCA58 = "", ToggleKey = _0x40CA.ToggleKey }
+do
+    local _0xFDD5, _0x18D6 = pcall(function() return Enum.KeyCode[_0x2483.ToggleKey] end)
+    if _0xFDD5 and typeof(_0x18D6) == string.char(69,110,117,109,73,116,101,109) then _0xA9E1.ToggleKey = _0x18D6 end
+end
+
+local _0xB813 = 1.1 
+local _0xB82C, _0xF78E = tonumber(_0x2483.PosX) or 0, tonumber(_0x2483.PosY) or -_0x7D6B / 2
+
+local _0x3AD1 = false
+local function _0x1DD0()
+    if _0x3AD1 or not writefile then return end
+    _0x3AD1 = true
+    task.delay(0.5, function()
+        _0x3AD1 = false
+        pcall(function()
+            if makefolder and isfolder and not isfolder(_0x142E) then makefolder(_0x142E) end
+            writefile(_0x8C52, _0x5C1F:JSONEncode({
+                ToggleKey = _0xA9E1.ToggleKey.Name,
+                UserScale = _0xB813,
+                PosX = _0xB82C, PosY = _0xF78E,
+            }))
+        end)
+    end)
+end
+
+
+local _0x1AC5 = _0xE944(string.char(83,99,114,101,101,110,71,117,105), {
+    Name = string.char(83,117,112,112,111,114,116,83,95,85,73),
+    IgnoreGuiInset = true,
+    ResetOnSpawn = false,
+    ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+    DisplayOrder = 9999,
+})
+do
+    local _0xFDD5 = pcall(function() _0x1AC5.Parent = (gethui and gethui()) or _0x5DA8 end)
+    if not _0xFDD5 or not _0x1AC5.Parent then _0x1AC5.Parent = _0x8F40 end
+end
+_0x38EF(_0x1AC5)
+
+local function _0xA7A2()
+    local _0x9726 = workspace.CurrentCamera or _0xEE93
+    return (_0x9726 and _0x9726.ViewportSize) or Vector2.new(1280, 720)
+end
+
+
+local _0xC4FF = _0xE944(string.char(67,97,110,118,97,115,71,114,111,117,112), {
+    Name = string.char(87,105,110,100,111,119),
+    AnchorPoint = Vector2.new(0.5, 0),
+    Position = UDim2.new(0.5, _0xB82C, 0.5, _0xF78E),
+    Size = UDim2.fromOffset(_0x31F5, _0x7D6B),
+    BackgroundColor3 = _0xFE17.window,
+    BorderSizePixel = 0,
+    ClipsDescendants = true,
+    Visible = false,
+    Active = true,
+}, _0x1AC5)
+_0x6803(_0xC4FF, 14)
+_0xEE0C(_0xC4FF, _0xFE17.border, 1.5)
+_0xC4FF.BackgroundTransparency = 0
+
+do
+    local _0x214B = _0xE944(string.char(70,114,97,109,101), {
+        Name = string.char(66,97,99,107,100,114,111,112), Size = UDim2.fromScale(1, 1), BackgroundColor3 = Color3.fromRGB(12, 12, 14),
+        BackgroundTransparency = 0, BorderSizePixel = 0, Active = false,
+    }, _0xC4FF)
+    _0x6803(_0x214B, 14)
+end
+
+local _0xF3E1 = _0xE944(string.char(85,73,83,99,97,108,101), { Scale = 1 }, _0xC4FF)
+local function _0x004D()
+    local _0xB479 = _0xA7A2()
+    local _0x17AA = math.min(1, (_0xB479.X - 24) / _0x31F5, (_0xB479.Y - 24) / _0x7D6B)
+    return math.max(0.3, _0x17AA * _0xB813)
+end
+_0xF3E1.Scale = _0x004D()
+do
+    local _0x9726 = workspace.CurrentCamera
+    if _0x9726 then
+        _0x38EF(_0x9726:GetPropertyChangedSignal(string.char(86,105,101,119,112,111,114,116,83,105,122,101)):Connect(function()
+            if not _0xA9E1.Visible then return end
+            _0xF3E1.Scale = _0x004D()
+        end))
+    end
+end
+
+
+local _0x30FA = _0xE944(string.char(70,114,97,109,101), {
+    Name = string.char(68,114,97,103,90,111,110,101), Size = UDim2.new(1, 0, 0, _0x8D88), BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0, Active = true,
+}, _0xC4FF)
+
+local _0x8AD5 = _0xE944(string.char(70,114,97,109,101), {
+    Position = UDim2.fromOffset(18, 10), Size = UDim2.fromOffset(44, 44), BackgroundColor3 = _0xFE17.chip, BorderSizePixel = 0,
+}, _0xC4FF)
+_0x6803(_0x8AD5, 10)
+_0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+    Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 22,
+    Text = string.char(83), TextColor3 = _0xFE17.text,
+}, _0x8AD5)
+
+_0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+    Position = UDim2.fromOffset(74, 10), Size = UDim2.fromOffset(300, 24), BackgroundTransparency = 1,
+    Font = Enum.Font.GothamBold, TextSize = 19, TextXAlignment = Enum.TextXAlignment.Left,
+    Text = _0x40CA.Title, TextColor3 = _0xFE17.text,
+}, _0xC4FF)
+_0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+    Position = UDim2.fromOffset(74, 34), Size = UDim2.fromOffset(300, 16), BackgroundTransparency = 1,
+    Font = Enum.Font.GothamBold, TextSize = 11, TextXAlignment = Enum.TextXAlignment.Left,
+    Text = _0x40CA.Sub, TextColor3 = _0xFE17.red,
+}, _0xC4FF)
+
+local function _0xF947(_0x6EF4, xFromRight)
+    local _0x6A39 = _0xE944(string.char(84,101,120,116,66,117,116,116,111,110), {
+        AnchorPoint = Vector2.new(1, 0),
+        Position = UDim2.new(1, -xFromRight, 0, 15),
+        Size = UDim2.fromOffset(34, 34),
+        BackgroundColor3 = _0xFE17.chip,
+        BorderSizePixel = 0,
+        AutoButtonColor = false,
+        Font = Enum.Font.GothamBold,
+        TextSize = 16,
+        Text = _0x6EF4,
+        TextColor3 = _0xFE17.text,
+        ZIndex = 3,
+    }, _0xC4FF)
+    _0x6803(_0x6A39, 8)
+    _0xEE0C(_0x6A39, _0xFE17.chipStroke, 1)
+    _0x38EF(_0x6A39.MouseEnter:Connect(function() _0x6A39.BackgroundColor3 = Color3.fromRGB(44, 24, 27) end))
+    _0x38EF(_0x6A39.MouseLeave:Connect(function() _0x6A39.BackgroundColor3 = _0xFE17.chip end))
+    return _0x6A39
+end
+local _0x081F = _0xF947(string.char(95), 62)
+local _0x99D4 = _0xF947(string.char(120), 18)
+
+_0xE944(string.char(70,114,97,109,101), {
+    Position = UDim2.fromOffset(0, _0x8D88 - 1), Size = UDim2.new(1, 0, 0, 1),
+    BackgroundColor3 = _0xFE17.line, BorderSizePixel = 0,
+}, _0xC4FF)
+
+
+local _0xEB29 = _0xE944(string.char(70,114,97,109,101), {
+    Position = UDim2.fromOffset(0, _0x8D88), Size = UDim2.new(1, 0, 0, _0xF1A0), BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0,
+}, _0xC4FF)
+_0xE944(string.char(70,114,97,109,101), {
+    Position = UDim2.new(0, 18, 1, -1), Size = UDim2.new(1, -36, 0, 1),
+    BackgroundColor3 = _0xFE17.line, BorderSizePixel = 0,
+}, _0xEB29)
+local _0x6BEC = _0xE944(string.char(70,114,97,109,101), {
+    AnchorPoint = Vector2.new(0, 1), Position = UDim2.new(0, 30, 1, 0), Size = UDim2.fromOffset(100, 3),
+    BackgroundColor3 = _0xFE17.red, BorderSizePixel = 0, ZIndex = 2,
+}, _0xEB29)
+_0x6803(_0x6BEC, 2)
+
+local _0x0A32 = _0xE944(string.char(70,114,97,109,101), {
+    Position = UDim2.fromOffset(0, _0x8D88 + _0xF1A0), Size = UDim2.new(1, 0, 1, -(_0x8D88 + _0xF1A0)),
+    BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0, ClipsDescendants = true,
+}, _0xC4FF)
+
+
+local function _0xBD56(handle, threshold, onBegin, onDelta, onFinish)
+    local _0xC7FC, _0x9DD2, _0x0855 = false, false, Vector3.zero
+    _0x38EF(handle.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            _0xC7FC, _0x9DD2, _0x0855 = true, false, input.Position
+            onBegin()
+        end
+    end))
+    _0x38EF(_0x4E42.InputChanged:Connect(function(input)
+        if _0xC7FC and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            local _0xE9C7 = input.Position - _0x0855
+            if not _0x9DD2 and Vector2.new(_0xE9C7.X, _0xE9C7.Y).Magnitude > threshold then _0x9DD2 = true end
+            if _0x9DD2 then onDelta(Vector2.new(_0xE9C7.X, _0xE9C7.Y)) end
+        end
+    end))
+    _0x38EF(_0x4E42.InputEnded:Connect(function(input)
+        if _0xC7FC and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+            _0xC7FC = false
+            onFinish(_0x9DD2)
+        end
+    end))
+end
+
+do
+    local _0x132A, _0x26F8 = 0, 0
+    _0xBD56(_0x30FA, 4, function() _0x132A, _0x26F8 = _0xB82C, _0xF78E end, function(_0xE9C7)
+        local _0xEC3F = _0xF3E1.Scale
+        local _0xB479 = _0xA7A2()
+        _0xB82C = math.clamp(_0x132A + _0xE9C7.X / _0xEC3F, -_0xB479.X / (2 * _0xEC3F) + 90, _0xB479.X / (2 * _0xEC3F) - 90)
+        _0xF78E = math.clamp(_0x26F8 + _0xE9C7.Y / _0xEC3F, -_0xB479.Y / (2 * _0xEC3F) + 4, _0xB479.Y / (2 * _0xEC3F) - 40)
+        _0xC4FF.Position = UDim2.new(0.5, _0xB82C, 0.5, _0xF78E)
+    end, function(_0x9DD2)
+        if _0x9DD2 then _0x1DD0() end
+    end)
+end
+
+
+local _0x6423 = false
+local function _0x281C()
+    _0xEB29.Visible = not _0x6423
+    _0x0A32.Visible = not _0x6423
+    _0xC4FF.Size = UDim2.fromOffset(_0x31F5, _0x6423 and _0x8D88 or _0x7D6B)
+end
+
+function _0xA9E1:Toggle(_0xA6C4)
+    if _0xA6C4 == nil then _0xA6C4 = not _0xA9E1.Visible end
+    if _0xA6C4 == _0xA9E1.Visible then return end
+    _0xA9E1.Visible = _0xA6C4
+    if _0xA6C4 then
+        _0xC4FF.Visible = true
+        local _0x8035 = _0x004D()
+        _0xF3E1.Scale = _0x8035 * 0.94
+        _0xD9BC:Create(_0xF3E1, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Scale = _0x8035 }):Play()
+    else
+        _0xC4FF.Visible = false
+    end
+end
+
+_0x38EF(_0x081F.MouseButton1Click:Connect(function()
+    _0x6423 = not _0x6423
+    _0x281C()
+end))
+_0x38EF(_0x99D4.MouseButton1Click:Connect(function()
+    _0xA9E1:Toggle(false)
+end))
+
+
+local _0xD975 = _0xE944(string.char(70,114,97,109,101), {
+    AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -18, 1, -18), Size = UDim2.fromOffset(300, 420),
+    BackgroundTransparency = 1, ZIndex = 20,
+}, _0x1AC5)
+_0xE944(string.char(85,73,76,105,115,116,76,97,121,111,117,116), {
+    FillDirection = Enum.FillDirection.Vertical, VerticalAlignment = Enum.VerticalAlignment.Bottom,
+    HorizontalAlignment = Enum.HorizontalAlignment.Right, SortOrder = Enum.SortOrder.LayoutOrder,
+    Padding = UDim.new(0, 8),
+}, _0xD975)
+
+local _0x50D8 = 0
+function _0xA9E1:Notify(_0x2CE4)
+    _0x2CE4 = _0x2CE4 or {}
+    local _0x3B2F = tostring(_0x2CE4.Title or "")
+    local _0x6EF4 = tostring(_0x2CE4.Text or "")
+    local _0x22E0 = tonumber(_0x2CE4.Duration) or 3
+    local _0xF0C6 = _0x6EF4 ~= "" and _0x7546(_0x6EF4, 12, Enum.Font.Gotham, 252).Y or 0
+    local _0x7D0B = 14 + 18 + (_0xF0C6 > 0 and (4 + _0xF0C6) or 0) + 14
+    _0x50D8 += 1
+
+    local _0x2EB2 = _0xE944(string.char(67,97,110,118,97,115,71,114,111,117,112), {
+        Size = UDim2.fromOffset(290, _0x7D0B), BackgroundColor3 = Color3.fromRGB(16, 16, 20), BorderSizePixel = 0,
+        GroupTransparency = 1, LayoutOrder = _0x50D8, ZIndex = 20,
+    }, _0xD975)
+    _0x6803(_0x2EB2, 10)
+    _0xEE0C(_0x2EB2, Color3.fromRGB(70, 26, 30), 1)
+    local _0xE24F = _0xE944(string.char(70,114,97,109,101), {
+        AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromScale(0, 0.5), Size = UDim2.new(0, 3, 0.7, 0),
+        BackgroundColor3 = _0xFE17.red, BorderSizePixel = 0,
+    }, _0x2EB2)
+    _0x6803(_0xE24F, 2)
+    _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+        Position = UDim2.fromOffset(18, 12), Size = UDim2.fromOffset(256, 18), BackgroundTransparency = 1,
+        Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+        TextTruncate = Enum.TextTruncate.AtEnd, Text = _0x3B2F, TextColor3 = _0xFE17.text,
+    }, _0x2EB2)
+    if _0x6EF4 ~= "" then
+        _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+            Position = UDim2.fromOffset(18, 34), Size = UDim2.fromOffset(256, _0xF0C6), BackgroundTransparency = 1,
+            Font = Enum.Font.Gotham, TextSize = 12, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left,
+            TextYAlignment = Enum.TextYAlignment.Top, Text = _0x6EF4, TextColor3 = _0xFE17.sub,
+        }, _0x2EB2)
+    end
+
+    
+    local _0xAEC7 = {}
+    for _0xB1B4, ch in ipairs(_0xD975:GetChildren()) do
+        if ch:IsA(string.char(67,97,110,118,97,115,71,114,111,117,112)) then _0xAEC7[#_0xAEC7 + 1] = ch end
+    end
+    table.sort(_0xAEC7, function(_0x2C46, _0x6A39) return _0x2C46.LayoutOrder < _0x6A39.LayoutOrder end)
+    while #_0xAEC7 > 5 do
+        table.remove(_0xAEC7, 1):Destroy()
+    end
+
+    _0xD9BC:Create(_0x2EB2, TweenInfo.new(0.2), { GroupTransparency = 0 }):Play()
+    task.delay(_0x22E0, function()
+        if not _0x2EB2.Parent then return end
+        local _0xF8AE = _0xD9BC:Create(_0x2EB2, TweenInfo.new(0.25), { GroupTransparency = 1 })
+        _0xF8AE.Completed:Connect(function() _0x2EB2:Destroy() end)
+        _0xF8AE:Play()
+    end)
+end
+
+function _0xA9E1:SetStatus(message)
+    _0xA9E1.Status = tostring(message or "")
+end
+
+
+local _0xA943 = {}
+local _0x623C
+local _0x14DF = 30
+
+local function _0x7B0E(_0x479F)
+    _0x623C = _0x479F
+    for _0xB1B4, _0xF8AE in ipairs(_0xA943) do
+        local _0x87A9 = (_0xF8AE == _0x479F)
+        _0xF8AE.page.Visible = _0x87A9
+        _0xF8AE.button.TextColor3 = _0x87A9 and _0xFE17.text or Color3.fromRGB(176, 176, 184)
+    end
+    _0xD9BC:Create(_0x6BEC, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        Position = UDim2.new(0, _0x479F.x, 1, 0), Size = UDim2.fromOffset(_0x479F.w, 3),
+    }):Play()
+end
+
+function _0xA9E1:Tab(tabTitle)
+    tabTitle = tostring(tabTitle)
+    local _0x1F4B = _0x7546(tabTitle, 14, Enum.Font.GothamBold, 400).X
+    local _0x24A1 = math.floor(_0x1F4B + 64)
+    local _0x2676 = _0xE944(string.char(84,101,120,116,66,117,116,116,111,110), {
+        Position = UDim2.fromOffset(_0x14DF, 0), Size = UDim2.new(0, _0x24A1, 1, -3), BackgroundTransparency = 1,
+        AutoButtonColor = false, Font = Enum.Font.GothamBold, TextSize = 14, Text = tabTitle,
+        TextColor3 = Color3.fromRGB(176, 176, 184),
+    }, _0xEB29)
+
+    local _0xEC85 = _0xE944(string.char(83,99,114,111,108,108,105,110,103,70,114,97,109,101), {
+        Name = string.char(80,97,103,101,95) .. tabTitle, Size = UDim2.fromScale(1, 1), BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0,
+        ScrollBarThickness = 4, ScrollBarImageColor3 = _0xFE17.redDim, CanvasSize = UDim2.new(),
+        AutomaticCanvasSize = Enum.AutomaticSize.Y, ScrollingDirection = Enum.ScrollingDirection.Y,
+        Visible = false,
+    }, _0x0A32)
+    _0xE944(string.char(85,73,76,105,115,116,76,97,121,111,117,116), { SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0, 8) }, _0xEC85)
+    _0xE944(string.char(85,73,80,97,100,100,105,110,103), {
+        PaddingLeft = UDim.new(0, 18), PaddingRight = UDim.new(0, 22), PaddingTop = UDim.new(0, 12), PaddingBottom = UDim.new(0, 18),
+    }, _0xEC85)
+
+    local _0x479F = { _0x2676 = _0x2676, _0xEC85 = _0xEC85, x = _0x14DF, _0x24A1 = _0x24A1 }
+    _0x14DF += _0x24A1 + 14
+    _0xA943[#_0xA943 + 1] = _0x479F
+    _0x38EF(_0x2676.MouseButton1Click:Connect(function() _0x7B0E(_0x479F) end))
+    if #_0xA943 == 1 then _0x7B0E(_0x479F) end
+
+    local _0xCA05 = 0
+    local function _0xE5C4()
+        _0xCA05 += 1
+        return _0xCA05
+    end
+
+    local _0xEDB2 = {}
+
+    function _0xEDB2:Section(sectionTitle)
+        sectionTitle = tostring(sectionTitle)
+
+        
+        local _0xBFF9 = _0xE944(string.char(70,114,97,109,101), { Size = UDim2.new(1, 0, 0, 30), BackgroundTransparency = 1, LayoutOrder = _0xE5C4() }, _0xEC85)
+        _0xE944(string.char(70,114,97,109,101), {
+            AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0, 7, 0.5, 2), Size = UDim2.fromOffset(9, 9),
+            Rotation = 45, BackgroundColor3 = _0xFE17.red, BorderSizePixel = 0,
+        }, _0xBFF9)
+        local _0x3AFB = _0x7546(sectionTitle, 12, Enum.Font.GothamBold, 500).X
+        _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+            Position = UDim2.fromOffset(22, 2), Size = UDim2.fromOffset(_0x3AFB + 6, 28), BackgroundTransparency = 1,
+            Font = Enum.Font.GothamBold, TextSize = 12, TextXAlignment = Enum.TextXAlignment.Left,
+            Text = sectionTitle, TextColor3 = _0xFE17.text,
+        }, _0xBFF9)
+        _0xE944(string.char(70,114,97,109,101), {
+            Position = UDim2.new(0, 22 + _0x3AFB + 16, 0.5, 2), Size = UDim2.new(1, -(22 + _0x3AFB + 16), 0, 1),
+            BackgroundColor3 = _0xFE17.line, BorderSizePixel = 0,
+        }, _0xBFF9)
+
+        local _0xFFDC = {}
+
+        local function _0x84EE(_0xD99B)
+            local _0x34C1 = _0xE944(string.char(70,114,97,109,101), {
+                Size = UDim2.new(1, 0, 0, _0xD99B), BackgroundColor3 = _0xFE17.card, BorderSizePixel = 0, LayoutOrder = _0xE5C4(),
+            }, _0xEC85)
+            _0x6803(_0x34C1, 10)
+            _0xEE0C(_0x34C1, _0xFE17.cardStroke, 1)
+            local _0xE24F = _0xE944(string.char(70,114,97,109,101), {
+                AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromScale(0, 0.5), Size = UDim2.new(0, 3, 0.66, 0),
+                BackgroundColor3 = _0xFE17.red, BorderSizePixel = 0,
+            }, _0x34C1)
+            _0x6803(_0xE24F, 2)
+            return _0x34C1
+        end
+
+        
+        local function _0x2967(_0x8C9A, _0xFE88, reserve)
+            local _0x1F4B = _0x6B4E - 18 - reserve
+            local _0x4816 = _0xFE88 ~= nil and _0xFE88 ~= ""
+            local _0xA538 = _0x4816 and math.max(15, _0x7546(_0xFE88, 12, Enum.Font.Gotham, _0x1F4B).Y) or 0
+            local _0xD99B = _0x4816 and (13 + 19 + 3 + _0xA538 + 13) or 48
+            local _0x34C1 = _0x84EE(math.max(_0xD99B, 48))
+            local _0x3B2F = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, _0x4816 and 13 or 0),
+                Size = _0x4816 and UDim2.fromOffset(_0x1F4B, 19) or UDim2.new(0, _0x1F4B, 1, 0),
+                BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 14,
+                TextXAlignment = Enum.TextXAlignment.Left, TextTruncate = Enum.TextTruncate.AtEnd,
+                Text = tostring(_0x8C9A or ""), TextColor3 = _0xFE17.text,
+            }, _0x34C1)
+            local _0x3D7C
+            if _0x4816 then
+                _0x3D7C = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                    Position = UDim2.fromOffset(18, 35), Size = UDim2.fromOffset(_0x1F4B, _0xA538), BackgroundTransparency = 1,
+                    Font = Enum.Font.Gotham, TextSize = 12, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left,
+                    TextYAlignment = Enum.TextYAlignment.Top, Text = tostring(_0xFE88), TextColor3 = _0xFE17.sub,
+                }, _0x34C1)
+            end
+            return _0x34C1, _0x3B2F, _0x3D7C
+        end
+
+        local function _0x8E30(_0x34C1, target)
+            target = target or _0x34C1
+            _0x38EF(target.MouseEnter:Connect(function() _0x34C1.BackgroundColor3 = _0xFE17.cardHover end))
+            _0x38EF(target.MouseLeave:Connect(function() _0x34C1.BackgroundColor3 = _0xFE17.card end))
+        end
+
+        
+        function _0xFFDC:Toggle(opts)
+            opts = opts or {}
+            local _0xA6C4 = (opts.Default == true)
+            local _0x34C1 = _0x2967(opts.Name, opts.Desc, 104)
+
+            local _0xC091 = _0xE944(string.char(70,114,97,109,101), {
+                AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -16, 0.5, 0), Size = UDim2.fromOffset(70, 32),
+                BackgroundColor3 = _0xFE17.off, BorderSizePixel = 0,
+            }, _0x34C1)
+            _0x6803(_0xC091, 8)
+            local _0x1273 = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Size = UDim2.fromOffset(34, 32), BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 13,
+                Text = string.char(79,70,70), TextColor3 = Color3.fromRGB(128, 128, 136),
+            }, _0xC091)
+            local _0xDBE9 = _0xE944(string.char(70,114,97,109,101), {
+                AnchorPoint = Vector2.new(0, 0.5), Size = UDim2.fromOffset(26, 26), Position = UDim2.new(0, 3, 0.5, 0),
+                BackgroundColor3 = Color3.fromRGB(96, 96, 104), BorderSizePixel = 0,
+            }, _0xC091)
+            _0x6803(_0xDBE9, 6)
+
+            local _0xF8D6 = TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+            local function _0xC5FA(animate)
+                local _0x77ED = { BackgroundColor3 = _0xA6C4 and _0xFE17.red or _0xFE17.off }
+                local _0x9B90 = {
+                    Position = UDim2.new(0, _0xA6C4 and 41 or 3, 0.5, 0),
+                    BackgroundColor3 = _0xA6C4 and Color3.fromRGB(248, 248, 250) or Color3.fromRGB(96, 96, 104),
+                }
+                _0x1273.Text = _0xA6C4 and string.char(79,78) or string.char(79,70,70)
+                _0x1273.TextColor3 = _0xA6C4 and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(128, 128, 136)
+                _0x1273.Position = UDim2.fromOffset(_0xA6C4 and 4 or 32, 0)
+                if animate then
+                    _0xD9BC:Create(_0xC091, _0xF8D6, _0x77ED):Play()
+                    _0xD9BC:Create(_0xDBE9, _0xF8D6, _0x9B90):Play()
+                else
+                    for _0x18D6, _0x21D3 in pairs(_0x77ED) do _0xC091[_0x18D6] = _0x21D3 end
+                    for _0x18D6, _0x21D3 in pairs(_0x9B90) do _0xDBE9[_0x18D6] = _0x21D3 end
+                end
+            end
+            _0xC5FA(false)
+
+            local _0x4A66 = {}
+            function _0x4A66:Set(val, suppressCallback)
+                val = (val == true)
+                if _0xA6C4 == val then return end
+                _0xA6C4 = val
+                _0xC5FA(true)
+                if not suppressCallback then _0x348D(opts.Callback, _0xA6C4) end
+            end
+            function _0x4A66:Get() return _0xA6C4 end
+
+            local _0xDE4C = _0xE944(string.char(84,101,120,116,66,117,116,116,111,110), {
+                Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, Text = "", AutoButtonColor = false, ZIndex = 2,
+            }, _0x34C1)
+            _0x8E30(_0x34C1, _0xDE4C)
+            _0x38EF(_0xDE4C.MouseButton1Click:Connect(function() _0x4A66:Set(not _0xA6C4) end))
+            return _0x4A66
+        end
+
+        
+        function _0xFFDC:Slider(opts)
+            opts = opts or {}
+            local _0x0965, _0x8C70 = tonumber(opts.Min) or 0, tonumber(opts.Max) or 100
+            local _0x9DA9 = tonumber(opts.Step) or 1
+            local _0xE556 = opts.Suffix or ""
+            local _0xC272 = math.clamp(tonumber(opts.Default) or _0x0965, _0x0965, _0x8C70)
+            local _0x1C22 = (_0x8C70 > _0x0965) and (_0x8C70 - _0x0965) or 1
+
+            local _0x34C1 = _0x84EE(64)
+            _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, 11), Size = UDim2.new(1, -170, 0, 19), BackgroundTransparency = 1,
+                Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+                TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or ""), TextColor3 = _0xFE17.text,
+            }, _0x34C1)
+            local _0x7E62 = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -16, 0, 11), Size = UDim2.fromOffset(150, 19),
+                BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 13, TextXAlignment = Enum.TextXAlignment.Right,
+                Text = tostring(_0xC272) .. _0xE556, TextColor3 = _0xFE17.red,
+            }, _0x34C1)
+
+            local _0x88C2 = _0xE944(string.char(70,114,97,109,101), {
+                Position = UDim2.new(0, 18, 0, 43), Size = UDim2.new(1, -36, 0, 6), BackgroundColor3 = Color3.fromRGB(38, 38, 44),
+                BorderSizePixel = 0,
+            }, _0x34C1)
+            _0x6803(_0x88C2, 3)
+            local _0xB721 = _0xE944(string.char(70,114,97,109,101), { Size = UDim2.fromScale((_0xC272 - _0x0965) / _0x1C22, 1), BackgroundColor3 = _0xFE17.red, BorderSizePixel = 0 }, _0x88C2)
+            _0x6803(_0xB721, 3)
+            local _0x5C80 = _0xE944(string.char(70,114,97,109,101), {
+                AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new((_0xC272 - _0x0965) / _0x1C22, 0, 0.5, 0), Size = UDim2.fromOffset(16, 16),
+                BackgroundColor3 = Color3.fromRGB(248, 248, 250), BorderSizePixel = 0, ZIndex = 2,
+            }, _0x88C2)
+            _0x6803(_0x5C80, 8)
+            _0xEE0C(_0x5C80, _0xFE17.red, 2)
+
+            local _0xDFAE = _0xC272
+            local function _0xC5FA()
+                local _0xAA62 = (_0xC272 - _0x0965) / _0x1C22
+                _0xB721.Size = UDim2.fromScale(_0xAA62, 1)
+                _0x5C80.Position = UDim2.new(_0xAA62, 0, 0.5, 0)
+                _0x7E62.Text = tostring(_0xC272) .. _0xE556
+            end
+
+            local _0x4A66 = {}
+            function _0x4A66:Set(val, suppressCallback)
+                val = math.clamp(tonumber(val) or _0xC272, _0x0965, _0x8C70)
+                _0xC272 = val
+                _0xC5FA()
+                if not suppressCallback and _0xC272 ~= _0xDFAE then
+                    _0xDFAE = _0xC272
+                    _0x348D(opts.Callback, _0xC272)
+                elseif suppressCallback then
+                    _0xDFAE = _0xC272
+                end
+            end
+            function _0x4A66:Get() return _0xC272 end
+
+            local _0x8286 = _0xE944(string.char(70,114,97,109,101), {
+                AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromScale(0, 0.5), Size = UDim2.new(1, 0, 0, 26),
+                BackgroundTransparency = 1, Active = true, ZIndex = 3,
+            }, _0x88C2)
+            local _0x932B = false
+            local function _0x2D3F(x)
+                local _0x2D77 = math.clamp((x - _0x88C2.AbsolutePosition.X) / math.max(1, _0x88C2.AbsoluteSize.X), 0, 1)
+                local _0x21D3 = math.floor((_0x0965 + _0x2D77 * _0x1C22 - _0x0965) / _0x9DA9 + 0.5) * _0x9DA9 + _0x0965
+                _0xC272 = math.clamp(_0x21D3, _0x0965, _0x8C70)
+                _0xC5FA()
+            end
+            _0x38EF(_0x8286.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    _0x932B = true
+                    _0x2D3F(input.Position.X)
+                end
+            end))
+            _0x38EF(_0x4E42.InputChanged:Connect(function(input)
+                if _0x932B and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+                    _0x2D3F(input.Position.X)
+                end
+            end))
+            _0x38EF(_0x4E42.InputEnded:Connect(function(input)
+                if _0x932B and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+                    _0x932B = false
+                    if _0xC272 ~= _0xDFAE then
+                        _0xDFAE = _0xC272
+                        _0x348D(opts.Callback, _0xC272)
+                    end
+                end
+            end))
+            return _0x4A66
+        end
+
+        
+        function _0xFFDC:Button(opts)
+            opts = opts or {}
+            local _0x34C1 = _0x2967(opts.Name, opts.Desc, 60)
+            _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -18, 0.5, -1), Size = UDim2.fromOffset(24, 28),
+                BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 24, Text = string.char(226,128,186), TextColor3 = _0xFE17.red,
+            }, _0x34C1)
+            local _0xDE4C = _0xE944(string.char(84,101,120,116,66,117,116,116,111,110), {
+                Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, Text = "", AutoButtonColor = false, ZIndex = 2,
+            }, _0x34C1)
+            _0x8E30(_0x34C1, _0xDE4C)
+            _0x38EF(_0xDE4C.MouseButton1Click:Connect(function()
+                _0x34C1.BackgroundColor3 = Color3.fromRGB(44, 20, 23)
+                _0xD9BC:Create(_0x34C1, TweenInfo.new(0.25), { BackgroundColor3 = _0xFE17.card }):Play()
+                _0x348D(opts.Callback)
+            end))
+        end
+
+        
+        function _0xFFDC:Dropdown(opts)
+            opts = opts or {}
+            local _0x3D8E = opts.Locked == true
+            local _0x2CE4 = {}
+            for _0xB1B4, _0x951C in ipairs(opts.Options or {}) do _0x2CE4[#_0x2CE4 + 1] = tostring(_0x951C) end
+            local _0x5105 = opts.Default ~= nil and tostring(opts.Default) or _0x2CE4[1]
+
+            local _0x34C1 = _0x84EE(48)
+            _0x34C1.ClipsDescendants = true
+            _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, 0), Size = UDim2.new(0, 250, 0, 48), BackgroundTransparency = 1,
+                Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+                TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or ""), TextColor3 = _0xFE17.text,
+            }, _0x34C1)
+
+            local _0x84EF = _0xE944(string.char(70,114,97,109,101), {
+                AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -14, 0, 9), Size = UDim2.fromOffset(300, 30),
+                BackgroundColor3 = _0xFE17.field, BorderSizePixel = 0,
+            }, _0x34C1)
+            _0x6803(_0x84EF, 7)
+            local _0xE850 = _0xEE0C(_0x84EF, _0xFE17.chipStroke, 1)
+            local _0x9EA6 = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(10, 0), Size = UDim2.new(1, _0x3D8E and -20 or -36, 1, 0), BackgroundTransparency = 1,
+                Font = Enum.Font.GothamMedium, TextSize = 13, TextXAlignment = Enum.TextXAlignment.Left,
+                TextTruncate = Enum.TextTruncate.AtEnd, Text = _0x5105 or string.char(45), TextColor3 = _0xFE17.text,
+            }, _0x84EF)
+            local _0x1BE2
+            if not _0x3D8E then
+                _0x1BE2 = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                    AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -10, 0.5, 0), Size = UDim2.fromOffset(16, 16),
+                    BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 13, Text = string.char(226,150,190), TextColor3 = _0xFE17.red,
+                }, _0x84EF)
+            end
+
+            local _0x4A66 = {}
+            if _0x3D8E then
+                function _0x4A66:Set() end 
+                function _0x4A66:Get() return _0x5105 end
+                function _0x4A66:SetOptions() end
+                return _0x4A66
+            end
+
+            local _0xC59C = false
+            local _0xDA3D = _0xE944(string.char(83,99,114,111,108,108,105,110,103,70,114,97,109,101), {
+                Position = UDim2.fromOffset(14, 54), Size = UDim2.new(1, -28, 0, 0), BackgroundTransparency = 1, BorderSizePixel = 0,
+                ScrollBarThickness = 3, ScrollBarImageColor3 = _0xFE17.redDim, CanvasSize = UDim2.new(),
+                AutomaticCanvasSize = Enum.AutomaticSize.Y, Visible = false,
+            }, _0x34C1)
+            _0xE944(string.char(85,73,76,105,115,116,76,97,121,111,117,116), { SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0, 2) }, _0xDA3D)
+
+            local function _0x8677() return math.min(#_0x2CE4, 6) * 32 end
+            local function _0x5DB6()
+                if _0xC59C then
+                    _0xDA3D.Visible = true
+                    _0xDA3D.Size = UDim2.new(1, -28, 0, _0x8677())
+                    _0x34C1.Size = UDim2.new(1, 0, 0, 54 + _0x8677() + 10)
+                else
+                    _0xDA3D.Visible = false
+                    _0x34C1.Size = UDim2.new(1, 0, 0, 48)
+                end
+                if _0x1BE2 then _0x1BE2.Text = _0xC59C and string.char(226,150,180) or string.char(226,150,190) end
+                _0xE850.Color = _0xC59C and _0xFE17.red or _0xFE17.chipStroke
+            end
+
+            local function _0xF421()
+                for _0xB1B4, ch in ipairs(_0xDA3D:GetChildren()) do
+                    if ch:IsA(string.char(84,101,120,116,66,117,116,116,111,110)) then ch:Destroy() end
+                end
+                for i, _0x8C9A in ipairs(_0x2CE4) do
+                    local _0x6A39 = _0xE944(string.char(84,101,120,116,66,117,116,116,111,110), {
+                        Size = UDim2.new(1, -6, 0, 30), BackgroundColor3 = (_0x8C9A == _0x5105) and Color3.fromRGB(40, 18, 21) or _0xFE17.field,
+                        BorderSizePixel = 0, AutoButtonColor = false, Font = Enum.Font.GothamMedium, TextSize = 13,
+                        TextXAlignment = Enum.TextXAlignment.Left, TextTruncate = Enum.TextTruncate.AtEnd, Text = string.char(32,32) .. _0x8C9A,
+                        TextColor3 = (_0x8C9A == _0x5105) and _0xFE17.red or _0xFE17.text, LayoutOrder = i,
+                    }, _0xDA3D)
+                    _0x6803(_0x6A39, 6)
+                    _0x38EF(_0x6A39.MouseButton1Click:Connect(function()
+                        _0x4A66:Set(_0x8C9A)
+                        _0xC59C = false
+                        _0x5DB6()
+                    end))
+                end
+                _0x5DB6()
+            end
+
+            function _0x4A66:Set(val, suppressCallback)
+                _0x5105 = tostring(val)
+                _0x9EA6.Text = _0x5105
+                _0xF421()
+                if not suppressCallback then _0x348D(opts.Callback, _0x5105) end
+            end
+            function _0x4A66:Get() return _0x5105 end
+            function _0x4A66:SetOptions(newOpts)
+                _0x2CE4 = {}
+                for _0xB1B4, _0x951C in ipairs(newOpts or {}) do _0x2CE4[#_0x2CE4 + 1] = tostring(_0x951C) end
+                if not table.find(_0x2CE4, _0x5105) then
+                    _0x5105 = _0x2CE4[1]
+                    _0x9EA6.Text = _0x5105 or string.char(45)
+                end
+                _0xF421()
+            end
+
+            local _0xDE4C = _0xE944(string.char(84,101,120,116,66,117,116,116,111,110), {
+                Position = UDim2.new(0, 0, 0, 0), Size = UDim2.new(1, 0, 0, 48), BackgroundTransparency = 1, Text = "",
+                AutoButtonColor = false, ZIndex = 2,
+            }, _0x34C1)
+            _0x38EF(_0xDE4C.MouseButton1Click:Connect(function()
+                _0xC59C = not _0xC59C
+                _0x5DB6()
+            end))
+            _0xF421()
+            return _0x4A66
+        end
+
+        
+        function _0xFFDC:Keybind(opts)
+            opts = opts or {}
+            local _0x7CAD = opts.Default or Enum.KeyCode.RightControl
+            local _0x9D4C = false
+            local _0x34C1 = _0x84EE(48)
+            _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, 0), Size = UDim2.new(1, -200, 1, 0), BackgroundTransparency = 1,
+                Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+                TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or ""), TextColor3 = _0xFE17.text,
+            }, _0x34C1)
+            local _0xC28F = _0xE944(string.char(84,101,120,116,66,117,116,116,111,110), {
+                AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -14, 0.5, 0), Size = UDim2.fromOffset(150, 30),
+                BackgroundColor3 = _0xFE17.field, BorderSizePixel = 0, AutoButtonColor = false, Font = Enum.Font.GothamBold,
+                TextSize = 13, Text = _0x7CAD.Name, TextColor3 = _0xFE17.red,
+            }, _0x34C1)
+            _0x6803(_0xC28F, 7)
+            _0xEE0C(_0xC28F, _0xFE17.chipStroke, 1)
+
+            local _0x4A66 = {}
+            function _0x4A66:Set(newKey)
+                _0x7CAD = newKey
+                _0xC28F.Text = _0x7CAD.Name
+            end
+            function _0x4A66:Get() return _0x7CAD end
+
+            _0x38EF(_0xC28F.MouseButton1Click:Connect(function()
+                _0x9D4C = true
+                _0xA9E1._listening = true
+                _0xC28F.Text = string.char(46,46,46)
+            end))
+            _0x38EF(_0x4E42.InputBegan:Connect(function(input)
+                if not _0x9D4C or input.UserInputType ~= Enum.UserInputType.Keyboard then return end
+                _0x9D4C = false
+                task.defer(function() _0xA9E1._listening = false end)
+                if input.KeyCode == Enum.KeyCode.Escape then
+                    _0xC28F.Text = _0x7CAD.Name
+                    return
+                end
+                _0x7CAD = input.KeyCode
+                _0xC28F.Text = _0x7CAD.Name
+                if opts.Changed then _0x348D(opts.Changed, _0x7CAD) end
+            end))
+            return _0x4A66
+        end
+
+        
+        function _0xFFDC:Input(opts)
+            opts = opts or {}
+            local _0x34C1 = _0x84EE(48)
+            _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, 0), Size = UDim2.new(0.38, 0, 1, 0), BackgroundTransparency = 1,
+                Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+                TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or ""), TextColor3 = _0xFE17.text,
+            }, _0x34C1)
+            local _0x84EF = _0xE944(string.char(84,101,120,116,66,111,120), {
+                AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -14, 0.5, 0), Size = UDim2.new(0.56, 0, 0, 30),
+                BackgroundColor3 = _0xFE17.field, BorderSizePixel = 0, ClearTextOnFocus = false, Font = Enum.Font.GothamMedium,
+                TextSize = 13, Text = tostring(opts.Default or ""), PlaceholderText = opts.Placeholder or "",
+                PlaceholderColor3 = Color3.fromRGB(110, 110, 118), TextColor3 = _0xFE17.text, TextXAlignment = Enum.TextXAlignment.Left,
+                TextTruncate = Enum.TextTruncate.AtEnd,
+            }, _0x34C1)
+            _0x6803(_0x84EF, 7)
+            local _0x3A0B = _0xEE0C(_0x84EF, _0xFE17.chipStroke, 1)
+            _0xE944(string.char(85,73,80,97,100,100,105,110,103), { PaddingLeft = UDim.new(0, 10), PaddingRight = UDim.new(0, 10) }, _0x84EF)
+            _0x38EF(_0x84EF.Focused:Connect(function() _0x3A0B.Color = _0xFE17.red end))
+            _0x38EF(_0x84EF.FocusLost:Connect(function()
+                _0x3A0B.Color = _0xFE17.chipStroke
+                _0x348D(opts.Callback, _0x84EF.Text)
+            end))
+            return {
+                Set = function(_0xB1B4, _0x6EF4) _0x84EF.Text = tostring(_0x6EF4 or "") end,
+                Get = function() return _0x84EF.Text end,
+            }
+        end
+
+        
+        function _0xFFDC:Paragraph(opts)
+            opts = opts or {}
+            local _0x34C1 = _0x84EE(66)
+            local _0x3B2F = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, 10), Size = UDim2.new(1, -36, 0, 19), BackgroundTransparency = 1,
+                Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+                TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or ""), TextColor3 = _0xFE17.text,
+            }, _0x34C1)
+            local _0xFE88 = _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, 31), Size = UDim2.new(1, -36, 0, 28), BackgroundTransparency = 1,
+                Font = Enum.Font.Gotham, TextSize = 12, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left,
+                TextYAlignment = Enum.TextYAlignment.Top, TextTruncate = Enum.TextTruncate.AtEnd,
+                Text = (opts.Desc and opts.Desc ~= "") and tostring(opts.Desc) or string.char(45), TextColor3 = _0xFE17.sub,
+            }, _0x34C1)
+            return {
+                TitleLabel = _0x3B2F,
+                SetTitle = function(_0x6EF4) _0x3B2F.Text = tostring(_0x6EF4) end,
+                SetDesc = function(_0x6EF4) _0xFE88.Text = tostring(_0x6EF4) end,
+            }
+        end
+
+        
+        function _0xFFDC:Label(textString)
+            local _0x34C1 = _0x84EE(40)
+            _0xE944(string.char(84,101,120,116,76,97,98,101,108), {
+                Position = UDim2.fromOffset(18, 0), Size = UDim2.new(1, -36, 1, 0), BackgroundTransparency = 1,
+                Font = Enum.Font.GothamMedium, TextSize = 13, TextXAlignment = Enum.TextXAlignment.Left,
+                Text = tostring(textString or ""), TextColor3 = _0xFE17.sub,
+            }, _0x34C1)
+        end
+
+        return _0xFFDC
+    end
+
+    return _0xEDB2
+end
+
+
+_0x38EF(_0x4E42.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed or _0xA9E1._listening then return end
+    if input.KeyCode == _0xA9E1.ToggleKey then _0xA9E1:Toggle() end
+end))
+
+
+function _0xA9E1:Destroy()
+    for i = #_0xAFB4, 1, -1 do
+        local _0x7FAB = _0xAFB4[i]
+        _0xAFB4[i] = nil
+        if typeof(_0x7FAB) == string.char(82,66,88,83,99,114,105,112,116,67,111,110,110,101,99,116,105,111,110) then
+            pcall(function() _0x7FAB:Disconnect() end)
+        elseif typeof(_0x7FAB) == string.char(73,110,115,116,97,110,99,101) then
+            pcall(function() _0x7FAB:Destroy() end)
+        end
+    end
+    _0xEDC2.__TwoKSupportUI = nil
+end
+_0xEDC2.__TwoKSupportUI = _0xA9E1
+
+
+function _0xA9E1:BuildSettings(settingsTab)
+    local _0x93F0 = settingsTab:Section(string.char(87,73,78,68,79,87))
+    _0x93F0:Slider({
+        Name = string.char(224,184,130,224,184,153,224,184,178,224,184,148,224,184,171,224,184,153,224,185,137,224,184,178,224,184,149,224,185,136,224,184,178,224,184,135,32,85,73),
+        Min = 40, Max = 150, Step = 5,
+        Default = math.floor(_0xB813 * 100 + 0.5),
+        Suffix = string.char(37),
+        Callback = function(val)
+            _0xB813 = val / 100
+            if _0xA9E1.Visible then _0xF3E1.Scale = _0x004D() end
+            _0x1DD0()
+        end,
+    })
+    _0x93F0:Keybind({
+        Name = string.char(224,184,155,224,184,184,224,185,136,224,184,161,224,185,128,224,184,155,224,184,180,224,184,148,47,224,184,155,224,184,180,224,184,148,224,185,128,224,184,161,224,184,153,224,184,185),
+        Default = _0xA9E1.ToggleKey,
+        Changed = function(newKey)
+            _0xA9E1.ToggleKey = newKey
+            _0x1DD0()
+            _0xA9E1:Notify({ Title = string.char(84,79,71,71,76,69,32,75,69,89), Text = string.char(224,185,128,224,184,155,224,184,165,224,184,181,224,185,136,224,184,162,224,184,153,224,184,155,224,184,184,224,185,136,224,184,161,224,185,128,224,184,155,224,184,180,224,184,148,47,224,184,155,224,184,180,224,184,148,224,185,128,224,184,161,224,184,153,224,184,185,224,185,128,224,184,155,224,185,135,224,184,153,32) .. newKey.Name, Duration = 3 })
+        end,
+    })
+    _0x93F0:Button({
+        Name = string.char(224,184,151,224,184,179,224,184,165,224,184,178,224,184,162,224,184,170,224,184,132,224,184,163,224,184,180,224,184,155,224,184,149,224,185,140,32,40,68,69,83,84,82,79,89,32,85,73,41),
+        Desc = string.char(224,184,155,224,184,180,224,184,148,224,184,129,224,184,178,224,184,163,224,184,151,224,184,179,224,184,135,224,184,178,224,184,153,32,224,184,165,224,184,154,224,184,171,224,184,153,224,185,137,224,184,178,224,184,149,224,185,136,224,184,178,224,184,135,32,224,185,129,224,184,165,224,184,176,224,184,132,224,184,183,224,184,153,224,184,132,224,185,136,224,184,178,224,184,151,224,184,177,224,185,137,224,184,135,224,184,171,224,184,161,224,184,148),
+        Callback = function() _0xA9E1:Destroy() end,
+    })
+end
+
+return _0xA9E1
+
+end)()
+
+
+local _0xC028 = _0xA9E1.Destroy
+local _0xB70A = false
+function _0xA9E1:Destroy()
+    if _0xB70A then return end
+    _0xB70A = true
+    _0xC028(self)
+    if _0x198E() then _G.TwoKRaycityCleanup() end
+end
+_0x4F8F(function() _0xA9E1:Destroy() end)
+
+local function _0x4BDD(_0x3B2F, _0x6EF4, _0x22E0)
+    _0xA9E1:Notify({ Title = _0x3B2F, Text = _0x6EF4, Duration = _0x22E0 or 3 })
+end
+
+
+local _0x62EC = {}
+local function _0xAAA2(section, _0x7CAD, _0x8C9A, _0xFE88, onChange)
+    local _0x4A66
+    _0x4A66 = section:Toggle({
+        Name = _0x8C9A,
+        Desc = _0xFE88,
+        Default = _0x1E35[_0x7CAD],
+        Callback = function(_0x21D3)
+            _0x1E35[_0x7CAD] = _0x21D3
+            _0x51BB()
+            if onChange then onChange(_0x21D3) end
+        end,
+    })
+    _0x62EC[_0x7CAD] = _0x4A66
+    return _0x4A66
+end
+
+
+local _0x8CA5 = _0xA9E1:Tab(string.char(224,185,128,224,184,161,224,184,153,224,184,185,224,184,155,224,184,129,224,184,149,224,184,180))
+local _0xDFC5 = _0xA9E1:Tab(string.char(224,184,151,224,184,179,224,185,128,224,184,132,224,184,167,224,184,170,32,224,184,173,224,184,173,224,185,130,224,184,149,224,185,137))
+local _0x6353 = _0xA9E1:Tab(string.char(224,184,170,224,185,136,224,184,135,224,185,128,224,184,135,224,184,180,224,184,153))
+
+
+local _0xF00F = _0x8CA5:Section(string.char(66,79,79,83,84,32,47,32,83,80,69,69,68))
+_0xAAA2(_0xF00F, string.char(65,117,116,111,66,111,111,115,116), string.char(224,184,154,224,184,185,224,184,170,224,184,149,224,185,140,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,184,129,224,184,148,224,184,154,224,184,185,224,184,170,224,184,149,224,185,140,224,185,131,224,184,171,224,185,137,224,184,149,224,184,173,224,184,153,224,184,167,224,184,180,224,185,136,224,184,135,224,184,151,224,184,178,224,184,135,224,184,149,224,184,163,224,184,135,32,40,224,185,131,224,184,138,224,185,137,32,83,80,32,224,184,130,224,184,173,224,184,135,224,185,128,224,184,129,224,184,161,32,224,185,128,224,184,171,224,184,165,224,184,183,224,184,173,224,185,132,224,184,167,224,185,137,32,50,48,32,83,80,41))
+_0xAAA2(_0xF00F, string.char(70,97,115,116,67,111,114,110,101,114,115), string.char(224,185,128,224,184,130,224,185,137,224,184,178,224,185,130,224,184,132,224,185,137,224,184,135,224,185,128,224,184,163,224,185,135,224,184,167,224,184,130,224,184,182,224,185,137,224,184,153),
+    string.char(224,184,165,224,184,148,224,184,129,224,184,178,224,184,163,224,185,128,224,184,154,224,184,163,224,184,129,224,184,129,224,185,136,224,184,173,224,184,153,224,185,128,224,184,130,224,185,137,224,184,178,224,185,130,224,184,132,224,185,137,224,184,135,224,184,130,224,184,173,224,184,135,224,184,163,224,184,176,224,184,154,224,184,154,224,184,130,224,184,177,224,184,154,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180), function() _0xCEE5() end)
+
+local _0x1CA4 = _0x8CA5:Section(string.char(78,80,67,32,84,82,65,70,70,73,67,32,47,32,80,82,79,80,83))
+_0xAAA2(_0x1CA4, string.char(78,111,84,114,97,102,102,105,99), string.char(224,184,165,224,184,154,224,184,163,224,184,150,32,78,80,67),
+    string.char(224,184,163,224,184,150,32,78,80,67,32,224,184,171,224,184,178,224,184,162,224,185,129,224,184,165,224,184,176,224,184,138,224,184,153,224,185,132,224,184,161,224,185,136,224,185,132,224,184,148,224,185,137,32,40,224,185,128,224,184,171,224,185,135,224,184,153,224,185,128,224,184,137,224,184,158,224,184,178,224,184,176,224,185,128,224,184,132,224,184,163,224,184,183,224,185,136,224,184,173,224,184,135,224,185,128,224,184,163,224,184,178,41), function(_0x21D3)
+        if not _0x2C69() then
+            _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.char(224,184,171,224,184,178,224,184,163,224,184,176,224,184,154,224,184,154,224,184,163,224,184,150,32,78,80,67,32,224,185,132,224,184,161,224,185,136,224,185,128,224,184,136,224,184,173))
+        else
+            _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), _0x21D3 and string.char(224,184,165,224,184,154,224,184,163,224,184,150,32,78,80,67,32,224,185,129,224,184,165,224,185,137,224,184,167) or string.char(224,184,163,224,184,150,32,78,80,67,32,224,184,129,224,184,165,224,184,177,224,184,154,224,184,161,224,184,178,224,185,129,224,184,165,224,185,137,224,184,167), 2)
+        end
+    end)
+
+_0xAAA2(_0x1CA4, string.char(78,111,80,114,111,112,115), string.char(224,184,151,224,184,176,224,184,165,224,184,184,224,184,149,224,185,137,224,184,153,224,185,132,224,184,161,224,185,137,47,224,185,128,224,184,170,224,184,178,224,185,132,224,184,159),
+    string.char(224,184,163,224,184,150,224,184,167,224,184,180,224,185,136,224,184,135,224,184,151,224,184,176,224,184,165,224,184,184,224,184,149,224,185,137,224,184,153,224,185,132,224,184,161,224,185,137,224,185,129,224,184,165,224,184,176,224,185,128,224,184,170,224,184,178,224,185,132,224,184,159,224,185,132,224,184,148,224,185,137,32,224,185,129,224,184,165,224,184,176,224,184,139,224,185,136,224,184,173,224,184,153,224,184,149,224,185,137,224,184,153,224,185,132,224,184,161,224,185,137,32,40,224,185,128,224,184,171,224,185,135,224,184,153,224,185,128,224,184,137,224,184,158,224,184,178,224,184,176,224,185,128,224,184,132,224,184,163,224,184,183,224,185,136,224,184,173,224,184,135,224,185,128,224,184,163,224,184,178,41), function(_0x21D3)
+        if not _0x721F() then
+            _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.char(224,184,171,224,184,178,224,184,163,224,184,176,224,184,154,224,184,154,224,184,138,224,184,153,224,184,149,224,185,137,224,184,153,224,185,132,224,184,161,224,185,137,224,185,132,224,184,161,224,185,136,224,185,128,224,184,136,224,184,173))
+        else
+            _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), _0x21D3 and string.char(224,184,151,224,184,176,224,184,165,224,184,184,224,184,149,224,185,137,224,184,153,224,185,132,224,184,161,224,185,137,47,224,185,128,224,184,170,224,184,178,224,185,132,224,184,159,224,185,129,224,184,165,224,185,137,224,184,167) or string.char(224,184,138,224,184,153,224,184,149,224,185,137,224,184,153,224,185,132,224,184,161,224,185,137,47,224,185,128,224,184,170,224,184,178,224,185,132,224,184,159,224,184,149,224,184,178,224,184,161,224,184,155,224,184,129,224,184,149,224,184,180), 2)
+        end
+    end)
+
+
+local _0xF054 = _0xDFC5:Section(string.char(87,65,82,78,73,78,71,32,47,32,224,184,132,224,184,179,224,185,128,224,184,149,224,184,183,224,184,173,224,184,153))
+local _0x4623 = _0xF054:Paragraph({
+    Name = string.char(226,154,160,32,224,184,129,224,184,178,224,184,163,224,185,131,224,184,138,224,185,137,224,184,159,224,184,177,224,184,135,224,184,129,224,185,140,224,184,138,224,184,177,224,184,153,224,184,153,224,184,181,224,185,137,224,185,128,224,184,170,224,184,181,224,185,136,224,184,162,224,184,135,224,185,130,224,184,148,224,184,153,224,185,129,224,184,154,224,184,153),
+    Desc = string.char(224,184,173,224,184,173,224,185,130,224,184,149,224,185,137,224,185,128,224,184,132,224,184,167,224,184,170,32,224,184,161,224,184,181,224,185,130,224,184,173,224,184,129,224,184,178,224,184,170,224,184,151,224,184,181,224,185,136,224,184,154,224,184,177,224,184,141,224,184,138,224,184,181,224,184,136,224,184,176,224,184,150,224,184,185,224,184,129,224,185,129,224,184,154,224,184,153,32,224,184,156,224,184,185,224,185,137,224,185,131,224,184,138,224,185,137,224,184,149,224,185,137,224,184,173,224,184,135,224,184,163,224,184,177,224,184,154,224,184,132,224,184,167,224,184,178,224,184,161,224,185,128,224,184,170,224,184,181,224,185,136,224,184,162,224,184,135,224,184,151,224,184,181,224,185,136,224,185,128,224,184,129,224,184,180,224,184,148,224,184,130,224,184,182,224,185,137,224,184,153,224,184,148,224,185,137,224,184,167,224,184,162,224,184,149,224,184,177,224,184,167,224,185,128,224,184,173,224,184,135,224,184,153,224,184,176,224,184,132,224,184,163,224,184,177,224,184,154),
+})
+_0x4623.TitleLabel.TextColor3 = Color3.fromRGB(235, 46, 46)
+
+local _0x73EF = _0xDFC5:Section(string.char(65,85,84,79,32,77,73,83,83,73,79,78))
+_0xAAA2(_0x73EF, string.char(65,117,116,111,77,105,115,115,105,111,110), string.char(224,184,151,224,184,179,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,184,130,224,184,177,224,184,154,224,185,132,224,184,155,224,184,171,224,184,178,32,78,80,67,32,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,32,224,184,163,224,184,177,224,184,154,224,184,135,224,184,178,224,184,153,32,224,185,129,224,184,165,224,185,137,224,184,167,224,184,130,224,184,177,224,184,154,224,184,149,224,184,178,224,184,161,224,185,128,224,184,170,224,185,137,224,184,153,224,184,153,224,184,179,224,184,151,224,184,178,224,184,135,224,184,136,224,184,153,224,184,136,224,184,154,32,224,184,167,224,184,153,224,185,132,224,184,155,224,185,128,224,184,163,224,184,183,224,185,136,224,184,173,224,184,162,224,185,134), function(_0x21D3)
+        if not _0x21D3 then
+            _0x790D()
+            _0x7C78()
+        end
+    end)
+_0x62EC.CruiseKmh = _0x73EF:Slider({
+    Name = string.char(224,184,132,224,184,167,224,184,178,224,184,161,224,185,128,224,184,163,224,185,135,224,184,167,224,184,130,224,184,177,224,184,154,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    Min = 100,
+    Max = 200,
+    Step = 10,
+    Default = _0x1E35.CruiseKmh,
+    Suffix = string.char(32,224,184,129,224,184,161,46,47,224,184,138,224,184,161,46),
+    Callback = function(_0x21D3)
+        _0x1E35.CruiseKmh = _0x21D3
+        _0x51BB()
+        _0x4D6D()
+    end,
+})
+do
+    local _0xE3A6 = {}
+    for _0xB1B4, _0x5FF8 in ipairs(_0xD5B9) do _0xE3A6[#_0xE3A6 + 1] = _0x5FF8.label end
+    _0x1E35.MissionPick = _0xE3A6[1] 
+    _0x62EC.MissionPick = _0x73EF:Dropdown({
+        Name = string.char(224,185,128,224,184,165,224,184,183,224,184,173,224,184,129,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136),
+        Options = _0xE3A6,
+        Default = _0xE3A6[1],
+        Locked = true, 
+    })
+end
+_0xAAA2(_0x73EF, string.char(65,117,116,111,71,101,116,73,116,101,109,115), string.char(224,184,163,224,184,177,224,184,154,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180,32,40,71,101,116,32,65,108,108,41),
+    string.char(224,184,129,224,184,148,32,71,101,116,32,65,108,108,32,224,185,131,224,184,153,224,184,171,224,184,153,224,185,137,224,184,178,224,184,149,224,185,136,224,184,178,224,184,135,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161,224,184,171,224,184,165,224,184,177,224,184,135,224,184,136,224,184,154,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,185,131,224,184,171,224,185,137,224,185,128,224,184,173,224,184,135,32,224,184,129,224,185,136,224,184,173,224,184,153,224,184,171,224,184,161,224,184,148,224,185,128,224,184,167,224,184,165,224,184,178))
+_0xAAA2(_0x73EF, string.char(65,117,116,111,83,116,111,114,101), string.char(224,184,157,224,184,178,224,184,129,224,184,130,224,184,173,224,184,135,224,185,128,224,184,130,224,185,137,224,184,178,224,185,130,224,184,129,224,184,148,224,184,177,224,184,135,224,185,128,224,184,161,224,184,183,224,185,136,224,184,173,224,184,129,224,184,163,224,184,176,224,185,128,224,184,155,224,185,139,224,184,178,224,185,131,224,184,129,224,184,165,224,185,137,224,185,128,224,184,149,224,185,135,224,184,161),
+    string.char(224,185,128,224,184,171,224,184,165,224,184,183,224,184,173,224,184,151,224,184,181,224,185,136,224,184,167,224,185,136,224,184,178,224,184,135,32,50,32,224,184,138,224,185,136,224,184,173,224,184,135,224,184,136,224,184,176,224,184,162,224,185,137,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,139,224,185,137,224,184,179,224,185,128,224,184,130,224,185,137,224,184,178,224,185,130,224,184,129,224,184,148,224,184,177,224,184,135,224,185,131,224,184,171,224,185,137,32,40,224,184,159,224,184,163,224,184,181,32,224,184,151,224,184,179,224,185,132,224,184,148,224,185,137,224,184,136,224,184,178,224,184,129,224,184,151,224,184,184,224,184,129,224,184,151,224,184,181,224,185,136,41,32,224,184,129,224,184,177,224,184,153,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161,224,184,171,224,184,178,224,184,162,224,184,149,224,184,173,224,184,153,224,184,129,224,184,148,32,71,101,116,32,65,108,108))
+_0xAAA2(_0x73EF, string.char(65,117,116,111,83,101,108,108,65,108,108), string.char(224,184,130,224,184,178,224,184,162,224,184,151,224,184,184,224,184,129,224,184,173,224,184,162,224,185,136,224,184,178,224,184,135,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,184,130,224,184,178,224,184,162,224,184,151,224,184,184,224,184,129,224,184,138,224,184,180,224,185,137,224,184,153,224,184,151,224,184,181,224,185,136,224,185,132,224,184,148,224,185,137,224,184,161,224,184,178,224,184,151,224,184,177,224,184,153,224,184,151,224,184,181,32,40,224,184,163,224,184,167,224,184,161,224,184,173,224,184,177,224,184,141,224,184,161,224,184,147,224,184,181,47,224,184,130,224,184,173,224,184,135,224,184,161,224,184,181,224,184,173,224,184,173,224,184,155,224,184,138,224,184,177,224,184,153,41,32,224,184,151,224,184,184,224,184,129,32,49,48,32,224,184,167,224,184,180,32,224,185,128,224,184,155,224,184,180,224,184,148,224,184,173,224,184,177,224,184,153,224,184,153,224,184,181,224,185,137,224,185,129,224,184,165,224,185,137,224,184,167,224,185,132,224,184,161,224,185,136,224,184,149,224,185,137,224,184,173,224,184,135,224,185,128,224,184,155,224,184,180,224,184,148,224,184,130,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,139,224,185,137,224,184,179))
+_0xAAA2(_0x73EF, string.char(65,117,116,111,83,101,108,108), string.char(224,184,130,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,139,224,185,137,224,184,179,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,184,130,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,151,224,184,181,224,185,136,224,184,161,224,184,181,224,184,139,224,185,137,224,184,179,32,224,185,128,224,184,171,224,184,165,224,184,183,224,184,173,224,185,132,224,184,167,224,185,137,224,184,138,224,184,153,224,184,180,224,184,148,224,184,165,224,184,176,32,49,32,224,184,138,224,184,180,224,185,137,224,184,153,32,40,224,184,130,224,184,178,224,184,162,224,185,132,224,184,148,224,185,137,224,184,151,224,184,184,224,184,129,224,184,151,224,184,181,224,185,136,41,32,224,185,132,224,184,161,224,185,136,224,184,130,224,184,178,224,184,162,224,184,173,224,184,177,224,184,141,224,184,161,224,184,147,224,184,181,224,185,129,224,184,165,224,184,176,224,184,130,224,184,173,224,184,135,224,184,151,224,184,181,224,185,136,224,184,161,224,184,181,224,184,173,224,184,173,224,184,155,224,184,138,224,184,177,224,184,153,224,184,158,224,184,180,224,185,128,224,184,168,224,184,169))
+do
+    local _0x9166 = 0
+    local _0x9EBF = false
+    _0x73EF:Button({
+        Name = string.char(224,184,130,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,151,224,184,177,224,185,137,224,184,135,224,184,171,224,184,161,224,184,148,224,185,131,224,184,153,224,184,129,224,184,163,224,184,176,224,185,128,224,184,155,224,185,139,224,184,178),
+        Desc = string.char(224,184,130,224,184,178,224,184,162,224,184,151,224,184,184,224,184,129,224,184,138,224,184,180,224,185,137,224,184,153,224,184,151,224,184,181,224,185,136,224,184,130,224,184,178,224,184,162,224,185,132,224,184,148,224,185,137,32,40,224,184,163,224,184,167,224,184,161,224,184,173,224,184,177,224,184,141,224,184,161,224,184,147,224,184,181,47,224,184,130,224,184,173,224,184,135,224,184,161,224,184,181,224,184,173,224,184,173,224,184,155,224,184,138,224,184,177,224,184,153,41,32,224,184,129,224,184,148,32,50,32,224,184,132,224,184,163,224,184,177,224,185,137,224,184,135,224,184,160,224,184,178,224,184,162,224,185,131,224,184,153,32,51,32,224,184,167,224,184,180,32,224,185,128,224,184,158,224,184,183,224,185,136,224,184,173,224,184,162,224,184,183,224,184,153,224,184,162,224,184,177,224,184,153),
+        Callback = function()
+            if _0x9EBF then return end
+            if os.clock() - _0x9166 > 3 then
+                _0x9166 = os.clock()
+                _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.char(224,184,129,224,184,148,224,184,173,224,184,181,224,184,129,224,184,132,224,184,163,224,184,177,224,185,137,224,184,135,224,184,160,224,184,178,224,184,162,224,185,131,224,184,153,32,51,32,224,184,167,224,184,180,32,224,185,128,224,184,158,224,184,183,224,185,136,224,184,173,224,184,130,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,151,224,184,177,224,185,137,224,184,135,224,184,171,224,184,161,224,184,148), 3)
+                return
+            end
+            _0x9166, _0x9EBF = 0, true
+            task.spawn(function()
+                _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.char(224,184,129,224,184,179,224,184,165,224,184,177,224,184,135,224,184,130,224,184,178,224,184,162,224,184,130,224,184,173,224,184,135,224,184,151,224,184,177,224,185,137,224,184,135,224,184,171,224,184,161,224,184,148,46,46,46), 2)
+                local _0xFDD5, _0xAC71, _0xBC79 = pcall(_0xD47D)
+                _0x9EBF = false
+                if _0xFDD5 then
+                    _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.format(string.char(224,184,130,224,184,178,224,184,162,224,185,129,224,184,165,224,185,137,224,184,167,32,37,100,32,224,184,138,224,184,180,224,185,137,224,184,153,32,224,185,132,224,184,148,224,185,137,32,43,37,100,32,224,185,128,224,184,135,224,184,180,224,184,153), _0xAC71 or 0, _0xBC79 or 0), 4)
+                else
+                    _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.char(224,184,130,224,184,178,224,184,162,224,185,132,224,184,161,224,185,136,224,184,170,224,184,179,224,185,128,224,184,163,224,185,135,224,184,136,58,32) .. tostring(_0xAC71):sub(1, 60), 4)
+                end
+            end)
+        end,
+    })
+end
+local _0xBFE5 = _0x73EF:Paragraph({ Name = string.char(224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,58,32,224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136), Desc = string.char(45) })
+
+local _0xD14A = _0xDFC5:Section(string.char(65,85,84,79,32,80,73,67,75,85,80))
+_0xAAA2(_0xD14A, string.char(65,117,116,111,67,111,105,110), string.char(224,185,128,224,184,129,224,185,135,224,184,154,224,184,130,224,184,173,224,184,135,224,184,154,224,184,153,224,184,150,224,184,153,224,184,153,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,184,130,224,184,177,224,184,154,224,185,132,224,184,155,224,184,151,224,184,177,224,184,154,224,184,130,224,184,173,224,184,135,224,184,154,224,184,153,224,184,150,224,184,153,224,184,153,32,40,224,184,150,224,185,137,224,184,178,224,185,128,224,184,155,224,184,180,224,184,148,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,185,132,224,184,167,224,185,137,224,184,148,224,185,137,224,184,167,224,184,162,32,224,184,136,224,184,176,224,184,158,224,184,177,224,184,129,224,185,132,224,184,167,224,185,137,224,184,163,224,184,176,224,184,171,224,184,167,224,185,136,224,184,178,224,184,135,224,184,151,224,184,179,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,41), function(_0x21D3)
+        if not _0x21D3 then
+            _0x790D()
+            _0x7C78()
+        end
+    end)
+_0xAAA2(_0xD14A, string.char(80,105,99,107,77,111,110,101,121), string.char(224,185,128,224,184,129,224,185,135,224,184,154,224,185,128,224,184,171,224,184,163,224,184,181,224,184,162,224,184,141,224,185,128,224,184,135,224,184,180,224,184,153), string.char(224,185,128,224,184,171,224,184,163,224,184,181,224,184,162,224,184,141,224,184,151,224,184,173,224,184,135,224,185,129,224,184,148,224,184,135,47,224,185,128,224,184,135,224,184,180,224,184,153,47,224,184,151,224,184,173,224,184,135))
+_0xAAA2(_0xD14A, string.char(80,105,99,107,83,80), string.char(224,185,128,224,184,129,224,185,135,224,184,154,32,83,80), string.char(224,184,165,224,184,185,224,184,129,224,184,170,224,184,181,224,184,159,224,185,137,224,184,178,32,224,185,128,224,184,149,224,184,180,224,184,161,224,185,128,224,184,129,224,184,136,32,83,80))
+_0xAAA2(_0xD14A, string.char(80,105,99,107,73,116,101,109), string.char(224,185,128,224,184,129,224,185,135,224,184,154,224,184,129,224,184,165,224,185,136,224,184,173,224,184,135,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161), string.char(224,184,129,224,184,165,224,185,136,224,184,173,224,184,135,224,184,151,224,184,181,224,185,136,224,185,130,224,184,156,224,184,165,224,185,136,224,184,138,224,185,136,224,184,167,224,184,135,224,184,173,224,184,181,224,185,128,224,184,167,224,184,153,224,184,149,224,185,140))
+_0x62EC.CoinRange = _0xD14A:Slider({
+    Name = string.char(224,184,163,224,184,176,224,184,162,224,184,176,224,184,171,224,184,178,224,185,128,224,184,171,224,184,163,224,184,181,224,184,162,224,184,141),
+    Min = 100,
+    Max = 1500,
+    Step = 50,
+    Default = _0x1E35.CoinRange,
+    Suffix = string.char(32,115,116,117,100,115),
+    Callback = function(_0x21D3)
+        _0x1E35.CoinRange = _0x21D3
+        _0x51BB()
+    end,
+})
+local _0xF583 = _0xD14A:Paragraph({ Name = string.char(224,185,128,224,184,129,224,185,135,224,184,154,224,184,130,224,184,173,224,184,135,58,32,224,184,155,224,184,180,224,184,148,224,184,173,224,184,162,224,184,185,224,185,136), Desc = string.char(45) })
+
+local _0x55CE = _0xDFC5:Section(string.char(83,84,65,84,83))
+local _0xBA11 = _0x55CE:Paragraph({ Name = string.char(224,184,129,224,184,179,224,184,165,224,184,177,224,184,135,224,185,130,224,184,171,224,184,165,224,184,148,46,46,46), Desc = string.char(45) })
+
+
+local _0xB86F = _0x6353:Section(string.char(83,69,78,68,32,77,79,78,69,89,32,40,224,184,136,224,184,148,224,184,171,224,184,161,224,184,178,224,184,162,41))
+
+_0x62EC.SendTarget = _0xB86F:Input({
+    Name = string.char(224,184,170,224,185,136,224,184,135,224,185,131,224,184,171,224,185,137,32,40,224,184,138,224,184,183,224,185,136,224,184,173,224,185,131,224,184,153,224,185,128,224,184,129,224,184,161,41),
+    Default = _0x1E35.SendTarget,
+    Placeholder = string.char(224,184,138,224,184,183,224,185,136,224,184,173,224,184,149,224,184,177,224,184,167,224,184,165,224,184,176,224,184,132,224,184,163,32,224,185,132,224,184,161,224,185,136,224,184,149,224,185,137,224,184,173,224,184,135,224,184,173,224,184,162,224,184,185,224,185,136,224,185,128,224,184,139,224,184,180,224,184,163,224,185,140,224,184,159,224,185,128,224,184,148,224,184,181,224,184,162,224,184,167,224,184,129,224,184,177,224,184,153),
+    Callback = function(_0x6EF4)
+        _0x1E35.SendTarget = tostring(_0x6EF4 or ""):gsub(string.char(94,37,115,43), ""):gsub(string.char(37,115,43,36), "")
+        _0x51BB()
+    end,
+})
+
+_0x62EC.SendAmount = _0xB86F:Input({
+    Name = string.char(224,184,136,224,184,179,224,184,153,224,184,167,224,184,153,224,185,128,224,184,135,224,184,180,224,184,153),
+    Default = tostring(_0x1E35.SendAmount),
+    Placeholder = string.char(224,185,128,224,184,138,224,185,136,224,184,153,32,53,48,48,48,48),
+    Callback = function(_0x6EF4)
+        local _0xAC71 = tonumber((tostring(_0x6EF4):gsub(string.char(91,44,37,115,93), "")))
+        if _0xAC71 and _0xAC71 > 0 then
+            _0x1E35.SendAmount = math.floor(_0xAC71)
+            _0x51BB()
+        else
+            _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.char(224,185,131,224,184,170,224,185,136,224,184,136,224,184,179,224,184,153,224,184,167,224,184,153,224,185,128,224,184,135,224,184,180,224,184,153,224,185,128,224,184,155,224,185,135,224,184,153,224,184,149,224,184,177,224,184,167,224,185,128,224,184,165,224,184,130))
+        end
+    end,
+})
+_0x62EC.SendKeep = _0xB86F:Input({
+    Name = string.char(224,185,128,224,184,129,224,185,135,224,184,154,224,185,128,224,184,135,224,184,180,224,184,153,224,185,132,224,184,167,224,185,137,224,184,130,224,184,177,224,185,137,224,184,153,224,184,149,224,185,136,224,184,179),
+    Default = tostring(_0x1E35.SendKeep),
+    Placeholder = string.char(48),
+    Callback = function(_0x6EF4)
+        local _0xAC71 = tonumber((tostring(_0x6EF4):gsub(string.char(91,44,37,115,93), "")))
+        if _0xAC71 and _0xAC71 >= 0 then
+            _0x1E35.SendKeep = math.floor(_0xAC71)
+            _0x51BB()
+        end
+    end,
+})
+
+do
+    local _0x9EBF = false
+    _0xB86F:Button({
+        Name = string.char(224,184,170,224,185,136,224,184,135,224,185,128,224,184,135,224,184,180,224,184,153,224,184,149,224,184,173,224,184,153,224,184,153,224,184,181,224,185,137),
+        Desc = string.char(224,184,170,224,185,136,224,184,135,224,184,136,224,184,148,224,184,171,224,184,161,224,184,178,224,184,162,224,185,129,224,184,153,224,184,154,32,82,97,105,110,32,40,224,184,130,224,185,137,224,184,178,224,184,161,224,185,128,224,184,139,224,184,180,224,184,163,224,185,140,224,184,159,224,185,132,224,184,148,224,185,137,32,224,185,128,224,184,129,224,184,161,224,184,132,224,184,180,224,184,148,224,184,132,224,185,136,224,184,178,224,184,170,224,185,136,224,184,135,224,185,128,224,184,158,224,184,180,224,185,136,224,184,161,41),
+        Callback = function()
+            if _0x9EBF then return end
+            _0x9EBF = true
+            task.spawn(function()
+                local _0xFDD5, _0x6527, _0x77CC = pcall(_0xFDF4, _0x1E35.SendTarget, _0x1E35.SendAmount)
+                _0x9EBF = false
+                _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), _0xFDD5 and tostring(_0x77CC) or (string.char(224,184,156,224,184,180,224,184,148,224,184,158,224,184,165,224,184,178,224,184,148,58,32) .. tostring(_0x6527):sub(1, 60)), 4)
+            end)
+        end,
+    })
+end
+_0xAAA2(_0xB86F, string.char(65,117,116,111,83,101,110,100), string.char(224,184,170,224,185,136,224,184,135,224,185,128,224,184,135,224,184,180,224,184,153,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,184,170,224,185,136,224,184,135,224,184,136,224,184,179,224,184,153,224,184,167,224,184,153,224,184,151,224,184,181,224,185,136,224,184,149,224,184,177,224,185,137,224,184,135,224,185,132,224,184,167,224,185,137,224,184,151,224,184,184,224,184,129,224,184,132,224,184,163,224,184,177,224,185,137,224,184,135,224,184,151,224,184,181,224,185,136,224,185,128,224,184,135,224,184,180,224,184,153,224,184,158,224,184,173,32,40,224,184,163,224,184,167,224,184,161,224,184,132,224,185,136,224,184,178,224,184,170,224,185,136,224,184,135,224,185,129,224,184,165,224,184,176,224,185,128,224,184,135,224,184,180,224,184,153,224,185,128,224,184,129,224,185,135,224,184,154,224,184,130,224,184,177,224,185,137,224,184,153,224,184,149,224,185,136,224,184,179,41,32,224,185,128,224,184,167,224,185,137,224,184,153,224,184,173,224,184,162,224,185,136,224,184,178,224,184,135,224,184,153,224,185,137,224,184,173,224,184,162,32,54,48,32,224,184,167,224,184,180))
+
+local _0xE945 = _0x6353:Section(string.char(82,69,67,69,73,86,69))
+_0xAAA2(_0xE945, string.char(65,117,116,111,84,97,107,101,77,97,105,108), string.char(224,184,163,224,184,177,224,184,154,224,185,128,224,184,135,224,184,180,224,184,153,224,184,136,224,184,178,224,184,129,224,184,136,224,184,148,224,184,171,224,184,161,224,184,178,224,184,162,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,185,131,224,184,138,224,185,137,224,184,129,224,184,177,224,184,154,224,185,132,224,184,173,224,184,148,224,184,181,224,184,151,224,184,181,224,185,136,224,184,163,224,184,177,224,184,154,224,185,128,224,184,135,224,184,180,224,184,153,58,32,224,184,129,224,184,148,224,184,163,224,184,177,224,184,154,224,185,128,224,184,135,224,184,180,224,184,153,47,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161,224,184,151,224,184,181,224,185,136,224,185,129,224,184,153,224,184,154,224,184,161,224,184,178,224,185,131,224,184,153,224,184,136,224,184,148,224,184,171,224,184,161,224,184,178,224,184,162,224,184,151,224,184,184,224,184,129,224,184,137,224,184,154,224,184,177,224,184,154,224,185,131,224,184,171,224,185,137))
+local _0xFF10 = _0xE945:Paragraph({ Name = string.char(224,184,170,224,184,150,224,184,178,224,184,153,224,184,176,224,184,129,224,184,178,224,184,163,224,184,170,224,185,136,224,184,135), Desc = string.char(45) })
+task.spawn(function()
+    while _0x198E() do
+        pcall(function()
+            _0xFF10.SetTitle(string.format(string.char(224,184,170,224,185,136,224,184,135,224,185,132,224,184,155,224,185,129,224,184,165,224,185,137,224,184,167,32,37,100,32,40,224,184,132,224,185,136,224,184,178,224,184,170,224,185,136,224,184,135,32,37,100,41,32,226,128,162,32,224,185,128,224,184,135,224,184,180,224,184,153,224,184,149,224,184,173,224,184,153,224,184,153,224,184,181,224,185,137,32,37,115), _0xCA58.SentTotal or 0, _0xCA58.SentFee or 0,
+                tostring(_0x0683:GetAttribute(string.char(82,97,121,99,105,116,121,82,97,105,110)) or string.char(45))))
+            _0xFF10.SetDesc(_0xCA58.Trade or string.char(45))
+        end)
+        task.wait(0.5)
+    end
+end)
+
+
+local _0x917D = _0x8CA5
+
+
+
+
+
+_0x1E35.No3D, _0x1E35.CapFps = false, false
+local _0xEBAD = game:GetService(string.char(82,117,110,83,101,114,118,105,99,101))
+local _0xA9CB = (getfpscap and getfpscap()) or 60
+local function _0x0FC5()
+    pcall(function() _0xEBAD:Set3dRenderingEnabled(not _0x1E35.No3D) end)
+    if setfpscap then
+        pcall(setfpscap, _0x1E35.CapFps and math.clamp(tonumber(_0x1E35.FpsCap) or 30, 10, 240) or _0xA9CB)
+    end
+end
+_0x0FC5()
+_0x4F8F(function()
+    pcall(function() _0xEBAD:Set3dRenderingEnabled(true) end)
+    if setfpscap then pcall(setfpscap, _0xA9CB) end
+end)
+
+local _0x3DA3 = _0x917D:Section(string.char(83,89,83,84,69,77))
+_0xAAA2(_0x3DA3, string.char(65,117,116,111,69,110,116,101,114), string.char(224,185,128,224,184,130,224,185,137,224,184,178,224,185,128,224,184,129,224,184,161,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180),
+    string.char(224,184,130,224,185,137,224,184,178,224,184,161,224,184,173,224,184,153,224,184,180,224,185,128,224,184,161,224,184,138,224,184,177,224,184,153,32,226,134,146,32,224,185,128,224,184,165,224,184,183,224,184,173,224,184,129,32,67,104,97,110,110,101,108,32,224,184,151,224,184,181,224,185,136,224,184,173,224,184,162,224,184,185,224,185,136,32,226,134,146,32,224,184,129,224,184,148,224,185,128,224,184,163,224,184,180,224,185,136,224,184,161,224,185,128,224,184,129,224,184,161,224,184,148,224,185,137,224,184,167,224,184,162,224,184,149,224,184,177,224,184,167,224,184,165,224,184,176,224,184,132,224,184,163,224,184,153,224,184,181,224,185,137,32,40,224,185,131,224,184,170,224,185,136,32,104,117,98,32,224,185,132,224,184,167,224,185,137,224,185,131,224,184,153,32,97,117,116,111,45,101,120,101,99,117,116,101,41))
+_0xAAA2(_0x3DA3, string.char(75,101,101,112,85,112,108,111,97,100,105,110,103), string.char(224,184,170,224,185,136,224,184,135,224,184,149,224,184,179,224,185,129,224,184,171,224,184,153,224,185,136,224,184,135,224,184,163,224,184,150,224,185,129,224,184,161,224,185,137,224,184,170,224,184,165,224,184,177,224,184,154,224,184,171,224,184,153,224,185,137,224,184,178,224,184,149,224,185,136,224,184,178,224,184,135),
+    string.char(224,184,155,224,184,180,224,184,148,224,185,129,224,184,165,224,185,137,224,184,167,224,185,128,224,184,139,224,184,180,224,184,163,224,185,140,224,184,159,224,185,128,224,184,167,224,184,173,224,184,163,224,185,140,224,184,136,224,184,176,224,185,132,224,184,161,224,185,136,224,184,163,224,184,177,224,184,154,224,185,128,224,184,171,224,184,163,224,184,181,224,184,162,224,184,141,47,224,184,132,224,184,184,224,184,162,32,78,80,67,32,224,184,149,224,184,173,224,184,153,224,184,171,224,184,153,224,185,137,224,184,178,224,184,149,224,185,136,224,184,178,224,184,135,224,185,132,224,184,161,224,185,136,224,185,132,224,184,148,224,185,137,224,184,173,224,184,162,224,184,185,224,185,136,224,184,148,224,185,137,224,184,178,224,184,153,224,184,171,224,184,153,224,185,137,224,184,178), function()
+        _0x2B79()
+    end)
+_0x3DA3:Button({
+    Name = string.char(224,184,171,224,184,162,224,184,184,224,184,148,224,184,163,224,184,150,224,184,151,224,184,177,224,184,153,224,184,151,224,184,181),
+    Desc = string.char(224,184,162,224,184,129,224,185,128,224,184,165,224,184,180,224,184,129,224,184,130,224,184,177,224,184,154,224,184,173,224,184,177,224,184,149,224,185,130,224,184,153,224,184,161,224,184,177,224,184,149,224,184,180,224,185,129,224,184,165,224,184,176,224,184,155,224,184,165,224,185,136,224,184,173,224,184,162,224,184,132,224,184,177,224,184,153,224,185,128,224,184,163,224,185,136,224,184,135),
+    Callback = function()
+        _0x1E35.AutoMission, _0x1E35.AutoCoin = false, false
+        _0x790D()
+        _0x7C78()
+        _0x4BDD(string.char(50,75,32,83,67,82,73,80,84), string.char(224,184,171,224,184,162,224,184,184,224,184,148,224,184,163,224,184,150,224,185,129,224,184,165,224,185,137,224,184,167,32,40,224,184,155,224,184,180,224,184,148,224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,224,185,129,224,184,165,224,184,176,224,185,128,224,184,171,224,184,163,224,184,181,224,184,162,224,184,141,41))
+    end,
+})
+
+
+
+_G.TwoKRaycity = {
+    _0x1E35 = _0x1E35,
+    _0xCA58 = _0xCA58,
+    _0xA9E1 = _0xA9E1,
+    DriveNear = _0x4190,
+    AutoDriveTo = _0xD786,
+    ApplyTraffic = _0x2C69,
+    StoreNow = function() return pcall(_0x0272, true) end,
+    SellNow = function() return pcall(_0xFDE9) end,
+    SellAll = function() return pcall(_0xD47D) end,
+    SendMoney = function(_0x8C9A, amount) return _0xFDF4(_0x8C9A, amount) end,
+    _0x8311 = _0x8311,
+    ProfileSave = _0x1798,
+    ProfileList = _0xC77B,
+    ProfileRead = _0x87F9,
+    Stop = function()
+        _0x790D()
+        _0x7C78()
+    end,
+}
+
+
+local _0x66E9 = _0x0683:GetAttribute(string.char(82,97,121,99,105,116,121,82,97,105,110))
+local _0x699C = os.clock()
+task.spawn(function()
+    while _0x198E() do
+        pcall(function()
+            local _0xBC79 = _0x0683:GetAttribute(string.char(82,97,121,99,105,116,121,82,97,105,110))
+            local _0xC918 = (tonumber(_0xBC79) or 0) - (tonumber(_0x66E9) or 0)
+            local _0x966B = math.max((os.clock() - _0x699C) / 60, 1 / 60)
+
+            _0xBFE5.SetTitle(string.char(224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,58,32) .. (_0x1E35.AutoMission and string.char(224,185,128,224,184,155,224,184,180,224,184,148) or string.char(224,184,155,224,184,180,224,184,148)))
+            _0xBFE5.SetDesc(_0xCA58.Mission)
+            _0xF583.SetTitle(string.char(224,185,128,224,184,129,224,185,135,224,184,154,224,184,130,224,184,173,224,184,135,58,32) .. (_0x1E35.AutoCoin and string.char(224,185,128,224,184,155,224,184,180,224,184,148) or string.char(224,184,155,224,184,180,224,184,148)))
+            _0xF583.SetDesc(_0xCA58.Coin)
+            _0xBA11.SetTitle(string.format(string.char(224,185,128,224,184,135,224,184,180,224,184,153,32,37,115,32,32,40,37,43,100,32,226,128,162,32,37,100,47,224,184,153,224,184,178,224,184,151,224,184,181,41), tostring(_0xBC79 or string.char(45)), _0xC918, _0xC918 / _0x966B))
+            _0xBA11.SetDesc(string.format(string.char(224,184,160,224,184,178,224,184,163,224,184,129,224,184,180,224,184,136,32,37,100,47,37,100,32,40,224,185,132,224,184,173,224,185,128,224,184,151,224,184,161,32,37,100,41,32,226,128,162,32,224,185,128,224,184,171,224,184,163,224,184,181,224,184,162,224,184,141,32,37,100,32,226,128,162,32,83,80,32,37,100,32,226,128,162,32,224,184,129,224,184,165,224,185,136,224,184,173,224,184,135,32,37,100,32,226,128,162,32,76,118,32,37,115),
+                _0xCA58.MissionsDone, _0xCA58.MissionsDone + _0xCA58.MissionsFailed, _0xCA58.Items or 0,
+                _0xCA58.Picked[0], _0xCA58.Picked[1], _0xCA58.Picked[2],
+                tostring(_0x0683:GetAttribute(string.char(82,97,121,99,105,116,121,80,108,97,121,101,114,76,118)) or string.char(45)))
+                .. (_0xCA58.Store and (string.char(32,226,128,162,32) .. _0xCA58.Store) or ""))
+
+            if _0x1E35.AutoMission then
+                _0xA9E1:SetStatus(string.char(77,73,83,83,73,79,78,32,32,47,47,32,32) .. _0xCA58.MissionsDone .. string.char(32,68,79,78,69))
+            elseif _0x1E35.AutoCoin then
+                _0xA9E1:SetStatus(string.char(80,73,67,75,85,80,32,32,47,47,32,32) .. _0xCA58.Coins .. string.char(32,80,73,67,75,69,68))
+            else
+                _0xA9E1:SetStatus(string.char(73,68,76,69))
+            end
+        end)
+        task.wait(0.5)
+    end
+end)
+
+
+
+
+
+do
+    local _0x1891, _0x2F3D = pcall(function() return require(_0x8DBA.RaycityUi.RaycityEscGate) end)
+    if _0x1891 and type(_0x2F3D) == string.char(116,97,98,108,101) and _0x2F3D.setTrapEnabled then
+        local _0x7CDA = false
+        task.spawn(function()
+            while _0x198E() do
+                local _0x9820 = _0xA9E1.Visible == true
+                if _0x9820 ~= _0x7CDA or _0x9820 then
+                    pcall(_0x2F3D.setTrapEnabled, not _0x9820)
+                    _0x7CDA = _0x9820
+                end
+                task.wait(0.3)
+            end
+        end)
+        _0x4F8F(function() pcall(_0x2F3D.setTrapEnabled, true) end)
+    end
+end
+
+
+_0xA9E1:Toggle(true)
+_0x4BDD(string.char(83,85,80,80,79,82,84,32,83), string.char(82,97,121,99,105,116,121,32,82,66,32,224,184,158,224,184,163,224,185,137,224,184,173,224,184,161,224,185,131,224,184,138,224,185,137,224,184,135,224,184,178,224,184,153,32,226,128,162,32,224,184,129,224,184,148,32) .. _0xA9E1.ToggleKey.Name .. string.char(32,224,185,128,224,184,155,224,184,180,224,184,148,47,224,184,155,224,184,180,224,184,148,224,185,128,224,184,161,224,184,153,224,184,185), 4)
+_0x4BDD(string.char(226,154,160,32,224,184,132,224,184,179,224,185,128,224,184,149,224,184,183,224,184,173,224,184,153), string.char(224,184,159,224,184,177,224,184,135,224,184,129,224,185,140,224,184,138,224,184,177,224,184,153,224,184,173,224,184,173,224,185,130,224,184,149,224,185,137,224,185,128,224,184,132,224,184,167,224,184,170,224,185,128,224,184,170,224,184,181,224,185,136,224,184,162,224,184,135,224,185,130,224,184,148,224,184,153,224,185,129,224,184,154,224,184,153,32,224,185,130,224,184,155,224,184,163,224,184,148,224,184,163,224,184,177,224,184,154,224,184,132,224,184,167,224,184,178,224,184,161,224,185,128,224,184,170,224,184,181,224,185,136,224,184,162,224,184,135,224,185,128,224,184,173,224,184,135), 6)
