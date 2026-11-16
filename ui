@@ -1,0 +1,30 @@
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local MAPS = {
+	{
+		name = "Dart & Dash",
+		placeIds = {127976865482051},
+		url = "https://api.jnkie.com/api/v1/luascripts/public/59a56528cb295ac2c0a54608321896ea504080ade8424b8f0cb405296cb64fd9/download",
+	},
+	{
+		name = "Raycity RB",
+		placeIds = {117419079466193},
+		url = "https://api.jnkie.com/api/v1/luascripts/public/568c3751bab95f9cbc44e3ed951f91be03031a97202e6e40b62770f6f99fd6dd/download",
+	},
+}
+
+local current = nil
+for _, map in ipairs(MAPS) do
+	for _, id in ipairs(map.placeIds) do
+		if id == game.PlaceId or id == game.GameId then
+			current = map
+		end
+	end
+end
+
+getgenv().SUPPORT_MAP = current
+
+print("PlaceId:", game.PlaceId, "| GameId:", game.GameId, "| Map:", current and current.name or "nil")
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/shoppp-eng/keyT/refs/heads/main/Keyobf"))()
