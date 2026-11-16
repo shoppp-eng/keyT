@@ -1,0 +1,633 @@
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local MarketplaceService = game:GetService("MarketplaceService")
+
+-- ===== ตั้งค่า =====
+local GET_KEY_LINK = "https://discord.gg/r2wDNrbxk" -- ลิงก์ปุ่ม Get Key
+local DISCORD_LINK = "https://discord.gg/r2wDNrbxk" -- ลิงก์ปุ่ม Discord
+
+-- รายการแมพ: เข้าแมพไหนก็รันสคริปต์ของแมพนั้น
+--   placeIds = PlaceId ของแมพ (แม่นที่สุด)  เช่น {1234567890}
+--   match    = คำที่อยู่ในชื่อเกม (ไม่สนตัวพิมพ์เล็กใหญ่) เช่น {"raycity"}
+-- ถ้าอยากเพิ่มแมพใหม่ ให้ copy บล็อก { ... } แล้วเพิ่มต่อท้าย
+local MAPS = {
+    {
+        name = "Dart & Dash",
+        placeIds = {127976865482051},
+        match = { "Dart & Dash" },
+        url = "https://api.jnkie.com/api/v1/luascripts/public/59a56528cb295ac2c0a54608321896ea504080ade8424b8f0cb405296cb64fd9/download",
+    },
+    {
+        name = "Raycity RB",
+        placeIds = {117419079466193},
+        match = { "raycity" },
+        url = "https://api.jnkie.com/api/v1/luascripts/public/568c3751bab95f9cbc44e3ed951f91be03031a97202e6e40b62770f6f99fd6dd/download",
+    },
+}
+
+-- ===== ตรวจจับแมพปัจจุบัน =====
+local gameName = ""
+pcall(function()
+    gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name or ""
+end)
+if gameName == "" then gameName = game.Name or "" end
+
+local function findMap()
+    for _, map in ipairs(MAPS) do
+        for _, id in ipairs(map.placeIds) do
+            if id == game.PlaceId or id == game.GameId then return map end
+        end
+    end
+    local lowerName = gameName:lower()
+    for _, map in ipairs(MAPS) do
+        for _, word in ipairs(map.match) do
+            if lowerName:find(word:lower(), 1, true) then return map end
+        end
+    end
+    return nil
+end
+
+local currentMap = findMap()
+
+-- ===== หาที่วาง GUI =====
+local guiParent
+pcall(function() if gethui then guiParent = gethui() end end)
+if not guiParent then pcall(function() guiParent = game:GetService("CoreGui") end) end
+if not guiParent then guiParent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui") end
+
+pcall(function()
+    local old = guiParent:FindFirstChild("KeySystemGui")
+    if old then old:Destroy() end
+end)
+
+-- ===== สี =====
+local C = {
+    bg       = Color3.fromRGB(20, 20, 31),
+    card     = Color3.fromRGB(29, 29, 51),
+    chip     = Color3.fromRGB(35, 35, 61),
+    chip2    = Color3.fromRGB(44, 44, 74),
+    line     = Color3.fromRGB(52, 52, 90),
+    purple   = Color3.fromRGB(106, 92, 255),
+    purpleD  = Color3.fromRGB(74, 63, 208),
+    purpleS  = Color3.fromRGB(36, 31, 92),
+    cyan     = Color3.fromRGB(0, 191, 255),
+    cyanBg   = Color3.fromRGB(11, 42, 58),
+    text     = Color3.fromRGB(255, 255, 255),
+    sub      = Color3.fromRGB(168, 168, 198),
+    dim      = Color3.fromRGB(133, 133, 168),
+    green    = Color3.fromRGB(90, 230, 150),
+    greenBg  = Color3.fromRGB(18, 48, 31),
+    red      = Color3.fromRGB(255, 100, 112),
+    redBg    = Color3.fromRGB(58, 26, 34),
+    yellow   = Color3.fromRGB(255, 205, 90),
+    yellowBg = Color3.fromRGB(56, 46, 18),
+    mint     = Color3.fromRGB(93, 202, 165),
+}
+
+-- ===== ตัวช่วย =====
+local function new(class, props, parent)
+    local o = Instance.new(class)
+    for k, v in pairs(props) do o[k] = v end
+    o.Parent = parent
+    return o
+end
+
+local function round(o, r)
+    new("UICorner", {CornerRadius = r}, o)
+end
+
+local function stroke(o, color, thick)
+    return new("UIStroke", {
+        Color = color, Thickness = thick,
+        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+    }, o)
+end
+
+local function box(parent, x, y, w, h, color, r)
+    local f = new("Frame", {
+        Position = UDim2.new(0, x, 0, y),
+        Size = UDim2.new(0, w, 0, h),
+        BackgroundColor3 = color,
+        BorderSizePixel = 0,
+    }, parent)
+    if r then round(f, UDim.new(0, r)) end
+    return f
+end
+
+local function text(parent, str, x, y, w, h, size, color, font, align)
+    return new("TextLabel", {
+        Position = UDim2.new(0, x, 0, y),
+        Size = UDim2.new(0, w, 0, h),
+        BackgroundTransparency = 1,
+        Text = str,
+        TextColor3 = color,
+        Font = font or Enum.Font.Gotham,
+        TextSize = size,
+        TextXAlignment = align or Enum.TextXAlignment.Left,
+    }, parent)
+end
+
+local function tween(obj, t, props)
+    local tw = TweenService:Create(obj, TweenInfo.new(t, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), props)
+    tw:Play()
+    return tw
+end
+
+local function hover(btn, normal, over)
+    btn.MouseEnter:Connect(function() tween(btn, 0.15, {BackgroundColor3 = over}) end)
+    btn.MouseLeave:Connect(function() tween(btn, 0.15, {BackgroundColor3 = normal}) end)
+end
+
+-- ===== ตั้งค่าแสงวิ่ง =====
+local RUN_HEAD  = C.cyan
+local RUN_TAIL  = C.purple
+local RUN_SPEED = 200
+
+-- ===== หน้าต่างหลัก =====
+local gui = new("ScreenGui", {
+    Name = "KeySystemGui", ResetOnSpawn = false, DisplayOrder = 999,
+    ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+}, guiParent)
+
+local W, H = 400, 490
+
+local holder = new("Frame", {
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    Size = UDim2.new(0, W, 0, H),
+    BackgroundTransparency = 1,
+    BorderSizePixel = 0,
+}, gui)
+
+local glowGradients = {}
+local function glowLayer(grow, thick, peak, radius)
+    local f = new("Frame", {
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        Position = UDim2.new(0.5, 0, 0.5, 0),
+        Size = UDim2.new(1, grow * 2, 1, grow * 2),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        ZIndex = 0,
+    }, holder)
+    round(f, UDim.new(0, radius))
+    local s = new("UIStroke", {
+        Color = Color3.new(1, 1, 1),
+        Thickness = thick,
+        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+    }, f)
+    local g = new("UIGradient", {
+        Color = ColorSequence.new({
+            ColorSequenceKeypoint.new(0, RUN_TAIL),
+            ColorSequenceKeypoint.new(0.75, RUN_TAIL),
+            ColorSequenceKeypoint.new(1, RUN_HEAD),
+        }),
+        Transparency = NumberSequence.new({
+            NumberSequenceKeypoint.new(0, 1),
+            NumberSequenceKeypoint.new(0.55, 1),
+            NumberSequenceKeypoint.new(0.95, peak),
+            NumberSequenceKeypoint.new(1, 1),
+        }),
+    }, s)
+    table.insert(glowGradients, g)
+end
+
+glowLayer(0, 3, 0, 20)
+glowLayer(3, 6, 0.65, 23)
+glowLayer(6, 10, 0.82, 26)
+glowLayer(10, 14, 0.92, 30)
+
+local frame = new("Frame", {
+    Position = UDim2.new(0, 0, 0, 0),
+    Size = UDim2.new(1, 0, 1, 0),
+    BackgroundColor3 = C.bg,
+    BorderSizePixel = 0,
+    Active = true,
+    ClipsDescendants = true,
+}, holder)
+round(frame, UDim.new(0, 20))
+stroke(frame, C.line, 1)
+
+do
+    local rot = 0
+    local conn
+    conn = RunService.RenderStepped:Connect(function(dt)
+        if not gui.Parent then
+            conn:Disconnect()
+            return
+        end
+        rot = (rot + dt * RUN_SPEED) % 360
+        for _, g in ipairs(glowGradients) do
+            g.Rotation = rot
+        end
+    end)
+end
+
+box(frame, 0, 0, W / 2, 5, C.purple)
+box(frame, W / 2, 0, W / 2, 5, C.cyan)
+
+-- ===== ส่วนหัว =====
+local avatarOuter = box(frame, 26, 24, 60, 60, C.purpleS)
+round(avatarOuter, UDim.new(1, 0))
+local avatarInner = box(avatarOuter, 8, 8, 44, 44, C.purple)
+round(avatarInner, UDim.new(1, 0))
+new("TextLabel", {
+    Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1,
+    Text = "🔑", TextColor3 = C.text, Font = Enum.Font.Gotham, TextSize = 24,
+}, avatarInner)
+
+text(frame, "ยืนยันคีย์", 102, 26, 125, 30, 23, C.text, Enum.Font.GothamBold)
+local badge = box(frame, 228, 31, 76, 20, C.mint, 10)
+new("TextLabel", {
+    Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1,
+    Text = "PREMIUM", TextColor3 = Color3.fromRGB(4, 52, 44),
+    Font = Enum.Font.GothamBold, TextSize = 11,
+}, badge)
+
+-- บรรทัดย่อยแสดงแมพที่ตรวจเจอ
+local subtitle = text(frame, "", 102, 58, 230, 20, 14, C.sub)
+subtitle.TextTruncate = Enum.TextTruncate.AtEnd
+if currentMap then
+    subtitle.Text = "แมพ: " .. currentMap.name
+    subtitle.TextColor3 = C.green
+else
+    subtitle.Text = "แมพนี้ยังไม่รองรับ"
+    subtitle.TextColor3 = C.yellow
+end
+
+local close = new("TextButton", {
+    Position = UDim2.new(0, W - 26 - 32, 0, 26),
+    Size = UDim2.new(0, 32, 0, 32),
+    BackgroundColor3 = C.chip, BorderSizePixel = 0, AutoButtonColor = false,
+    Text = "X", TextColor3 = C.sub, Font = Enum.Font.GothamBold, TextSize = 15,
+}, frame)
+round(close, UDim.new(0, 10))
+close.MouseEnter:Connect(function()
+    tween(close, 0.15, {BackgroundColor3 = C.red, TextColor3 = C.text})
+end)
+close.MouseLeave:Connect(function()
+    tween(close, 0.15, {BackgroundColor3 = C.chip, TextColor3 = C.sub})
+end)
+close.Activated:Connect(function() gui:Destroy() end)
+
+-- ===== แถบขั้นตอน =====
+local function step(x, num, label, state)
+    local bgc, fgc, lc, font = C.chip, C.dim, C.dim, Enum.Font.Gotham
+    if state == "done" then bgc, fgc, lc = C.greenBg, C.green, C.sub end
+    if state == "now" then bgc, fgc, lc, font = C.purple, C.text, C.text, Enum.Font.GothamBold end
+    local c = box(frame, x, 108, 24, 24, bgc)
+    round(c, UDim.new(1, 0))
+    new("TextLabel", {
+        Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1,
+        Text = num, TextColor3 = fgc, Font = Enum.Font.GothamBold, TextSize = 12,
+    }, c)
+    text(frame, label, x + 31, 108, 50, 24, 13, lc, font)
+end
+
+step(26,  "1", "รับคีย์", "done")
+box(frame, 114, 119, 38, 2, C.purple)
+step(160, "2", "วางคีย์", "now")
+box(frame, 248, 119, 38, 2, C.line)
+step(294, "3", "ใช้งาน", "todo")
+
+-- ===== ช่องใส่คีย์ =====
+text(frame, "ใส่คีย์", 26, 146, 200, 28, 22, Color3.fromRGB(255, 255, 255), Enum.Font.GothamBold)
+
+local inputWrap = box(frame, 26, 178, 348, 56, C.card, 14)
+local inputStroke = stroke(inputWrap, C.line, 2)
+
+local keyBox = new("TextBox", {
+    Position = UDim2.new(0, 16, 0, 0),
+    Size = UDim2.new(1, -32, 1, 0),
+    BackgroundTransparency = 1,
+    PlaceholderText = "วางคีย์ที่นี่...",
+    PlaceholderColor3 = C.dim,
+    Text = "",
+    TextColor3 = C.text,
+    Font = Enum.Font.Gotham,
+    TextSize = 17,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    ClearTextOnFocus = false,
+    ClipsDescendants = true,
+}, inputWrap)
+
+keyBox.Focused:Connect(function() tween(inputStroke, 0.2, {Color = C.cyan}) end)
+
+-- ===== ข้อความสถานะ =====
+local pill = box(frame, 26, 248, 348, 42, C.chip, 12)
+pill.Visible = false
+local pillText = new("TextLabel", {
+    Position = UDim2.new(0, 14, 0, 0), Size = UDim2.new(1, -28, 1, 0),
+    BackgroundTransparency = 1, Text = "",
+    TextColor3 = C.sub, Font = Enum.Font.GothamBold, TextSize = 14,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    TextWrapped = true,
+}, pill)
+
+local function showStatus(kind, msg)
+    if kind == "ok" then
+        pill.BackgroundColor3, pillText.TextColor3 = C.greenBg, C.green
+    elseif kind == "warn" then
+        pill.BackgroundColor3, pillText.TextColor3 = C.yellowBg, C.yellow
+    else
+        pill.BackgroundColor3, pillText.TextColor3 = C.redBg, C.red
+    end
+    pillText.Text = msg
+    pill.Visible = true
+end
+
+keyBox:GetPropertyChangedSignal("Text"):Connect(function()
+    pill.Visible = false
+end)
+
+-- ===== ปุ่มยืนยัน =====
+box(frame, 26, 306, 348, 54, C.purpleD, 14)
+local submit = new("TextButton", {
+    Position = UDim2.new(0, 26, 0, 302),
+    Size = UDim2.new(0, 348, 0, 54),
+    BackgroundColor3 = C.purple, BorderSizePixel = 0, AutoButtonColor = false,
+    Text = "ยืนยันคีย์", TextColor3 = C.text, Font = Enum.Font.GothamBold, TextSize = 19,
+}, frame)
+round(submit, UDim.new(0, 14))
+hover(submit, C.purple, Color3.fromRGB(128, 115, 255))
+
+-- ===== เส้นคั่น =====
+box(frame, 26, 391, 112, 1, C.line)
+text(frame, "ยังไม่มีคีย์?", 138, 381, 124, 20, 13, C.sub, Enum.Font.Gotham, Enum.TextXAlignment.Center)
+box(frame, 262, 391, 112, 1, C.line)
+
+-- ===== ปุ่ม Get Key / Discord =====
+local function sideButton(x, bg, border, iconBg, iconChar, title, titleColor, sub, subColor)
+    local b = new("TextButton", {
+        Position = UDim2.new(0, x, 0, 412),
+        Size = UDim2.new(0, 168, 0, 52),
+        BackgroundColor3 = bg, BorderSizePixel = 0, AutoButtonColor = false, Text = "",
+    }, frame)
+    round(b, UDim.new(0, 14))
+    stroke(b, border, 1.5)
+    local ic = box(b, 12, 12, 28, 28, iconBg, 8)
+    new("TextLabel", {
+        Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1,
+        Text = iconChar, TextColor3 = C.text,
+        Font = Enum.Font.Gotham, TextSize = 18,
+    }, ic)
+    text(b, title, 48, 8, 114, 20, 15, titleColor, Enum.Font.GothamBold)
+    text(b, sub, 48, 27, 114, 16, 12, subColor)
+    return b
+end
+
+local getKey = sideButton(26, C.cyanBg, C.cyan, Color3.fromRGB(0, 70, 96), "🔑",
+    "Get Key", Color3.fromRGB(189, 238, 255), "รับคีย์ฟรี", Color3.fromRGB(127, 196, 220))
+
+local discord = sideButton(206, C.chip, Color3.fromRGB(74, 74, 114), Color3.fromRGB(58, 52, 140), "💬",
+    "Discord", C.text, "ติดต่อแอดมิน", C.sub)
+
+hover(getKey, C.cyanBg, Color3.fromRGB(14, 58, 80))
+hover(discord, C.chip, C.chip2)
+
+-- พยายามเปิดลิงก์ในเบราว์เซอร์ (ขึ้นกับ executor ว่ารองรับไหม)
+local function openLink(link)
+    -- 1) ฟังก์ชันเปิดลิงก์ที่ executor บางตัวมีให้
+    local env = (getgenv and getgenv()) or _G
+    for _, name in ipairs({ "openurl", "open_url", "openbrowser", "open_browser" }) do
+        local fn = env[name]
+        if type(fn) == "function" and pcall(fn, link) then
+            return true
+        end
+    end
+
+    -- 2) ลิงก์เชิญ Discord: สั่งแอป Discord บนคอมให้เปิด (ใช้ได้เฉพาะ PC ที่เปิด Discord ค้างไว้)
+    local code = link:match("discord%.gg/(%w+)")
+    local req = request or http_request or (syn and syn.request)
+    if code and req then
+        local HttpService = game:GetService("HttpService")
+        local ok, res = pcall(function()
+            return req({
+                Url = "http://127.0.0.1:6463/rpc?v=1",
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json",
+                    ["Origin"] = "https://discord.com",
+                },
+                Body = HttpService:JSONEncode({
+                    cmd = "INVITE_BROWSER",
+                    args = { code = code },
+                    nonce = HttpService:GenerateGUID(false),
+                }),
+            })
+        end)
+        if ok and type(res) == "table" and (res.Success or res.StatusCode == 200) then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- ===== ป๊อปอัปแจ้งเตือนกลางจอ (มีปุ่มปิด) =====
+local popupOverlay = new("Frame", {
+    Name = "Popup",
+    Size = UDim2.new(1, 0, 1, 0),
+    BackgroundColor3 = Color3.new(0, 0, 0),
+    BackgroundTransparency = 1,
+    BorderSizePixel = 0,
+    Active = true,
+    Visible = false,
+    ZIndex = 50,
+}, gui)
+
+local popup = new("Frame", {
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    Size = UDim2.new(0, 320, 0, 200),
+    BackgroundColor3 = C.bg,
+    BorderSizePixel = 0,
+}, popupOverlay)
+round(popup, UDim.new(0, 18))
+local popupStroke = stroke(popup, C.green, 2)
+local popupScale = new("UIScale", { Scale = 0.85 }, popup)
+
+local popupIconBg = box(popup, 138, 18, 44, 44, C.greenBg)
+round(popupIconBg, UDim.new(1, 0))
+local popupIcon = new("TextLabel", {
+    Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1,
+    Text = "✓", TextColor3 = C.green, Font = Enum.Font.GothamBold, TextSize = 24,
+}, popupIconBg)
+
+local popupMsg = new("TextLabel", {
+    Position = UDim2.new(0, 20, 0, 72),
+    Size = UDim2.new(1, -40, 0, 64),
+    BackgroundTransparency = 1,
+    Text = "",
+    TextColor3 = C.text,
+    Font = Enum.Font.GothamBold,
+    TextSize = 16,
+    TextWrapped = true,
+    TextXAlignment = Enum.TextXAlignment.Center,
+    TextYAlignment = Enum.TextYAlignment.Center,
+}, popup)
+
+local popupClose = new("TextButton", {
+    Position = UDim2.new(0, 20, 1, -58),
+    Size = UDim2.new(1, -40, 0, 42),
+    BackgroundColor3 = C.purple, BorderSizePixel = 0, AutoButtonColor = false,
+    Text = "ปิด", TextColor3 = C.text, Font = Enum.Font.GothamBold, TextSize = 17,
+}, popup)
+round(popupClose, UDim.new(0, 12))
+hover(popupClose, C.purple, Color3.fromRGB(128, 115, 255))
+
+-- ให้ป๊อปอัปและทุกอย่างข้างในอยู่เหนือฉากดำ (ZIndex 50) เสมอ
+popup.ZIndex = 51
+for _, d in ipairs(popup:GetDescendants()) do
+    if d:IsA("GuiObject") then d.ZIndex = 52 end
+end
+popupClose.ZIndex = 53
+
+local popupToken = 0
+
+-- ปิดทันที ไม่พึ่ง tween (กันค้าง)
+local function hidePopup()
+    popupToken += 1
+    popupOverlay.Visible = false
+    popupOverlay.BackgroundTransparency = 1
+    popupScale.Scale = 0.85
+end
+
+-- ผูกการกดหลายแบบ (Activated / Click / InputBegan) กันบาง executor ที่บางอีเวนต์ไม่ทำงาน
+do
+    local last = 0
+    local function fire()
+        if os.clock() - last < 0.25 then return end
+        last = os.clock()
+        hidePopup()
+    end
+    popupClose.Activated:Connect(fire)
+    popupClose.MouseButton1Click:Connect(fire)
+    popupClose.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1
+            or input.UserInputType == Enum.UserInputType.Touch then
+            fire()
+        end
+    end)
+end
+
+local function showPopup(kind, msg)
+    popupToken += 1
+    local good = (kind == "ok")
+    local col = good and C.green or C.yellow
+    popupStroke.Color = col
+    popupIconBg.BackgroundColor3 = good and C.greenBg or C.yellowBg
+    popupIcon.TextColor3 = col
+    popupIcon.Text = good and "✓" or "!"
+    popupMsg.Text = msg
+    popupOverlay.Visible = true
+    popupOverlay.BackgroundTransparency = 1
+    popupScale.Scale = 0.85
+    tween(popupOverlay, 0.2, { BackgroundTransparency = 0.5 })
+    tween(popupScale, 0.2, { Scale = 1 })
+end
+
+local function copyLink(link)
+    -- คัดลอกลิงก์ไว้เสมอ เผื่อเปิดเองไม่ได้
+    local copied = false
+    local fn = setclipboard or toclipboard
+    if fn then
+        copied = pcall(fn, link)
+    end
+
+    if openLink(link) then
+        showPopup("ok", "เปิดลิงก์แล้ว")
+    elseif copied then
+        showPopup("ok", "คัดลอกลิงก์แล้ว\nนำไปวางในเบราว์เซอร์")
+    else
+        showPopup("warn", "คัดลอกอัตโนมัติไม่ได้\nลิงก์: " .. link)
+    end
+end
+
+getKey.Activated:Connect(function() copyLink(GET_KEY_LINK) end)
+discord.Activated:Connect(function() copyLink(DISCORD_LINK) end)
+
+-- ===== ลากย้าย (ลากที่ส่วนหัว) =====
+do
+    local dragging, dragStart, startPos
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1
+            or input.UserInputType == Enum.UserInputType.Touch then
+            if input.Position.Y - frame.AbsolutePosition.Y < 100 then
+                dragging = true
+                dragStart = input.Position
+                startPos = holder.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end
+    end)
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement
+            or input.UserInputType == Enum.UserInputType.Touch) then
+            local d = input.Position - dragStart
+            holder.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X,
+                                        startPos.Y.Scale, startPos.Y.Offset + d.Y)
+        end
+    end)
+end
+
+-- ===== ระบบเช็กคีย์และโหลดสคริปต์ =====
+local busy = false
+
+local function isUUID(s)
+    return s:match("^%x%x%x%x%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%x%x%x%x%x%x%x%x$") ~= nil
+end
+
+local function submitKey()
+    if busy then return end
+
+    local key = keyBox.Text:gsub("%s+", "")
+    keyBox.Text = key
+
+    if key == "" then
+        showStatus("bad", "กรุณาใส่คีย์ก่อน")
+        return
+    end
+
+    if not isUUID(key) then
+        showStatus("bad", "รูปแบบคีย์ไม่ถูกต้อง")
+        return
+    end
+
+    -- เลือกสคริปต์ตามแมพที่เข้าอยู่
+    local map = findMap()
+    if not map then
+        showStatus("warn", "ยังไม่รองรับแมพนี้ PlaceId: " .. tostring(game.PlaceId))
+        return
+    end
+
+    busy = true
+    submit.Text = "กำลังโหลด..."
+    showStatus("warn", "กำลังโหลดสคริปต์ " .. map.name .. "...")
+
+    getgenv().SCRIPT_KEY = key
+
+    task.spawn(function()
+        local ok, err = pcall(function()
+            loadstring(game:HttpGet(map.url))()
+        end)
+        if not ok then warn("Script error:", err) end
+    end)
+
+    task.wait(1.5)
+    showStatus("ok", "ส่งคีย์เรียบร้อย")
+    task.wait(0.5)
+    gui:Destroy()
+end
+
+submit.Activated:Connect(submitKey)
+keyBox.FocusLost:Connect(function(enterPressed)
+    tween(inputStroke, 0.2, {Color = C.line})
+    if enterPressed then submitKey() end
+end)
