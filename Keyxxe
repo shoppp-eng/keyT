@@ -1,0 +1,2538 @@
+local _0x4327, _0x690D = 10772794231, 117419079466193if not game:IsLoaded() then game.Loaded:Wait() end
+do
+local _0x1C14 = os.clock()
+while game.GameId == 0 and game.PlaceId == 0 and os.clock() - _0x1C14 < 60 do task.wait(0.2) end
+end
+if game.GameId ~= _0x4327 and game.PlaceId ~= _0x690D then
+warn("[TwoK] Raycity hub: not in Raycity RB, not loading")
+return
+endlocal _0x122D = tick()
+if _G.TwoKRaycityCleanup then
+pcall(_G.TwoKRaycityCleanup)
+task.wait(0.3)
+end
+_G.TwoKRaycityToken = _0x122D
+_G.TwoKRaycityRunning = true
+local function _0xE144()
+return _G.TwoKRaycityRunning and _G.TwoKRaycityToken == _0x122D
+end
+local _0x0C3C, _0x3F26 = {}, {}
+local function _0x5A0D(_0xCD2A)
+table.insert(_0x0C3C, _0xCD2A)
+return _0xCD2A
+end
+local function _0xCE54(_0x6211)
+table.insert(_0x3F26, _0x6211)
+end
+_G.TwoKRaycityCleanup = function()
+_G.TwoKRaycityRunning = false
+_G.TwoKRaycityToken = nil
+for _0x55A0, _0x6211 in ipairs(_0x3F26) do pcall(_0x6211) end
+table.clear(_0x3F26)
+for _0x55A0, _0xCD2A in ipairs(_0x0C3C) do pcall(function() _0xCD2A:Disconnect() end) end
+table.clear(_0x0C3C)
+endlocal _0x4F60 = game:GetService("Players")
+local _0xA0CF = game:GetService("ReplicatedStorage")
+local _0x3351 = game:GetService("HttpService")if not game:IsLoaded() then game.Loaded:Wait() end
+local _0xD643 = _0x4F60.LocalPlayer
+while not _0xD643 do
+task.wait(0.1)
+_0xD643 = _0x4F60.LocalPlayer
+end
+_0xD643:WaitForChild("PlayerGui", 60)
+local _0x3F6A = (getrenv and getrenv()) or _G
+local function _0xC9F0()
+return (_0x3F6A and _0x3F6A.shared) or shared
+end
+pcall(function()
+local _0xF44E = game:GetService("VirtualUser")
+_0x5A0D(_0xD643.Idled:Connect(function()
+_0xF44E:CaptureController()
+_0xF44E:ClickButton2(Vector2.new())
+end))
+end)local _0x8AD8 = {
+AutoMission = false,
+AutoCoin = false,
+PickMoney = true,
+PickSP = true,
+PickItem = true,
+NoTraffic = false,
+CruiseKmh = 130,
+NoProps = true,
+AutoGetItems = true,
+AutoStore = true,
+AutoSell = true,
+AutoSellAll = false,
+SendTarget ="",
+SendAmount = 10000,
+AutoSend = false,
+SendKeep = 0,
+AutoTakeMail = false,
+HudScale = 1,
+AutoBoost = true,
+BoostKeepSP = 20,
+FastCorners = true,
+No3D = false,
+CapFps = false,
+FpsCap = 30,
+SellKeep = 1,
+MissionPick ="อัตโนมัติ (วนทุกภารกิจ)",
+KeepUploading = true,
+AutoEnter = true,
+CoinRange = 600,
+}
+local _0xD95C = { AutoMission = true, AutoCoin = true }
+local _0x283D, _0x876C ="2KScript_Raycity","2KScript_Raycity/config.json"pcall(function()
+if not (isfile and readfile and isfile(_0x876C)) then return end
+local _0xBAED = _0x3351:JSONDecode(readfile(_0x876C))
+for _0x6AB9, _0x5957 in pairs(_0xBAED) do
+if _0x8AD8[_0x6AB9] ~= nil and not _0xD95C[_0x6AB9] and type(_0x5957) == type(_0x8AD8[_0x6AB9]) then _0x8AD8[_0x6AB9] = _0x5957 end
+end
+end)local _0x9EF4 = _0x283D .."/profiles"local _0x5E3A = _0x283D .."/autoload.txt"local function _0x822D(_0xB962)
+_0xB962 = tostring(_0xB962 or""):gsub("[/\\:%*%?\"<>|]",""):gsub("^%s+",""):gsub("%s+$","")
+return _0xB962 ~=""and _0xB962:sub(1, 40) or nil
+end
+local function _0xE68F()
+local _0x679B = {}
+pcall(function()
+if not (listfiles and isfolder and isfolder(_0x9EF4)) then return end
+for _0x55A0, _0x86FB in ipairs(listfiles(_0x9EF4)) do
+local _0xB962 = tostring(_0x86FB):match("([^/\\]+)%.json$")
+if _0xB962 then _0x679B[#_0x679B + 1] = _0xB962 end
+end
+end)
+table.sort(_0x679B, function(_0x9C57, _0x7A15) return _0x9C57:lower() < _0x7A15:lower() end)
+return _0x679B
+end
+local function _0xC0CE(_0xB962)
+_0xB962 = _0x822D(_0xB962)
+if not _0xB962 then return false,"ตั้งชื่อ config ก่อน"end
+if not writefile then return false,"executor นี้เขียนไฟล์ไม่ได้"end
+local _0x05F7, _0x7910 = pcall(function()
+if makefolder and isfolder then
+if not isfolder(_0x283D) then makefolder(_0x283D) end
+if not isfolder(_0x9EF4) then makefolder(_0x9EF4) end
+end
+local _0x679B = {}
+for _0x6AB9, _0x5957 in pairs(_0x8AD8) do _0x679B[_0x6AB9] = _0x5957 end
+writefile(_0x9EF4 .."/".. _0xB962 ..".json", _0x3351:JSONEncode(_0x679B))
+end)
+return _0x05F7, _0x05F7 and _0xB962 or tostring(_0x7910)
+end
+local function _0xABEC(_0xB962)
+_0xB962 = _0x822D(_0xB962)
+if not (_0xB962 and isfile and readfile) then return nil end
+local _0x86FB = _0x9EF4 .."/".. _0xB962 ..".json"if not isfile(_0x86FB) then return nil end
+local _0x05F7, _0xBAED = pcall(function() return _0x3351:JSONDecode(readfile(_0x86FB)) end)
+return _0x05F7 and type(_0xBAED) =="table"and _0xBAED or nil
+endlocal function _0xEEC8(_0xBAED)
+local _0x3494 = 0
+for _0x6AB9, _0x5957 in pairs(_0xBAED or {}) do
+if _0x8AD8[_0x6AB9] ~= nil and type(_0x5957) == type(_0x8AD8[_0x6AB9]) then
+_0x8AD8[_0x6AB9] = _0x5957
+_0x3494 += 1
+end
+end
+return _0x3494
+end
+local function _0xE79A(_0xB962)
+_0xB962 = _0x822D(_0xB962)
+if not (_0xB962 and delfile and isfile) then return false end
+local _0x86FB = _0x9EF4 .."/".. _0xB962 ..".json"if not isfile(_0x86FB) then return false end
+return (pcall(delfile, _0x86FB))
+end
+local function _0xE20F()
+local _0x05F7, _0x5957 = pcall(function()
+return isfile and readfile and isfile(_0x5E3A) and readfile(_0x5E3A) or nil
+end)
+return _0x05F7 and _0x822D(_0x5957) or nil
+end
+local function _0x826E(_0xB962)
+pcall(function()
+if not _0xB962 then
+if delfile and isfile and isfile(_0x5E3A) then delfile(_0x5E3A) end
+return
+end
+if makefolder and isfolder and not isfolder(_0x283D) then makefolder(_0x283D) end
+writefile(_0x5E3A, _0xB962)
+end)
+end
+do
+local _0xB962 = _0xE20F()
+local _0xBAED = _0xB962 and _0xABEC(_0xB962)
+if _0xBAED then _0xEEC8(_0xBAED) end
+end
+local _0xBDBA = false
+local function _0x6472()
+if _0xBDBA or not writefile then return end
+_0xBDBA = true
+task.delay(1, function()
+_0xBDBA = false
+pcall(function()
+if makefolder and isfolder and not isfolder(_0x283D) then makefolder(_0x283D) end
+local _0x679B = {}
+for _0x6AB9, _0x5957 in pairs(_0x8AD8) do
+if not _0xD95C[_0x6AB9] then _0x679B[_0x6AB9] = _0x5957 end
+end
+writefile(_0x876C, _0x3351:JSONEncode(_0x679B))
+end)
+end)
+end
+local _0xA85B = {
+Mission ="ปิดอยู่",
+Coin ="ปิดอยู่",
+MissionsDone = 0,
+MissionsFailed = 0,
+Coins = 0,
+Gauge = nil,
+Remaining = nil,
+}local function _0x80E0(_0xE24D)
+if getconnections then
+local _0x3494 = 0
+for _0x55A0, sig in ipairs({"Activated","MouseButton1Click"}) do
+local _0x05F7, _0x74A6 = pcall(getconnections, _0xE24D[sig])
+if _0x05F7 and type(_0x74A6) =="table"then
+for _0x55A0, _0xCD2A in ipairs(_0x74A6) do
+if _0xCD2A.Function then pcall(_0xCD2A.Function); _0x3494 += 1 end
+end
+end
+if _0x3494 > 0 then return true end
+end
+end
+if firesignal and pcall(firesignal, _0xE24D.Activated) then return true end
+return pcall(function()
+local _0x83D3 = game:GetService("VirtualInputManager")
+local _0x413B = game:GetService("GuiService"):GetGuiInset()
+local _0x533B = _0xE24D.AbsolutePosition + _0xE24D.AbsoluteSize / 2 + _0x413B
+_0x83D3:SendMouseButtonEvent(_0x533B.X, _0x533B.Y, 0, true, game, 0)
+task.wait(0.05)
+_0x83D3:SendMouseButtonEvent(_0x533B.X, _0x533B.Y, 0, false, game, 0)
+end)
+end
+local function _0xF0E5(_0x4312)
+if not (_0x4312 and _0x4312.Parent) then return false end
+local _0x533B = _0x4312
+while _0x533B and not _0x533B:IsA("LayerCollector") do
+if _0x533B:IsA("GuiObject") and not _0x533B.Visible then return false end
+_0x533B = _0x533B.Parent
+end
+return _0x533B == nil or (_0x533B:IsA("ScreenGui") and _0x533B.Enabled)
+endlocal function _0xD932()
+local _0xC144 = _0xD643:FindFirstChildOfClass("PlayerGui")
+local _0x8EAA = _0xC144 and _0xC144:FindFirstChild("RaycityEntryChannel")
+local _0x4F96 = _0xC144 and _0xC144:FindFirstChild("RaycityChannel")
+if not (_0x8EAA and _0x8EAA.Enabled) then return nil endlocal _0x7641 = _0x8EAA:FindFirstChild("Connect", true)
+if not (_0x7641 and _0x7641:IsA("GuiButton")) and _0x4F96 then
+_0x7641 = _0x4F96:FindFirstChild("Connect", true)
+end
+if not (_0x7641 and _0x7641:IsA("GuiButton")) then return nil end
+local _0x054A, _0x5B3F
+for _0x55A0, _0xE9F8 in ipairs(_0x8EAA:GetDescendants()) do
+if _0xE9F8:IsA("GuiButton") and _0xE9F8.Name:match("^Channel%d+$") then
+local _0x9CF9 = _0xE9F8:FindFirstChild("Count", true)
+local _0xCE1E = _0xE9F8:FindFirstChild("Ms", true)
+local _0x9C57, _0x7A15 = tostring(_0x9CF9 and _0x9CF9.Text or""):match("(%d+)%s*/%s*(%d+)")
+_0x9C57, _0x7A15 = tonumber(_0x9C57), tonumber(_0x7A15)
+local _0xC89A = tonumber(tostring(_0xCE1E and _0xCE1E.Text or""):match("(%d+)")) or 999
+if _0x9C57 and _0x7A15 and _0x9C57 < _0x7A15 then
+local _0x9C98 = _0x9C57 * 1000 + _0xC89A
+if not _0x5B3F or _0x9C98 < _0x5B3F then _0x054A, _0x5B3F = _0xE9F8, _0x9C98 end
+end
+end
+end
+return _0x7641, _0x054A
+end
+_0xA85B.Enter ="-"task.spawn(function()
+if not _0x8AD8.AutoEnter then return end
+local _0x1C14 = os.clock()
+local _0x7330 = 0
+while _0xE144() and os.clock() - _0x1C14 < 300 do
+if workspace:FindFirstChild("MyCar") and not _0xD643.PlayerGui:FindFirstChild("RaycityStarterGui") then
+_0xA85B.Enter ="เข้าเกมแล้ว"break
+end
+local _0xC144 = _0xD643.PlayerGuilocal _0xF5EF = _0xC144:FindFirstChild("RaycityCutsceneSkip") or game:GetService("CoreGui"):FindFirstChild("RaycityCutsceneSkip", true)
+local _0x0C30 = _0xF5EF and _0xF5EF:FindFirstChild("Skip", true)
+if _0x0C30 and _0x0C30:IsA("GuiButton") then
+_0xA85B.Enter ="ข้ามอนิเมชัน"_0x80E0(_0x0C30)
+pcall(function()
+local _0x83D3 = game:GetService("VirtualInputManager")
+_0x83D3:SendKeyEvent(true, Enum.KeyCode.Space, false, game)
+task.wait(0.05)
+_0x83D3:SendKeyEvent(false, Enum.KeyCode.Space, false, game)
+end)
+endif os.clock() - _0x7330 > 6 then
+local _0x7641, _0x8F00 = _0xD932()
+if _0x7641 and _0x8F00 then
+_0x7330 = os.clock()
+local _0xE667 = _0x8F00:FindFirstChild("Text", true)
+_0xA85B.Enter ="เข้า ".. tostring(_0xE667 and _0xE667.Text or _0x8F00.Name)
+_0x80E0(_0x8F00)
+task.wait(0.5)
+_0x80E0(_0x7641)
+end
+endlocal _0xF4E9 = _0xC144:FindFirstChild("RaycityStarterGui")
+local _0x5D18 = _0xF4E9 and _0xF4E9:FindFirstChild("btGameStart", true)
+if _0x5D18 and _0x5D18:IsA("GuiButton") and _0xF0E5(_0x5D18) then
+_0xA85B.Enter ="กดเริ่มเกมด้วยตัวละครนี้"_0x80E0(_0x5D18)
+task.wait(2)
+end
+task.wait(0.5)
+end
+end)local _0x58F5 = require(_0xA0CF:WaitForChild("RaycityUi"):WaitForChild("AutoDrive"))
+local _0x5538
+for _0x55A0, _0x6211 in ipairs({ _0x58F5.start, _0x58F5.isActive, _0x58F5.stop }) do
+for _0x55A0, _0x5957 in pairs(debug.getupvalues(_0x6211)) do
+if type(_0x5957) =="table"and rawget(_0x5957,"active") ~= nil then
+_0x5538 = _0x5957
+break
+end
+end
+if _0x5538 then break end
+endlocal _0x376C = _0x58F5.C and _0x58F5.C.maxSpeed
+local function _0xD5A5()
+if _0x58F5.C and _0x376C then
+_0x58F5.C.maxSpeed = math.max(_0x376C, _0x8AD8.CruiseKmh / 3.6)
+end
+end
+_0xD5A5()
+_0xCE54(function()
+if _0x58F5.C and _0x376C then _0x58F5.C.maxSpeed = _0x376C end
+end)
+local function _0x2522() return workspace:FindFirstChild("MyCar") end
+local function _0x3E49(_0xB962)
+local _0x681A = _0x2522()
+local _0x533B = _0x681A and _0x681A:FindFirstChild(_0xB962)
+return (_0x533B and _0x533B:IsA("BasePart")) and _0x533B or nil
+end
+local function _0xF159(_0x9C57, _0x7A15) return ((_0x9C57 - _0x7A15) * Vector3.new(1, 0, 1)).Magnitude end
+local function _0x4184()
+pcall(function()
+require(_0xA0CF.RaycityMultiplayer.RemoteCars).PAUSE_WHEN_UNFOCUSED = not _0x8AD8.KeepUploading
+end)
+end
+_0x4184()
+_0xCE54(function()
+pcall(function()
+require(_0xA0CF.RaycityMultiplayer.RemoteCars).PAUSE_WHEN_UNFOCUSED = true
+end)
+end)
+local function _0x6D9E() pcall(_0x58F5.stop,"2k") end
+local function _0x217D()
+local _0x05F7, _0x5957 = pcall(_0x58F5.isActive)
+return _0x05F7 and _0x5957
+end
+local function _0x9606(_0x23B3)
+if not _0x5538 then return false end
+_0x6D9E()
+_0x5538.pending = { _0x23B3 = _0x23B3 }
+local _0x05F7, _0x9A70 = pcall(_0x58F5.start)
+return _0x05F7 and _0x9A70 ~= false
+end
+local function _0xAAB7(_0xF6B0, _0x7A15, _0xDB96)
+local _0x681A = _0x2522()
+if not _0x681A then return end
+_0x681A:SetAttribute("AutoThrottle", _0xF6B0)
+_0x681A:SetAttribute("AutoBrake", _0x7A15)
+_0x681A:SetAttribute("AutoSteer", _0xDB96)
+end
+local function _0x1D0B()
+local _0x681A = _0x2522()
+if not _0x681A then return end
+for _0x55A0, _0x6AB9 in ipairs({"AutoThrottle","AutoBrake","AutoSteer"}) do _0x681A:SetAttribute(_0x6AB9, nil) end
+end
+_0xCE54(function()
+_0x6D9E()
+_0x1D0B()
+end)
+local function _0x90ED(_0x5957) return math.atan2(-_0x5957.X, -_0x5957.Z) end
+local function _0x1269(_0xD79D, _0xB932)
+local _0x5671 = (_0xB932 - _0xD79D.Position) * Vector3.new(1, 0, 1)
+local _0x7910 = _0x90ED(_0x5671) - _0x90ED(_0xD79D.CFrame.LookVector)
+_0x7910 = (_0x7910 + math.pi) % (2 * math.pi) - math.pi
+return math.deg(_0x7910), _0x5671.Magnitude
+endlocal function _0xA4CA(getPos, radius, _0xCF7A, stopCond, rolling)
+local _0xD79D = _0x3E49("Hull")
+if not _0xD79D then return false end
+local _0x1C14 = os.clock()
+local _0x03E9 = false
+local _0xA0EE, _0x317A = nil, 0
+while os.clock() - _0x1C14 < _0xCF7A and _0xE144() do
+if stopCond and stopCond() then _0x03E9 = true break end
+local _0xB932 = getPos()
+if not _0xB932 or not _0xD79D.Parent then break end
+local _0x88F1, _0x1A51 = _0x1269(_0xD79D, _0xB932)
+if _0x1A51 <= radius then _0x03E9 = true break end
+local _0xB09C = _0xD79D.AssemblyLinearVelocity.Magnitude
+if _0xB09C < 3 and os.clock() - _0x1C14 > 1 then
+_0xA0EE = _0xA0EE or os.clock()
+if os.clock() - _0xA0EE > 1.2 then
+_0x317A += 1
+if _0x317A > 2 then
+_0xAAB7(0, 1, 0)
+task.wait(0.3)
+_0x1D0B()
+return"stuck"end_0xAAB7(0, 1, -math.clamp(_0x88F1 / 25, -1, 1))
+task.wait(0.9)
+_0xA0EE = nil
+end
+else
+_0xA0EE = nil
+end
+local _0xAA50, _0x3F48 = 0.7, 0
+local _0xA147 = math.abs(_0x88F1)
+if _0xA147 > 70 then
+_0xAA50 = 0.3
+elseif _0xA147 > 30 then
+_0xAA50 = 0.5
+endif _0x1A51 < 30 and _0xA147 > 25 and _0xB09C > 25 then _0xAA50, _0x3F48 = 0, 0.4 end
+_0xAAB7(_0xAA50, _0x3F48, math.clamp(_0x88F1 / 25, -1, 1))
+task.wait(0.03)
+end
+if rolling and _0x03E9 then
+_0x1D0B()
+else
+_0xAAB7(0, 1, 0)
+task.wait(0.4)
+_0x1D0B()
+end
+return _0x03E9
+end
+local function _0x330E(_0xB932, radius, stopCond, keepGoing, rolling)
+local _0xD79D = _0x3E49("Hull")
+if not _0xD79D then return false end
+if _0xF159(_0xB932, _0xD79D.Position) > 60 then
+_0x9606(_0xB932)
+local _0x1C14 = os.clock()local _0xE90D, _0xE6D3 = _0xF159(_0xB932, _0xD79D.Position), os.clock()
+while os.clock() - _0x1C14 < 150 and _0xE144() and (not keepGoing or keepGoing()) do
+if stopCond and stopCond() then break end
+local _0x5671 = _0xF159(_0xB932, _0xD79D.Position)
+if _0x5671 < 35 then break end
+if _0x5671 < _0xE90D - 10 then
+_0xE90D, _0xE6D3 = _0x5671, os.clock()
+elseif os.clock() - _0xE6D3 > 6 then
+_0x6D9E()
+_0x1D0B()
+return"stuck"end
+if not _0x217D() thenif os.clock() - _0x1C14 > 2 and not _0x9606(_0xB932) then break end
+end
+task.wait(0.1)
+end
+_0x6D9E()
+end
+if not _0xE144() or (keepGoing and not keepGoing()) then return false end
+if stopCond and stopCond() then return true end
+local _0x1A51 = _0xF159(_0xB932, _0xD79D.Position)
+return _0xA4CA(function() return _0xB932 end, radius, 3 + _0x1A51 / 12, stopCond, rolling)
+endlocal _0x2C31 = { boostFn = nil, stockCaps = nil }
+local function _0xAE8A()
+if _0x2C31.boostFn ~= nil then return _0x2C31.boostFn or nil end
+_0x2C31.boostFn = false
+for _0x55A0, _0x06B0 in ipairs(getgc and getgc() or {}) do
+if type(_0x06B0) =="function"and islclosure and islclosure(_0x06B0) then
+local _0x05F7, _0x2348 = pcall(debug.info, _0x06B0,"s")
+if _0x05F7 and tostring(_0x2348):find("RCDriveClient") and debug.info(_0x06B0,"n") =="boost"then
+_0x2C31.boostFn = _0x06B0
+break
+end
+end
+end
+return _0x2C31.boostFn or nil
+end
+local function _0x07F5()
+local _0xF996 = _0x58F5.C
+if not _0xF996 then return end
+if not _0x2C31.stockCaps then _0x2C31.stockCaps = { _0xF996.cap1, _0xF996.cap2, _0xF996.cap3 } end
+local _0xDB96 = _0x2C31.stockCaps
+if _0x8AD8.FastCorners then
+_0xF996.cap1, _0xF996.cap2, _0xF996.cap3 = math.max(_0xDB96[1], 46), math.max(_0xDB96[2], 24), math.max(_0xDB96[3], 16)
+else
+_0xF996.cap1, _0xF996.cap2, _0xF996.cap3 = _0xDB96[1], _0xDB96[2], _0xDB96[3]
+end
+end
+_0x07F5()
+_0xCE54(function()
+local _0xF996, _0xDB96 = _0x58F5.C, _0x2C31.stockCaps
+if _0xF996 and _0xDB96 then _0xF996.cap1, _0xF996.cap2, _0xF996.cap3 = _0xDB96[1], _0xDB96[2], _0xDB96[3] end
+end)
+task.spawn(function()
+while _0xE144() do
+if _0x8AD8.AutoBoost and (_0x8AD8.AutoMission or _0x8AD8.AutoCoin) and _0x217D() then
+local _0x66BE = _0xC9F0().RCDrive
+local _0x9915 = _0x66BE and _0x66BE.phys
+local _0x681A = _0x2522()
+local _0xD79D = _0x3E49("Hull")
+if _0x9915 and _0xD79D and _0x681A and not _0x9915.boosting then
+local _0x1960 = _0xD79D.AssemblyLinearVelocity.Magnitude / 2 * 3.6
+local _0x22C5 = tostring(_0x681A:GetAttribute("AutoDriveDebug") or"")
+local _0x96AA = tonumber(_0x22C5:match("cap=([%d%.]+)")) or 0
+local _0x8264, _0xD547 = pcall(_0x66BE.sp)
+_0xD547 = _0x8264 and tonumber(_0xD547) or 0if _0x1960 > 60 and _0x96AA >= 40 and _0xD547 >= (tonumber(_0x8AD8.BoostKeepSP) or 20) then
+local _0x6211 = _0xAE8A()
+if _0x6211 then pcall(_0x6211) end
+end
+end
+end
+task.wait(0.25)
+end
+end)local _0xC58E = _0xA0CF:WaitForChild("RaycityPickups")
+local _0xD1E0 = _0xC58E:WaitForChild("Remotes")
+local _0xA6FF
+do
+local _0xC9F3 = require(_0xC58E:WaitForChild("PickupClient"))
+local function _0xC225(_0x6211, depth)
+if _0xA6FF or depth > 3 then return end
+for _0x55A0, _0x5957 in pairs(debug.getupvalues(_0x6211)) do
+if type(_0x5957) =="function"then
+_0xC225(_0x5957, depth + 1)
+elseif type(_0x5957) =="table"then
+local _0x6AB9, _0x73CE = next(_0x5957)
+if type(_0x6AB9) =="number"and type(_0x73CE) =="table"and _0x73CE.uid and _0x73CE.base then
+_0xA6FF = _0x5957
+return
+end
+end
+end
+end
+pcall(_0xC225, _0xC9F3.start, 0)
+endlocal _0x312A = { [0] ="เหรียญ", [1] ="SP", [2] ="กล่องไอเทม"}
+local function _0x8325(_0xF6B0)
+if _0xF6B0 == 0 then return _0x8AD8.PickMoney end
+if _0xF6B0 == 1 then return _0x8AD8.PickSP end
+if _0xF6B0 == 2 then return _0x8AD8.PickItem end
+return false
+end
+_0xA85B.Picked = { [0] = 0, [1] = 0, [2] = 0 }
+_0x5A0D(_0xD1E0.PickupResult.OnClientEvent:Connect(function(_0x9C57)
+if type(_0x9C57) =="table"and _0x9C57.ok and _0x9C57.uid then
+_0xA85B.Coins += 1
+if _0x9C57.type and _0xA85B.Picked[_0x9C57.type] then _0xA85B.Picked[_0x9C57.type] += 1 end
+end
+end))local function _0xF0E0(_0x73CE, keepGoing)
+local _0xD79D = _0x3E49("Hull")
+if not _0xD79D then return false end
+local _0xAE77 = _0xF159(_0x73CE.base, _0xD79D.Position)
+local _0x1C14 = os.clock()
+local _0xCF7A = 4 + _0xAE77 / 10
+local _0xA0EE, _0x317A = nil, 0
+local _0xAA20 = false
+while os.clock() - _0x1C14 < _0xCF7A and _0xE144() and (not keepGoing or keepGoing()) do
+if _0x73CE.eatT or _0x73CE.dead or not _0xD79D.Parent then break end
+local _0x88F1, _0x1A51 = _0x1269(_0xD79D, _0x73CE.base)
+local _0xE892 = _0xD79D.AssemblyLinearVelocity
+local _0xB09C = _0xE892.Magnitude
+local _0xA41E = _0xE892:Dot(_0xD79D.CFrame.LookVector)if _0x1A51 < 30 and math.abs(_0x88F1) > 115 then
+_0xAA20 = true
+elseif math.abs(_0x88F1) < 65 or _0x1A51 > 40 then
+_0xAA20 = false
+end
+if _0xB09C < 2 and os.clock() - _0x1C14 > 1.2 then
+_0xA0EE = _0xA0EE or os.clock()
+if os.clock() - _0xA0EE > 1.5 then
+_0x317A += 1
+if _0x317A > 2 then
+_0xAAB7(0, 1, 0)
+task.wait(0.3)
+_0x1D0B()
+return"stuck"end_0xAAB7(0, 1, -math.clamp(_0x88F1 / 25, -1, 1))
+task.wait(0.9)
+_0xA0EE = nil
+end
+else
+_0xA0EE = nil
+end
+if _0xAA20 then
+local _0x6549 = (_0x88F1 + 360) % 360 - 180if _0xA41E > 6 then
+_0xAAB7(0, 1, 0)else
+_0xAAB7(0, 0.8, math.clamp(-_0x6549 / 20, -1, 1))
+end
+elselocal _0x3BE3 = math.clamp(_0x1A51 * 1.1, 14, 70)
+if math.abs(_0x88F1) > 40 then _0x3BE3 = math.min(_0x3BE3, 22) end
+local _0xAA50, _0x3F48 = 0, 0
+if _0xA41E < _0x3BE3 - 3 then
+_0xAA50 = math.abs(_0x88F1) > 70 and 0.35 or 0.75
+elseif _0xA41E > _0x3BE3 + 6 then
+_0x3F48 = math.clamp((_0xA41E - _0x3BE3) / 25, 0.2, 0.8)
+else
+_0xAA50 = 0.25
+end
+_0xAAB7(_0xAA50, _0x3F48, math.clamp(_0x88F1 / 20, -1, 1))
+end
+task.wait(0.03)
+end
+_0x1D0B()
+return (_0x73CE.eatT ~= nil) or (_0x73CE.dead == true)
+end
+local _0x0756 = {}
+local function _0x302B(keepGoing)
+local _0xD79D = _0x3E49("Hull")
+if not (_0xA6FF and _0xD79D) then
+_0xA85B.Coin ="รอรถ..."task.wait(1)
+return
+endlocal _0x054A, _0x7B74, _0x8550
+for uid, _0x73CE in pairs(_0xA6FF) do
+if _0x8325(_0x73CE.type) and not _0x73CE.eatT and not _0x73CE.dead and (_0x0756[uid] or 0) < os.clock() then
+local _0x88F1, _0x5671 = _0x1269(_0xD79D, _0x73CE.base)
+if _0x5671 <= _0x8AD8.CoinRange then
+local _0xA604 = _0x5671 + math.abs(_0x88F1) * 1.2
+if _0x73CE.type ~= 0 then _0xA604 -= 80 endif not _0x7B74 or _0xA604 < _0x7B74 then _0x054A, _0x7B74, _0x8550 = _0x73CE, _0xA604, _0x5671 end
+end
+end
+end
+if not _0x054A then
+_0xA85B.Coin ="ไม่มีของให้เก็บใกล้ๆ รอเกิดใหม่"_0x1D0B()
+task.wait(2)
+return
+end
+_0x0756[_0x054A.uid] = os.clock() + 20
+_0xA85B.Coin = string.format("ไปเก็บ%s (ห่าง %d)", _0x312A[_0x054A.type] or"ของ", _0x8550)
+local function _0x293C() return _0x054A.eatT ~= nil or _0x054A.dead == true end
+local _0x9A70
+local _0x0E0A = _0x3E49("Hull")
+if _0x0E0A and _0xF159(_0x054A.base, _0x0E0A.Position) > 70 then_0x9606(_0x054A.base)
+local _0x1C14 = os.clock()
+local _0xE90D, _0xE6D3 = _0xF159(_0x054A.base, _0x0E0A.Position), os.clock()
+while os.clock() - _0x1C14 < 120 and _0xE144() and keepGoing() and not _0x293C() do
+local _0x5671 = _0xF159(_0x054A.base, _0x0E0A.Position)
+if _0x5671 < 45 then break end
+if _0x5671 < _0xE90D - 10 then
+_0xE90D, _0xE6D3 = _0x5671, os.clock()
+elseif os.clock() - _0xE6D3 > 6 then
+_0x9A70 ="stuck"break
+end
+if not _0x217D() and os.clock() - _0x1C14 > 2 and not _0x9606(_0x054A.base) then break end
+task.wait(0.1)
+end
+_0x6D9E()
+end
+if _0x9A70 ~="stuck"and not _0x293C() and _0xE144() and keepGoing() then
+_0x9A70 = _0xF0E0(_0x054A, keepGoing)
+end
+_0xA85B.CoinLast = tostring(_0x9A70) .. (_0x293C() and"+"or"")
+if _0x9A70 == true or _0x293C() then
+_0xA85B.CoinMiss, _0xA85B.CoinStuck = 0, 0
+local _0x06BD = _0x3E49("Hull")
+if _0x06BD then _0xA85B.CoinGoodPos = _0x06BD.Position end
+else
+_0xA85B.CoinMiss = (_0xA85B.CoinMiss or 0) + 1
+end
+if _0x9A70 =="stuck"then
+_0xA85B.CoinStuck = (_0xA85B.CoinStuck or 0) + 1
+if _0xA85B.CoinStuck >= 2 then_0xA85B.Coin ="รถติด กำลังถอยกลับถนน"for i = 1, 2 do
+local _0x30D4 = (i % 2 == 0) and -1 or 1
+_0xAAB7(0, 1, _0x30D4)
+task.wait(1.3)
+_0xAAB7(0.8, 0, -_0x30D4)
+task.wait(1.2)
+end
+_0x1D0B()
+if _0xA85B.CoinGoodPos then
+_0xA4CA(function() return _0xA85B.CoinGoodPos end, 10, 20, nil, false)
+end
+_0xA85B.CoinStuck = 0
+end
+end
+if _0x9A70 =="stuck"thenfor uid, _0x73CE in pairs(_0xA6FF) do
+if _0xF159(_0x73CE.base, _0x054A.base) < 150 then _0x0756[uid] = os.clock() + 300 end
+end
+_0xA85B.Coin ="ทางตัน ข้ามจุดนี้ไป"end
+endlocal _0x76ED = { _0x6211 = nil, maxIdx = nil, maxOrig = nil, hits = {} }
+local function _0x07AB()
+if _0x76ED.fn then return _0x76ED.fn end
+if not getconnections then return nil end
+for _0x55A0, _0xCD2A in ipairs(getconnections(game:GetService("RunService").RenderStepped)) do
+local _0x06B0 = _0xCD2A.Function
+local _0x05F7, _0xB896 = pcall(function() return getfenv(_0x06B0).script end)
+if _0x05F7 and typeof(_0xB896) =="Instance"and _0xB896.Name =="RBRCTrafficClient"then
+_0x76ED.fn = _0x06B0
+local _0x7FA4 = _0xA0CF.RBRCTraffic:GetAttribute("MaxRenderCars")
+local _0xE393 = (type(_0x7FA4) =="number"and _0x7FA4 > 0) and _0x7FA4 or 90
+for idx, _0x5957 in pairs(debug.getupvalues(_0x06B0)) do
+if type(_0x5957) =="function"then
+local _0x3494 = debug.info(_0x5957,"n")
+if _0x3494 =="nativeHit"or _0x3494 =="resolveHit"then _0x76ED.hits[idx] = _0x5957 end
+elseif type(_0x5957) =="number"and _0x5957 == _0xE393 and not _0x76ED.maxIdx then
+_0x76ED.maxIdx, _0x76ED.maxOrig = idx, _0x5957
+end
+end
+return _0x06B0
+end
+end
+return nil
+end
+local function _0xEAC1() return nil end
+local function _0x3CD9()
+local _0x06B0 = _0x07AB()
+if not _0x06B0 then return false end
+if _0x76ED.maxIdx then
+pcall(debug.setupvalue, _0x06B0, _0x76ED.maxIdx, _0x8AD8.NoTraffic and 0 or _0x76ED.maxOrig)
+end
+for idx, orig in pairs(_0x76ED.hits) do
+pcall(debug.setupvalue, _0x06B0, idx, _0x8AD8.NoTraffic and _0xEAC1 or orig)
+end
+return true
+end
+if _0x8AD8.NoTraffic then task.defer(_0x3CD9) endlocal _0x25E3 = { orig = nil, hidden = setmetatable({}, { __mode ="k"}) }
+local _0x0A28 = (function()
+local _0x05F7, _0x73EA = pcall(require, _0xA0CF:WaitForChild("KrCollisionBuilder", 10))
+return (_0x05F7 and type(_0x73EA) =="table"and _0x73EA.setPropHidden) and _0x73EA or nil
+end)()
+local function _0xDFC1(_0xEDFD)
+local _0x7056 = workspace:FindFirstChild("KrCity")
+if not _0x7056 then return end
+for _0x55A0, tile in ipairs(_0x7056:GetChildren()) do
+local _0x4536 = tile:FindFirstChild("Trees")
+if _0x4536 and (_0xEDFD and not _0x25E3.hidden[_0x4536] or not _0xEDFD and _0x25E3.hidden[_0x4536]) then
+_0x25E3.hidden[_0x4536] = _0xEDFD or nil
+for _0x55A0, _0x5671 in ipairs(_0x4536:GetDescendants()) do
+if _0x5671:IsA("BasePart") then _0x5671.LocalTransparencyModifier = _0xEDFD and 1 or 0 end
+end
+end
+end
+end
+local function _0x7EA2()
+if not _0x0A28 then return false end
+if not _0x25E3.orig then
+_0x25E3.orig = {
+at = _0x0A28.PROP_ALLOW.trees, ap = _0x0A28.PROP_ALLOW.poles,
+ht = _0x0A28.PROP_HIDE.trees, hp = _0x0A28.PROP_HIDE.poles,
+}
+end
+if _0x8AD8.NoProps then
+_0x0A28.PROP_ALLOW.trees, _0x0A28.PROP_ALLOW.poles = true, true
+pcall(_0x0A28.setPropHidden, true, true)
+else
+local _0xC41E = _0x25E3.orig
+_0x0A28.PROP_ALLOW.trees, _0x0A28.PROP_ALLOW.poles = _0xC41E.at, _0xC41E.ap
+pcall(_0x0A28.setPropHidden, _0xC41E.ht, _0xC41E.hp)
+end
+pcall(_0xDFC1, _0x8AD8.NoProps)
+return true
+end
+task.spawn(function()while _0xE144() do
+if _0x8AD8.NoProps and _0x0A28 and not (_0x0A28.PROP_PASS.trees and _0x0A28.PROP_PASS.poles) then _0x7EA2() end
+if _0x8AD8.NoProps then pcall(_0xDFC1, true) end
+task.wait(3)
+end
+end)
+_0xCE54(function()
+if _0x8AD8.NoProps and _0x25E3.orig then
+_0x8AD8.NoProps = false
+_0x7EA2()
+_0x8AD8.NoProps = true
+end
+end)
+_0xCE54(function()
+if _0x8AD8.NoTraffic then
+_0x8AD8.NoTraffic = false
+_0x3CD9()
+_0x8AD8.NoTraffic = true
+end
+end)local _0x997F = _0xA0CF:WaitForChild("RBRCQuest"):WaitForChild("Remotes")
+local _0x7E79 = _0x997F:WaitForChild("QuestRequest")
+local _0xB314 = _0x997F:WaitForChild("QuestPush")
+local _0x5948, _0xE172 = {}, nil
+_0x5A0D(_0xB314.OnClientEvent:Connect(function(_0x9C57)
+if type(_0x9C57) ~="table"then return end
+if _0x9C57.op =="update"then
+_0x5948 = _0x9C57
+_0xA85B.UpdateAt = os.clock()
+_0xA85B.Gauge = _0x9C57.gauge
+_0xA85B.Remaining = _0x9C57.remainingMs
+elseif _0x9C57.op =="result"then
+_0xE172 = _0x9C57
+end
+end))
+local function _0x1EB7(payload)
+local _0x05F7, _0x9A70 = pcall(_0x7E79.InvokeServer, _0x7E79, payload)
+if _0x05F7 and type(_0x9A70) =="table"then return _0x9A70 end
+return nil
+endlocal _0xB0C5 = {}
+local function _0x6204()
+local _0x149D = workspace:FindFirstChild("RBRCNpcs")
+if not _0x149D then return end
+for _0x55A0, _0x73EA in ipairs(_0x149D:GetChildren()) do
+local _0xAC15 = _0x73EA:GetAttribute("RBRCNpcId")if type(_0xAC15) =="string"and (_0xAC15:match("^mission:") or _0xAC15:match("^mission24:") or _0xAC15:match("^thtalk:")) then
+local _0x05F7, _0x0DBF = pcall(_0x73EA.GetPivot, _0x73EA)
+if _0x05F7 then
+_0xB0C5[_0xAC15] = _0xB0C5[_0xAC15] or {}
+_0xB0C5[_0xAC15].pos = _0x0DBF.Position
+_0xB0C5[_0xAC15].mark = _0x73EA:GetAttribute("MarkType")
+end
+end
+end
+endlocal function _0x97AF()
+_0x6204()
+local _0xDDDD = _0x3E49("Root")
+if not _0xDDDD then return nil end
+local _0xCECD, _0x054A, _0x7B74
+local _0xFA50 = os.clock()
+for _0xAC15, _0x4312 in pairs(_0xB0C5) do
+if (_0x4312.blockedUntil or 0) < _0xFA50 then
+local _0x5671 = _0xF159(_0x4312.pos, _0xDDDD.Position)
+local _0x9685 = _0x4312.money or 500
+local _0xA604 = _0x9685 / (_0x5671 + 600)if (_0x4312.restUntil or 0) > _0xFA50 then _0xA604 -= 10 end
+if not _0x7B74 or _0xA604 > _0x7B74 then _0xCECD, _0x054A, _0x7B74 = _0xAC15, _0x4312, _0xA604 end
+end
+end
+return _0xCECD, _0x054A
+endlocal function _0x9173()
+local _0x6AB7 = _0xD643.PlayerGui:FindFirstChild("RaycityQuestUi")
+local _0x8E33 = _0x6AB7 and _0x6AB7:FindFirstChild("MissionOffer")
+local _0xFC5F = _0x8E33 and _0x8E33:FindFirstChild("No")
+if _0xFC5F and _0xFC5F:IsA("GuiButton") and getconnections then
+for _0x55A0, _0xCD2A in ipairs(getconnections(_0xFC5F.Activated)) do pcall(_0xCD2A.Function) end
+end
+end
+local function _0x5A50()
+local _0xF06F = _0xC9F0().RaycityNavigation
+if not (_0xF06F and _0xF06F.getGuide) then return nil end
+local _0x05F7, _0x4312 = pcall(_0xF06F.getGuide)
+if _0x05F7 and type(_0x4312) =="table"and _0x4312.source =="mission"and _0x4312.points and #_0x4312.points > 0 then
+return _0x4312.points[#_0x4312.points], _0x4312.version
+end
+return nil
+end
+local _0x4DCFlocal _0xA656 = (function()
+local _0x05F7, _0x73EA = pcall(function() return require(_0xA0CF.RCDrive.Physics) end)
+return _0x05F7 and type(_0x73EA) =="table"and _0x73EA or nil
+end)()local _0xB4BF = _0x997F:WaitForChild("RoadFightRequest")
+local _0x3FAD = (function()
+local _0x05F7, _0x73EA = pcall(require, _0xA0CF.RBRCQuest:WaitForChild("RoadFightData"))
+return _0x05F7 and _0x73EA or nil
+end)()
+local _0x07B5 = {}
+local function _0x3689()
+return tonumber(_0xD643:GetAttribute("RaycityPlayerLv")) or 1
+end
+local function _0x7474()
+local _0x812E = _0xC9F0().RaycityTownServices
+if _0x812E and _0x812E.holdRef then pcall(_0x812E.holdRef,"rbrcRfTalk", false) end
+end
+local function _0x9532(payload)
+local _0x05F7, _0x9A70 = pcall(_0xB4BF.InvokeServer, _0xB4BF, payload)
+if _0x05F7 and type(_0x9A70) =="table"then return _0x9A70 end
+return nil
+end
+local function _0xC6A2(npcId)
+if not (_0x3FAD and type(_0x3FAD.fights) =="table") then return nil end
+for _0x55A0, _0x06B0 in pairs(_0x3FAD.fights) do
+if _0x06B0.npcId == npcId and type(_0x06B0.pos) =="table"then
+local _0x4312 = _0x07B5[npcId] or {}
+_0x07B5[npcId] = _0x4312
+_0x4312.npcId, _0x4312.level = _0x06B0.npcId, _0x06B0.level or 0
+_0x4312.name = _0x06B0.nativeName or _0x06B0.nameFallback or tostring(_0x06B0.npcId)
+_0x4312.pos = Vector3.new(_0x06B0.pos[1], _0x06B0.pos[2], _0x06B0.pos[3])
+return _0x4312
+end
+end
+return nil
+endlocal _0xC630
+local function _0x4C7F(_0xAC15)
+if not _0xC630 then
+_0xC630 = {}
+pcall(function()
+local _0x9C17 = require(_0xA0CF.RBRCQuest:WaitForChild("QuestData"))
+for _0x55A0, _0x4040 in pairs(_0x9C17.npcRows) do
+if type(_0x4040) =="table"and type(_0x4040[1]) =="string"and tonumber(_0x4040[7]) then
+_0xC630[_0x4040[1]] = Vector3.new(_0x4040[7], _0x4040[8], _0x4040[9])
+end
+end
+end)
+end
+return _0xC630[_0xAC15]
+endlocal _0x94C4 = {
+{ _0xE667 ="อัตโนมัติ (วนทุกภารกิจ)"},
+{ _0xE667 ="Road Fight: Derix (Lv4)", rf = 1676 },
+{ _0xE667 ="Road Fight: Do young (Lv7)", rf = 1681 },
+{ _0xE667 ="S70 คนข้างถนน (Lv4)", npc ="mission24:70"},
+{ _0xE667 ="S71 ชายหนุ่มผู้โดดเดี่ยว (Lv4)", npc ="mission24:71"},
+{ _0xE667 ="S76 สาวผู้ประสบภัย (Lv12)", npc ="mission24:76"},
+{ _0xE667 ="Road Fight: Kaori (Lv11)", rf = 1689 },
+{ _0xE667 ="Road Fight: Yoko (Lv13)", rf = 1693 },
+}
+local _0xA10D = {}
+for _0x55A0, _0xCD2A in ipairs(_0x94C4) do _0xA10D[_0xCD2A.label] = _0xCD2A end
+local function _0x40C8(missions)
+local _0x054A, _0x5B3F
+for _0x55A0, _0x73EA in ipairs(missions or {}) do
+if _0x73EA.canAccept and _0x73EA.playable ~= false and _0x73EA.questId thenlocal _0x9C98 = (_0x73EA.cleared and 0 or 100) + ((_0x73EA.reasons and #_0x73EA.reasons > 0) and 0 or 10) + (_0x73EA.slot or 0)
+if not _0x5B3F or _0x9C98 > _0x5B3F then _0x054A, _0x5B3F = _0x73EA, _0x9C98 end
+end
+end
+return _0x054A
+end
+local function _0x4C46(_0x4312, keepGoing)
+_0xA85B.Mission ="ขับไปหา Road Fight ".. _0x4312.namelocal _0x0BB7 = _0x330E(_0x4312.pos, 8, nil, keepGoing)
+if _0x0BB7 ~= true then
+if _0x0BB7 =="stuck"then _0x4312.blockedUntil = os.clock() + 60 end
+return
+end
+if not keepGoing() then return end
+_0xAAB7(0, 1, 0)
+task.wait(0.8)
+local _0xDDDD = _0x3E49("Root")
+if not _0xDDDD then return end
+local _0x357A = _0x9532({ op ="talk", npcId = _0x4312.npcId, carPos = _0xDDDD.Position })
+if not (_0x357A and _0x357A.ok) then
+_0x7474()
+_0x1D0B()
+_0xA85B.Mission ="คุย Road Fight ไม่สำเร็จ: ".. tostring(_0x357A and (_0x357A.reason or _0x357A.reasonKey) or"?")
+_0x4312.blockedUntil = os.clock() + 120
+return
+end
+local _0x73EA = _0x40C8(_0x357A.missions)
+if not _0x73EA then
+_0x7474()
+_0x1D0B()
+_0xA85B.Mission = _0x4312.name ..": ไม่มีรอบที่รับได้"_0x4312.blockedUntil = os.clock() + 1800
+return
+end
+_0xE172, _0x5948 = nil, {}
+local _0xCD6C = _0x9532({ op ="accept", questId = _0x73EA.questId, carPos = _0xDDDD.Position })
+_0x1D0B()
+if not (_0xCD6C and _0xCD6C.ok) then
+_0x7474()
+_0xA85B.Mission ="รับ Road Fight ไม่ได้: ".. tostring(_0xCD6C and (_0xCD6C.reason or _0xCD6C.reasonKey) or"?")
+_0x4312.blockedUntil = os.clock() + 300
+return
+endtask.wait(1.5)
+_0x7474()
+local _0xFCAA = _0x8AD8.CruiseKmh
+if _0x58F5.C and _0x376C then
+_0x58F5.C.maxSpeed = math.max(_0x376C, math.max(_0xFCAA, 160) / 3.6)
+end
+local _0x1202 = _0xA85B.MissionsDone
+_0x4DCF(tostring(_0x73EA.title or _0x73EA.questId), keepGoing)
+_0xD5A5()
+if _0xA85B.MissionsDone == _0x1202 then _0x4312.blockedUntil = os.clock() + 120 end
+end
+local function _0x6EB8(keepGoing)local _0x3ACE = workspace:FindFirstChild("RBRCMissionCars")
+local _0x605C = _0x3ACE and _0x3ACE:FindFirstChild("MovCar") and os.clock() - (_0xA85B.UpdateAt or 0) < 3
+if _0x5A50() or _0x605C then
+_0xE172 = nil
+_0x4DCF("ภารกิจที่ค้างอยู่", keepGoing)
+return
+end_0x8AD8.MissionPick = _0x94C4[1].labellocal _0x07F0 = _0xA10D[_0x8AD8.MissionPick]
+if _0x07F0 and _0x07F0.rf then
+local _0x4312 = _0xC6A2(_0x07F0.rf)if _0x4312 and (_0x4312.blockedUntil or 0) > os.clock() + 10 then _0x4312.blockedUntil = os.clock() + 10 end
+if not _0x4312 then
+_0xA85B.Mission ="หา Road Fight นี้ไม่เจอ"task.wait(3)
+elseif (_0x4312.blockedUntil or 0) > os.clock() then
+_0xA85B.Mission = string.format("%s: รอ NPC พร้อม ลองใหม่ใน %d วิ", _0x4312.name, _0x4312.blockedUntil - os.clock())
+task.wait(1)
+else
+_0x4C46(_0x4312, keepGoing)
+end
+return
+end
+local _0xAC15, _0xF01B
+if _0x07F0 and _0x07F0.npc then
+_0xAC15 = _0x07F0.npc
+_0x6204()
+_0xF01B = _0xB0C5[_0xAC15] or {}
+_0xB0C5[_0xAC15] = _0xF01B
+_0xF01B.pos = _0xF01B.pos or _0x4C7F(_0xAC15)
+_0xF01B.restUntil = nil
+if (_0xF01B.blockedUntil or 0) > os.clock() + 10 then _0xF01B.blockedUntil = os.clock() + 10 end
+if not _0xF01B.pos then
+_0xA85B.Mission ="หาตำแหน่ง NPC ".. _0xAC15 .." ไม่เจอ"task.wait(3)
+return
+end
+if (_0xF01B.blockedUntil or 0) > os.clock() then
+_0xA85B.Mission = string.format("%s: รอ NPC พร้อม ลองใหม่ใน %d วิ", _0x07F0.label, _0xF01B.blockedUntil - os.clock())
+task.wait(1)
+return
+end
+else_0xAC15, _0xF01B = _0x97AF()
+end
+if not _0xAC15 then
+_0xA85B.Mission ="ไม่เจอ NPC ภารกิจ (ลองขับไปแถวที่มี NPC)"task.wait(3)
+return
+end
+_0xA85B.Mission ="ขับไปหา NPC ".. _0xAC15
+local _0x0BB7 = _0x330E(_0xF01B.pos, 5, nil, keepGoing)
+if _0x0BB7 ~= true then
+if _0x0BB7 =="stuck"then _0xF01B.blockedUntil = os.clock() + 30 end
+return
+end
+if not keepGoing() then return end
+task.wait(0.4)
+local _0xDDDD = _0x3E49("Root")
+if not _0xDDDD then return end
+local _0x357A = _0x1EB7({ op ="talk", npcId = _0xAC15, carPos = _0xDDDD.Position })
+if not (_0x357A and _0x357A.ok and _0x357A.offers) then
+_0xA85B.Mission ="คุยกับ NPC ไม่สำเร็จ: ".. tostring(_0x357A and (_0x357A.reason or _0x357A.why) or"?")
+_0xF01B.blockedUntil = os.clock() + 60
+_0x9173()
+task.wait(1)
+return
+end
+local _0x8E33
+for _0x55A0, _0xC41E in ipairs(_0x357A.offers) do
+if _0xC41E.playable ~= false and _0xC41E.questId then _0x8E33 = _0xC41E break end
+end
+if not _0x8E33 then
+_0xA85B.Mission ="NPC นี้ไม่มีภารกิจที่รับได้"_0xF01B.blockedUntil = os.clock() + 600
+_0x9173()
+_0x1EB7({ op ="talkEnd", npcId = _0xAC15 })
+return
+end
+local _0xBA44 = _0x8E33.rewardPreview and _0x8E33.rewardPreview[1]
+if _0xBA44 and _0xBA44.money then _0xF01B.money = _0xBA44.money end
+_0xE172, _0x5948 = nil, {}
+local _0xCD6C = _0x1EB7({ op ="accept", questId = _0x8E33.questId, carPos = _0xDDDD.Position, carLook = _0xDDDD.CFrame.LookVector })
+if not (_0xCD6C and _0xCD6C.ok) then
+_0xA85B.Mission ="รับภารกิจไม่ได้: ".. tostring(_0xCD6C and (_0xCD6C.reason or _0xCD6C.reasonKey) or"?")
+_0xF01B.blockedUntil = os.clock() + 120
+_0x9173()
+return
+end_0xF01B.restUntil = os.clock() + 240
+if _0xCD6C.needsBoarding then
+_0xA85B.Mission ="รอผู้โดยสารขึ้นรถ"task.wait(2.5)
+_0x1EB7({ op ="boarded", questId = _0x8E33.questId })
+end
+_0x4DCF(tostring(_0x8E33.title or _0x8E33.questId), keepGoing)
+end_0x4DCF = function(_0xB216, keepGoing)
+local _0xB7AD, _0xAB92, _0x82DE
+local _0x1C14 = os.clock()
+while _0xE144() and keepGoing() and not _0xE172 and os.clock() - _0x1C14 < 600 do
+local _0x23B3, _0xA00D = _0x5A50()
+local _0xD79D = _0x3E49("Hull")
+local _0x6BC5 = _0x3E49("Root")
+if _0x6BC5 and _0x6BC5.Anchored then _0x7474() endlocal _0x3ACE = workspace:FindFirstChild("RBRCMissionCars")
+local _0x74C9 = (not _0x23B3) and _0x3ACE and _0x3ACE:FindFirstChild("MovCar")
+if _0x74C9 and os.clock() - (_0xA85B.UpdateAt or 0) > 8 then
+breakend
+if _0x74C9 and _0xD79D then
+local _0xFAEC, _0x1951 = pcall(function() return _0x74C9:GetPivot().Position end)
+if _0xFAEC then
+local _0x5671 = _0xF159(_0x1951, _0xD79D.Position)
+if _0x58F5.C and _0x376C then
+_0x58F5.C.maxSpeed = math.max(_0x376C, 200 / 3.6)
+end
+if _0x5671 > 70 then
+if not _0xAB92 or _0xF159(_0x1951, _0xAB92) > 40 or not _0x217D() then
+_0xAB92 = _0x1951
+_0x9606(_0x1951)
+end
+else_0x6D9E()
+_0xAB92 = nil
+local _0x73FD, _0x7861 = _0x1951, os.clock()
+local _0x0307 = os.clock()
+while os.clock() - _0x0307 < 4 and _0x74C9.Parent and not _0xE172 and _0xE144() and keepGoing() do
+local _0xBAB5, _0xC129 = pcall(function() return _0x74C9:GetPivot().Position end)
+if not _0xBAB5 then break end
+local _0xFA50 = os.clock()
+local _0xE892 = (_0xFA50 > _0x7861) and (_0xC129 - _0x73FD) / (_0xFA50 - _0x7861) or Vector3.zero
+_0x73FD, _0x7861 = _0xC129, _0xFA50
+local _0x88F1, _0x9E97 = _0x1269(_0xD79D, _0xC129 + _0xE892 * math.clamp(_0xF159(_0xC129, _0xD79D.Position) / 60, 0, 0.8))
+if _0x9E97 > 120 then break end
+_0xAAB7(1, 0, math.clamp(_0x88F1 / 18, -1, 1))local _0x9B91 = (_0xC129 - _0xD79D.Position) * Vector3.new(1, 0, 1)
+local _0x70BC = _0x9B91:Dot(_0xD79D.CFrame.RightVector)
+if _0x9B91.Magnitude < 24 and math.abs(_0x70BC) > 2 and _0xFA50 - (_0x82DE or 0) > 1.6 then
+_0x82DE = _0xFA50
+local _0x9915 = _0xC9F0().RCDrive and _0xC9F0().RCDrive.phys
+if _0x9915 and _0xA656 and _0xA656.sideSlide then
+pcall(_0xA656.sideSlide, _0x9915, _0x70BC < 0)
+end
+end
+task.wait(0.03)
+end
+_0x1D0B()
+end
+_0xA85B.Mission = string.format("%s • ไล่จับ ห่าง %d • ความพอใจ %s • เหลือ %s วิ", _0xB216, _0x5671,
+_0xA85B.Gauge and string.format("%.0f", _0xA85B.Gauge) or"-",
+_0xA85B.Remaining and string.format("%.0f", _0xA85B.Remaining / 1000) or"-")
+end
+task.wait(0.3)
+continue
+end
+if _0x23B3 and _0xD79D and _0xF159(_0x23B3, _0xD79D.Position) < 45 then_0x6D9E()
+local _0xA143 = _0xA00D
+local function _0x0B89()
+local _0x55A0, _0x5957 = _0x5A50()
+return _0xE172 ~= nil or _0x5957 ~= _0xA143
+endlocal _0xA35C = os.clock()
+while os.clock() - _0xA35C < 10 and _0xE144() and keepGoing() and not _0x0B89() do
+local _0x533B = _0x5A50()
+if not _0x533B then break end
+local _0x88F1, _0x1A51 = _0x1269(_0xD79D, _0x533B)
+if _0x1A51 <= 3 then break end
+local _0xA41E = _0xD79D.AssemblyLinearVelocity:Dot(_0xD79D.CFrame.LookVector)
+local _0x3BE3 = math.clamp(_0x1A51 * 0.9, 8, 55)
+if math.abs(_0x88F1) > 40 then _0x3BE3 = math.min(_0x3BE3, 18) end
+local _0xAA50, _0x3F48 = 0, 0
+if _0xA41E < _0x3BE3 - 3 then
+_0xAA50 = math.abs(_0x88F1) > 70 and 0.35 or 0.7
+elseif _0xA41E > _0x3BE3 + 5 then
+_0x3F48 = math.clamp((_0xA41E - _0x3BE3) / 25, 0.2, 0.8)
+else
+_0xAA50 = 0.2
+end
+_0xAAB7(_0xAA50, _0x3F48, math.clamp(_0x88F1 / 20, -1, 1))
+task.wait(0.03)
+end
+if not _0x0B89() thenlocal _0x9D15 = os.clock()
+while os.clock() - _0x9D15 < 4 and _0xE144() and keepGoing() and not _0x0B89() do
+_0xAAB7(0, 1, 0)if _0xD79D.AssemblyLinearVelocity.Magnitude < 1 then _0xAAB7(0, 0, 0) end
+task.wait(0.05)
+end
+end
+_0x1D0B()
+_0xB7AD = nil
+elseif _0x23B3 and (_0xA00D ~= _0xB7AD or not _0x217D()) then
+_0xB7AD = _0xA00D
+_0x9606(_0x23B3)
+end
+_0xA85B.Mission = string.format("%s • ความพอใจ %s • เหลือ %s วิ", _0xB216,
+_0xA85B.Gauge and string.format("%.0f", _0xA85B.Gauge) or"-",
+_0xA85B.Remaining and string.format("%.0f", _0xA85B.Remaining / 1000) or"-")
+task.wait(0.5)
+end
+_0x6D9E()
+_0x1D0B()
+_0xD5A5()
+if _0xE172 then
+if _0xE172.success ~= false and _0xE172.reasonKey ~="stMissionError"then
+_0xA85B.MissionsDone += 1
+local _0x4E3E = type(_0xE172.items) =="table"and #_0xE172.items or 0
+_0xA85B.Items = (_0xA85B.Items or 0) + _0x4E3E
+_0xA85B.Mission = string.format("สำเร็จ %s +%s เงิน +%d ไอเทม", _0xB216, tostring(_0xE172.money or 0), _0x4E3E)
+else
+_0xA85B.MissionsFailed += 1
+_0xA85B.Mission ="ภารกิจไม่ผ่าน เริ่มใหม่"end
+task.wait(3)
+elseif not keepGoing() then
+_0x1EB7({ op ="abandon"})
+end
+endlocal function _0x9475(_0xE24D)
+if getconnections then
+local _0x3494 = 0
+for _0x55A0, sig in ipairs({"Activated","MouseButton1Click"}) do
+local _0x05F7, _0x74A6 = pcall(getconnections, _0xE24D[sig])
+if _0x05F7 and type(_0x74A6) =="table"then
+for _0x55A0, _0xCD2A in ipairs(_0x74A6) do
+if _0xCD2A.Function then pcall(_0xCD2A.Function); _0x3494 += 1 end
+end
+end
+if _0x3494 > 0 then return true end
+end
+end
+if firesignal then
+if pcall(firesignal, _0xE24D.Activated) then return true end
+end
+local _0x05F7 = pcall(function()
+local _0x83D3 = game:GetService("VirtualInputManager")
+local _0x413B = game:GetService("GuiService"):GetGuiInset()
+local _0x533B = _0xE24D.AbsolutePosition + _0xE24D.AbsoluteSize / 2 + _0x413B
+_0x83D3:SendMouseButtonEvent(_0x533B.X, _0x533B.Y, 0, true, game, 0)
+task.wait(0.05)
+_0x83D3:SendMouseButtonEvent(_0x533B.X, _0x533B.Y, 0, false, game, 0)
+end)
+return _0x05F7
+endtask.spawn(function()
+while _0xE144() dopcall(function()
+if _0x8AD8.AutoGetItems then
+local _0xC144 = _0xD643:FindFirstChildOfClass("PlayerGui")
+local _0x36D4 = _0xC144 and _0xC144:FindFirstChild("RaycityMissionExtra")
+if _0x36D4 then
+for _0x55A0, dlg in ipairs(_0x36D4:GetChildren()) do
+local _0xE24D = dlg.Name:match("^DropItemDlg_") and dlg:FindFirstChild("BtGetAll")
+if _0xE24D and _0xE24D:IsA("GuiButton") then
+_0x9475(_0xE24D)
+_0xA85B.ItemsClaimed = (_0xA85B.ItemsClaimed or 0) + 1
+end
+end
+end
+end
+end)
+task.wait(1)
+end
+end)local _0xB0C8 = { badIds = {} }
+local function _0xDAFF()
+if _0xB0C8.T == nil then
+local _0x05F7, _0x73EA = pcall(function()
+return require(_0xA0CF:WaitForChild("RaycityTown", 5):WaitForChild("TownServices", 5))
+end)
+_0xB0C8.T = (_0x05F7 and type(_0x73EA) =="table"and _0x73EA.request) and _0x73EA or false
+end
+return _0xB0C8.T or nil
+end
+local function _0x2586()
+local _0x05F7, _0xC9F3 = pcall(require, _0xA0CF.RaycityProfile.ProfileClient)
+if not _0x05F7 then return nil end
+local _0xD74F, _0xC87D = pcall(_0xC9F3.get)
+return _0xD74F and type(_0xC87D) =="table"and _0xC87D or nil
+end
+local function _0xCD36(force)
+local _0x812E, _0xC87D = _0xDAFF(), _0x2586()
+if not (_0x812E and _0xC87D and type(_0xC87D.inventory) =="table") then return end
+local _0x24AC, _0xB6AE, _0xD308 = 0, {}, {}
+for cell, it in pairs(_0xC87D.inventory) do
+_0x24AC += 1
+local _0xCD2A = tonumber(cell)
+if _0xCD2A and type(it) =="table"and it.id then
+_0xB6AE[#_0xB6AE + 1] = { cell = _0xCD2A, _0xAC15 = it.id }
+_0xD308[it.id] = (_0xD308[it.id] or 0) + 1
+end
+end
+local _0x3C79 = tonumber(_0xC87D.invSize) or 30
+if not force and _0x3C79 - _0x24AC > 2 then
+_0xA85B.Store = string.format("กระเป๋า %d/%d", _0x24AC, _0x3C79)
+return
+end
+local _0x6720 = _0x812E.request("storage","open", { index = 1 })
+if not (type(_0x6720) =="table"and _0x6720.ok) then
+_0xA85B.Store ="เปิดโกดังไม่ได้"return
+endtable.sort(_0xB6AE, function(_0x9C57, _0x7A15)
+local _0xB64E, _0x7CAA = _0xD308[_0x9C57.id] > 1, _0xD308[_0x7A15.id] > 1
+if _0xB64E ~= _0x7CAA then return _0xB64E end
+return _0x9C57.cell > _0x7A15.cell
+end)
+local _0xF010 = 0
+for _0x55A0, _0xCD2A in ipairs(_0xB6AE) do
+if _0x3C79 - (_0x24AC - _0xF010) >= 8 then break end
+if not _0xB0C8.badIds[_0xCD2A.id] then
+local _0x4040 = _0x812E.request("storage","deposit", { index = 1, from = _0xCD2A.cell })
+if type(_0x4040) =="table"and _0x4040.ok then
+_0xF010 += 1
+_0xD308[_0xCD2A.id] -= 1
+elseif type(_0x4040) =="table"and _0x4040.msgKey =="stCanNotMoveItem"then
+_0xB0C8.badIds[_0xCD2A.id] = true
+else
+_0xA85B.Store ="โกดังเต็มหรือฝากไม่ได้: ".. tostring(type(_0x4040) =="table"and (_0x4040.msgKey or _0x4040.err) or"?")
+break
+end
+task.wait(0.3)
+end
+end
+_0xA85B.StoredTotal = (_0xA85B.StoredTotal or 0) + _0xF010
+if _0xF010 > 0 then
+_0xA85B.Store = string.format("ฝากเข้าโกดังแล้ว %d ชิ้น (รวม %d)", _0xF010, _0xA85B.StoredTotal)
+end
+endlocal _0xC486 = {}
+local function _0x3BBD(it)
+if _0xC486.items == nil then
+local _0x05F7, _0x73EA = pcall(require, _0xA0CF.RaycityShop.ShopItems)
+_0xC486.items = _0x05F7 and _0x73EA or false
+local _0xD74F, _0x533B = pcall(require, _0xA0CF.RaycityShop.ItemSellPrice)
+_0xC486.price = _0xD74F and type(_0x533B) =="table"and _0x533B.ofDef and _0x533B or false
+end
+local _0x5671 = _0xC486.items and _0xC486.items[it.id]
+if not _0x5671 then return 0, nil end
+local _0xF6B8 = (_0x5671.serverPrice and _0x5671.serverPrice[2]) or _0x5671.sell or 0
+if _0xC486.price then
+local _0x05F7, _0x5957 = pcall(_0xC486.price.ofDef, _0x5671, it.id)
+if _0x05F7 and type(_0x5957) =="number"then _0xF6B8 = _0x5957 end
+endif it.bound or it.expires ~= nil then return 0, _0x5671 end
+if _0x5671.type and _0x5671.type >= 5 and _0x5671.type <= 8 then return 0, _0x5671 end
+if _0x5671.bonding and _0x5671.bonding ~= 0 then return 0, _0x5671 end
+return tonumber(_0xF6B8) or 0, _0x5671
+end
+local function _0xB565()
+local _0xC87D = _0x2586()
+if not (_0xC87D and type(_0xC87D.inventory) =="table") then return end
+local _0x3B73 = _0xA0CF.RaycityShop.Remotes:FindFirstChild("ShopRequest")
+if not _0x3B73 then return end
+local _0x3FCF = math.max(0, tonumber(_0x8AD8.SellKeep) or 1)
+local _0x92C5 = {}
+for cell, it in pairs(_0xC87D.inventory) do
+local _0xCD2A = tonumber(cell)
+if _0xCD2A and type(it) =="table"and it.id and it.uid then
+local _0x74A6 = _0x92C5[it.id] or {}
+_0x92C5[it.id] = _0x74A6
+_0x74A6[#_0x74A6 + 1] = { cell = _0xCD2A, it = it }
+end
+end
+local _0xB5E9, _0xD63A = 0, 0
+for _0x55A0, _0x74A6 in pairs(_0x92C5) do
+local _0xBE9A = 0
+for _0x55A0, _0x73CE in ipairs(_0x74A6) do _0xBE9A += (tonumber(_0x73CE.it.count) or 1) end
+local _0x36D4 = _0xBE9A - _0x3FCF
+if _0x36D4 > 0 then
+local _0x6297, _0xD66B = _0x3BBD(_0x74A6[1].it)
+if _0x6297 > 0 and _0xD66B and _0xD66B.type ~= 2 thentable.sort(_0x74A6, function(_0x9C57, _0x7A15) return _0x9C57.cell > _0x7A15.cell end)
+for _0x55A0, _0x73CE in ipairs(_0x74A6) do
+if _0x36D4 <= 0 then break end
+if _0x73CE.it.opt == nil then
+local _0x3494 = math.min(_0x36D4, tonumber(_0x73CE.it.count) or 1)
+local _0x05F7, _0x4040 = pcall(_0x3B73.InvokeServer, _0x3B73,"sell", { cell = _0x73CE.cell, count = _0x3494, uid = _0x73CE.it.uid })
+if _0x05F7 and type(_0x4040) =="table"and _0x4040.ok then
+_0x36D4 -= _0x3494
+_0xD63A += _0x3494
+_0xB5E9 += tonumber(_0x4040.paid or _0x4040.total) or 0
+end
+task.wait(0.4)
+end
+end
+end
+end
+end
+if _0xD63A > 0 then
+_0xA85B.SoldTotal = (_0xA85B.SoldTotal or 0) + _0xD63A
+_0xA85B.SoldMoney = (_0xA85B.SoldMoney or 0) + _0xB5E9
+_0xA85B.Store = string.format("ขายของซ้ำ %d ชิ้น +%d เงิน (รวม +%d)", _0xD63A, _0xB5E9, _0xA85B.SoldMoney)
+end
+endlocal function _0x8DE2()
+local _0xC87D = _0x2586()
+if not (_0xC87D and type(_0xC87D.inventory) =="table") then return 0, 0 end
+local _0x3B73 = _0xA0CF.RaycityShop.Remotes:FindFirstChild("ShopRequest")
+if not _0x3B73 then return 0, 0 end
+local _0x74A6 = {}
+for cell, it in pairs(_0xC87D.inventory) do
+local _0xCD2A = tonumber(cell)
+if _0xCD2A and type(it) =="table"and it.uid then _0x74A6[#_0x74A6 + 1] = { cell = _0xCD2A, it = it } end
+end
+table.sort(_0x74A6, function(_0x9C57, _0x7A15) return _0x9C57.cell > _0x7A15.cell end)
+local _0xD63A, _0xB5E9 = 0, 0
+for _0x55A0, _0x73CE in ipairs(_0x74A6) do
+if _0x3BBD(_0x73CE.it) > 0 then
+local _0x3494 = tonumber(_0x73CE.it.count) or 1
+local _0x05F7, _0x4040 = pcall(_0x3B73.InvokeServer, _0x3B73,"sell", { cell = _0x73CE.cell, count = _0x3494, uid = _0x73CE.it.uid })
+if _0x05F7 and type(_0x4040) =="table"and _0x4040.ok then
+_0xD63A += _0x3494
+_0xB5E9 += tonumber(_0x4040.paid or _0x4040.total) or 0
+end
+task.wait(0.35)
+end
+end
+_0xA85B.SoldTotal = (_0xA85B.SoldTotal or 0) + _0xD63A
+_0xA85B.SoldMoney = (_0xA85B.SoldMoney or 0) + _0xB5E9
+if _0xD63A > 0 then
+_0xA85B.Store = string.format("ขายแล้ว %d ชิ้น +%d เงิน (รวม +%d)", _0xD63A, _0xB5E9, _0xA85B.SoldMoney)
+end
+return _0xD63A, _0xB5E9
+end
+task.spawn(function()
+while _0xE144() do
+if _0x8AD8.AutoSellAll then
+pcall(_0x8DE2)
+elseif _0x8AD8.AutoSell then
+pcall(_0xB565)
+end
+task.wait(10)
+end
+end)
+task.spawn(function()
+while _0xE144() do
+if _0x8AD8.AutoStore then pcall(_0xCD36) end
+task.wait(5)
+end
+end)local _0x073B = { log = {}, taken = {} }
+local function _0xEBD5()
+if _0x073B.SC == nil then
+local _0x05F7, _0x73EA = pcall(function() return require(_0xA0CF.RaycitySocial.SocialClient) end)
+_0x073B.SC = (_0x05F7 and type(_0x73EA) =="table"and _0x73EA.request) and _0x73EA or false
+end
+return _0x073B.SC or nil
+end
+local function _0x2E83(_0xE46D)
+_0xA85B.Trade = _0xE46D
+table.insert(_0x073B.log, 1, os.date("%H:%M:%S ") .. _0xE46D)
+if #_0x073B.log > 6 then table.remove(_0x073B.log) end
+endlocal function _0x1F99(targetName, amount)
+local _0xB2F6 = _0xEBD5()
+if not _0xB2F6 then return false,"หาระบบจดหมายไม่เจอ"end
+targetName = tostring(targetName or""):gsub("^%s+",""):gsub("%s+$","")
+if targetName ==""then return false,"ใส่ชื่อผู้รับก่อน"end
+amount = math.floor(tonumber(amount) or 0)
+if amount <= 0 then return false,"จำนวนเงินไม่ถูกต้อง"end
+local _0x692D = tonumber(_0xD643:GetAttribute("RaycityRain")) or 0
+if amount > _0x692D then return false, string.format("เงินไม่พอ (มี %d)", _0x692D) end
+local _0x05F7, _0x4040 = pcall(_0xB2F6.request,"mail.send", {
+to = targetName,
+subject ="2K SCRIPT",
+content = string.format("ส่ง Rain %d", amount),
+_0x9685 = amount,
+auto = { subject = true, content = true },
+})
+if _0x05F7 and type(_0x4040) =="table"and _0x4040.ok then
+local _0xB364 = type(_0x4040.receipt) =="table"and _0x4040.receipt or {}
+_0xA85B.SentTotal = (_0xA85B.SentTotal or 0) + amount
+_0xA85B.SentFee = (_0xA85B.SentFee or 0) + (tonumber(_0xB364.fee) or 0)
+local _0xE46D = string.format("ส่ง %d ให้ %s แล้ว (ค่าส่ง %s)", amount, tostring(_0xB364.to or targetName), tostring(_0xB364.fee or"?"))
+_0x2E83(_0xE46D)
+return true, _0xE46D
+end
+local _0x526A ="?"if _0x05F7 and type(_0x4040) =="table"then
+local _0x2A4C, _0x7B9E = pcall(_0xB2F6.text, _0x4040)
+_0x526A = (_0x2A4C and _0x7B9E and _0x7B9E ~="") and _0x7B9E or tostring(_0x4040.key or _0x4040.err or _0x4040.msg or"?")
+elseif not _0x05F7 then
+_0x526A = tostring(_0x4040)
+end
+local _0xE46D ="ส่งไม่สำเร็จ: ".. _0x526A
+_0x2E83(_0xE46D)
+return false, _0xE46D
+endlocal function _0x3C1E()
+local _0xB2F6 = _0xEBD5()
+local _0xD98E = _0xB2F6 and _0xB2F6.box
+if not (_0xD98E and type(_0xD98E.mails) =="table") then return end
+for _0x55A0, _0x73EA in ipairs(_0xD98E.mails) do
+if type(_0x73EA) =="table"and _0x73EA.id and not _0x073B.taken[_0x73EA.id] then
+_0x073B.taken[_0x73EA.id] = true
+local _0x05F7, _0x4040 = pcall(_0xB2F6.request,"mail.take", { _0xAC15 = _0x73EA.id })
+if _0x05F7 and type(_0x4040) =="table"and _0x4040.ok then
+_0xA85B.MailTaken = (_0xA85B.MailTaken or 0) + 1
+_0x2E83("รับจดหมายจาก ".. tostring(_0x73EA.from or"?") .. (_0x73EA.money and (" +".. tostring(_0x73EA.money)) or""))
+end
+task.wait(0.5)
+end
+end
+end
+task.spawn(function()
+local _0x977B = 0
+while _0xE144() do
+if _0x8AD8.AutoSend and os.clock() - _0x977B > 60 then
+local _0x692D = tonumber(_0xD643:GetAttribute("RaycityRain")) or 0
+local _0x3489 = math.floor(tonumber(_0x8AD8.SendAmount) or 0)if _0x3489 > 0 and _0x8AD8.SendTarget ~=""and _0x692D - _0x3489 - 200 >= (tonumber(_0x8AD8.SendKeep) or 0) then
+_0x977B = os.clock()
+pcall(_0x1F99, _0x8AD8.SendTarget, _0x3489)
+end
+end
+if _0x8AD8.AutoTakeMail then pcall(_0x3C1E) end
+task.wait(3)
+end
+end)task.spawn(function()
+while _0xE144() do
+if _0x8AD8.AutoMission then
+_0xA85B.Coin = _0x8AD8.AutoCoin and"พักไว้ระหว่างทำภารกิจ"or"ปิดอยู่"local _0x05F7, _0x7910 = pcall(_0x6EB8, function() return _0x8AD8.AutoMission end)
+if not _0x05F7 then
+_0xA85B.Mission ="ผิดพลาด: ".. tostring(_0x7910):sub(1, 80)
+_0x6D9E()
+_0x1D0B()
+task.wait(2)
+end
+elseif _0x8AD8.AutoCoin then
+_0xA85B.Mission ="ปิดอยู่"local _0x05F7, _0x7910 = pcall(_0x302B, function() return _0x8AD8.AutoCoin and not _0x8AD8.AutoMission end)
+if not _0x05F7 then
+_0xA85B.Coin ="ผิดพลาด: ".. tostring(_0x7910):sub(1, 80)
+_0x6D9E()
+_0x1D0B()
+task.wait(2)
+end
+else
+_0xA85B.Mission, _0xA85B.Coin ="ปิดอยู่","ปิดอยู่"task.wait(0.5)
+end
+task.wait(0.1)
+end
+end)local _0xE6E9 = (function()
+local _0xDC87 = (getgenv and getgenv()) or _G
+if _0xDC87.__TwoKSupportUI then
+pcall(function() _0xDC87.__TwoKSupportUI:Destroy() end)
+_0xDC87.__TwoKSupportUI = nil
+end
+local _0x2741 = game:GetService("CoreGui")
+local _0x4F60 = game:GetService("Players")
+local _0x39B4 = game:GetService("TweenService")
+local _0x7D42 = game:GetService("UserInputService")
+local _0x499C = game:GetService("TextService")
+local _0x3351 = game:GetService("HttpService")
+local _0x66B3 = game:GetService("Lighting")
+local _0xF902 = _0x4F60.LocalPlayer
+local _0x2A99 = _0xF902 and _0xF902:FindFirstChildOfClass("PlayerGui")
+local _0x0D72 = workspace.CurrentCamerapcall(function()
+local _0x0CDE = _0x66B3:FindFirstChild("TwoKPrismFrost")
+if _0x0CDE then _0x0CDE:Destroy() end
+end)
+for _0x55A0, _0xDDDD in ipairs({ _0x2741, _0x2A99, (gethui and gethui()) or nil }) do
+pcall(function()
+for _0x55A0, child in ipairs(_0xDDDD:GetChildren()) do
+if child:IsA("ScreenGui") and (child.Name =="TwoKPrism"or child.Name =="SupportS_UI") then
+child:Destroy()
+end
+end
+end)
+endlocal _0xDB3B = {}
+local function _0x996D(_0x3B47)
+_0xDB3B[#_0xDB3B + 1] = _0x3B47
+return _0x3B47
+end
+local function _0x4B5C(class, props, parent)
+local _0xB3D8 = Instance.new(class)
+for _0x6AB9, _0x5957 in pairs(props or {}) do _0xB3D8[_0x6AB9] = _0x5957 end
+if parent then _0xB3D8.Parent = parent end
+return _0xB3D8
+end
+local function _0x11C5(parent, _0x4040)
+return _0x4B5C("UICorner", { CornerRadius = UDim.new(0, _0x4040) }, parent)
+end
+local function _0x6257(parent, color, thickness, transparency)
+return _0x4B5C("UIStroke", {
+Color = color,
+Thickness = thickness or 1,
+Transparency = transparency or 0,
+ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+}, parent)
+end
+local function _0xE6A7(_0x6211, ...)
+if type(_0x6211) ~="function"then return end
+local _0x0403 = { ... }
+task.spawn(function()
+local _0x05F7, _0x7910 = pcall(_0x6211, unpack(_0x0403))
+if not _0x05F7 then warn("[SUPPORT S UI]: ".. tostring(_0x7910)) end
+end)
+end
+local function _0x2C3E(_0xB460, _0x3C79, font, width)
+local _0x05F7, _0x5957 = pcall(function()
+return _0x499C:GetTextSize(tostring(_0xB460), _0x3C79, font, Vector2.new(width, 10000))
+end)
+return _0x05F7 and _0x5957 or Vector2.new(width, _0x3C79 + 2)
+endlocal _0xF996 = {
+_0x9E47 = Color3.fromRGB(12, 12, 14),
+windowTop = Color3.fromRGB(30, 13, 15),
+border = Color3.fromRGB(176, 32, 38),
+_0x6610 = Color3.fromRGB(18, 18, 22),
+cardHover = Color3.fromRGB(23, 23, 28),
+cardStroke = Color3.fromRGB(32, 32, 38),
+red = Color3.fromRGB(235, 46, 46),
+redDim = Color3.fromRGB(120, 28, 32),
+_0xB460 = Color3.fromRGB(246, 246, 248),
+sub = Color3.fromRGB(150, 150, 158),
+chip = Color3.fromRGB(30, 30, 34),
+chipStroke = Color3.fromRGB(48, 48, 54),
+line = Color3.fromRGB(44, 28, 31),
+off = Color3.fromRGB(38, 38, 44),
+field = Color3.fromRGB(11, 11, 14),
+}
+local _0xF83C = { Title ="SUPPORT S", Sub ="RAYCITY RB", ToggleKey = Enum.KeyCode.RightControl }
+local _0xA431, _0x3EF7 = 720, 440
+local _0x84A2, _0xEC4F = 64, 40
+local _0x565C = _0xA431 - 40local _0x8A81 ="2KSupportUI"local _0x5FFD = _0x8A81 .."/settings.json"local _0x8C51 = {}
+pcall(function()
+if isfile and isfile(_0x5FFD) then _0x8C51 = _0x3351:JSONDecode(readfile(_0x5FFD)) end
+end)
+if type(_0x8C51) ~="table"then _0x8C51 = {} end
+local _0xE6E9 = { Visible = false, _0xA85B ="", ToggleKey = _0xF83C.ToggleKey }
+do
+local _0x05F7, _0x6AB9 = pcall(function() return Enum.KeyCode[_0x8C51.ToggleKey] end)
+if _0x05F7 and typeof(_0x6AB9) =="EnumItem"then _0xE6E9.ToggleKey = _0x6AB9 end
+end
+local _0x5537 = 1.1local _0x6E5D, _0x9046 = tonumber(_0x8C51.PosX) or 0, tonumber(_0x8C51.PosY) or -_0x3EF7 / 2
+local _0xBDBA = false
+local function _0x708C()
+if _0xBDBA or not writefile then return end
+_0xBDBA = true
+task.delay(0.5, function()
+_0xBDBA = false
+pcall(function()
+if makefolder and isfolder and not isfolder(_0x8A81) then makefolder(_0x8A81) end
+writefile(_0x5FFD, _0x3351:JSONEncode({
+ToggleKey = _0xE6E9.ToggleKey.Name,
+UserScale = _0x5537,
+PosX = _0x6E5D, PosY = _0x9046,
+}))
+end)
+end)
+endlocal _0x4CB3 = _0x4B5C("ScreenGui", {
+Name ="SupportS_UI",
+IgnoreGuiInset = true,
+ResetOnSpawn = false,
+ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+DisplayOrder = 9999,
+})
+do
+local _0x05F7 = pcall(function() _0x4CB3.Parent = (gethui and gethui()) or _0x2741 end)
+if not _0x05F7 or not _0x4CB3.Parent then _0x4CB3.Parent = _0x2A99 end
+end
+_0x996D(_0x4CB3)
+local function _0x331B()
+local _0x69F2 = workspace.CurrentCamera or _0x0D72
+return (_0x69F2 and _0x69F2.ViewportSize) or Vector2.new(1280, 720)
+endlocal _0x9E47 = _0x4B5C("CanvasGroup", {
+Name ="Window",
+AnchorPoint = Vector2.new(0.5, 0),
+Position = UDim2.new(0.5, _0x6E5D, 0.5, _0x9046),
+Size = UDim2.fromOffset(_0xA431, _0x3EF7),
+BackgroundColor3 = _0xF996.window,
+BorderSizePixel = 0,
+ClipsDescendants = true,
+Visible = false,
+Active = true,
+}, _0x4CB3)
+_0x11C5(_0x9E47, 14)
+_0x6257(_0x9E47, _0xF996.border, 1.5)
+_0x9E47.BackgroundTransparency = 0do
+local _0xA90B = _0x4B5C("Frame", {
+Name ="Backdrop", Size = UDim2.fromScale(1, 1), BackgroundColor3 = Color3.fromRGB(12, 12, 14),
+BackgroundTransparency = 0, BorderSizePixel = 0, Active = false,
+}, _0x9E47)
+_0x11C5(_0xA90B, 14)
+end
+local _0x6FC0 = _0x4B5C("UIScale", { Scale = 1 }, _0x9E47)
+local function _0x10F6()
+local _0x4DDB = _0x331B()
+local _0xAA07 = math.min(1, (_0x4DDB.X - 24) / _0xA431, (_0x4DDB.Y - 24) / _0x3EF7)
+return math.max(0.3, _0xAA07 * _0x5537)
+end
+_0x6FC0.Scale = _0x10F6()
+do
+local _0x69F2 = workspace.CurrentCamera
+if _0x69F2 then
+_0x996D(_0x69F2:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+if not _0xE6E9.Visible then return end
+_0x6FC0.Scale = _0x10F6()
+end))
+end
+endlocal _0x4132 = _0x4B5C("Frame", {
+Name ="DragZone", Size = UDim2.new(1, 0, 0, _0x84A2), BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0, Active = true,
+}, _0x9E47)
+local _0x98E0 = _0x4B5C("Frame", {
+Position = UDim2.fromOffset(18, 10), Size = UDim2.fromOffset(44, 44), BackgroundColor3 = _0xF996.chip, BorderSizePixel = 0,
+}, _0x9E47)
+_0x11C5(_0x98E0, 10)
+_0x4B5C("TextLabel", {
+Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 22,
+Text ="S", TextColor3 = _0xF996.text,
+}, _0x98E0)
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(74, 10), Size = UDim2.fromOffset(300, 24), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 19, TextXAlignment = Enum.TextXAlignment.Left,
+Text = _0xF83C.Title, TextColor3 = _0xF996.text,
+}, _0x9E47)
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(74, 34), Size = UDim2.fromOffset(300, 16), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 11, TextXAlignment = Enum.TextXAlignment.Left,
+Text = _0xF83C.Sub, TextColor3 = _0xF996.red,
+}, _0x9E47)
+local function _0xB0B3(_0xB460, xFromRight)
+local _0x7A15 = _0x4B5C("TextButton", {
+AnchorPoint = Vector2.new(1, 0),
+Position = UDim2.new(1, -xFromRight, 0, 15),
+Size = UDim2.fromOffset(34, 34),
+BackgroundColor3 = _0xF996.chip,
+BorderSizePixel = 0,
+AutoButtonColor = false,
+Font = Enum.Font.GothamBold,
+TextSize = 16,
+Text = _0xB460,
+TextColor3 = _0xF996.text,
+ZIndex = 3,
+}, _0x9E47)
+_0x11C5(_0x7A15, 8)
+_0x6257(_0x7A15, _0xF996.chipStroke, 1)
+_0x996D(_0x7A15.MouseEnter:Connect(function() _0x7A15.BackgroundColor3 = Color3.fromRGB(44, 24, 27) end))
+_0x996D(_0x7A15.MouseLeave:Connect(function() _0x7A15.BackgroundColor3 = _0xF996.chip end))
+return _0x7A15
+end
+local _0xA224 = _0xB0B3("_", 62)
+local _0x9537 = _0xB0B3("x", 18)
+_0x4B5C("Frame", {
+Position = UDim2.fromOffset(0, _0x84A2 - 1), Size = UDim2.new(1, 0, 0, 1),
+BackgroundColor3 = _0xF996.line, BorderSizePixel = 0,
+}, _0x9E47)local _0xC3D7 = _0x4B5C("Frame", {
+Position = UDim2.fromOffset(0, _0x84A2), Size = UDim2.new(1, 0, 0, _0xEC4F), BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0,
+}, _0x9E47)
+_0x4B5C("Frame", {
+Position = UDim2.new(0, 18, 1, -1), Size = UDim2.new(1, -36, 0, 1),
+BackgroundColor3 = _0xF996.line, BorderSizePixel = 0,
+}, _0xC3D7)
+local _0x5100 = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(0, 1), Position = UDim2.new(0, 30, 1, 0), Size = UDim2.fromOffset(100, 3),
+BackgroundColor3 = _0xF996.red, BorderSizePixel = 0, ZIndex = 2,
+}, _0xC3D7)
+_0x11C5(_0x5100, 2)
+local _0xE0DD = _0x4B5C("Frame", {
+Position = UDim2.fromOffset(0, _0x84A2 + _0xEC4F), Size = UDim2.new(1, 0, 1, -(_0x84A2 + _0xEC4F)),
+BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0, ClipsDescendants = true,
+}, _0x9E47)local function _0xF0B9(handle, threshold, onBegin, onDelta, onFinish)
+local _0x6030, _0xF010, _0x6E9C = false, false, Vector3.zero
+_0x996D(handle.InputBegan:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+_0x6030, _0xF010, _0x6E9C = true, false, input.Position
+onBegin()
+end
+end))
+_0x996D(_0x7D42.InputChanged:Connect(function(input)
+if _0x6030 and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+local _0x5671 = input.Position - _0x6E9C
+if not _0xF010 and Vector2.new(_0x5671.X, _0x5671.Y).Magnitude > threshold then _0xF010 = true end
+if _0xF010 then onDelta(Vector2.new(_0x5671.X, _0x5671.Y)) end
+end
+end))
+_0x996D(_0x7D42.InputEnded:Connect(function(input)
+if _0x6030 and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+_0x6030 = false
+onFinish(_0xF010)
+end
+end))
+end
+do
+local _0xED72, _0xF9C6 = 0, 0
+_0xF0B9(_0x4132, 4, function() _0xED72, _0xF9C6 = _0x6E5D, _0x9046 end, function(_0x5671)
+local _0xDB96 = _0x6FC0.Scale
+local _0x4DDB = _0x331B()
+_0x6E5D = math.clamp(_0xED72 + _0x5671.X / _0xDB96, -_0x4DDB.X / (2 * _0xDB96) + 90, _0x4DDB.X / (2 * _0xDB96) - 90)
+_0x9046 = math.clamp(_0xF9C6 + _0x5671.Y / _0xDB96, -_0x4DDB.Y / (2 * _0xDB96) + 4, _0x4DDB.Y / (2 * _0xDB96) - 40)
+_0x9E47.Position = UDim2.new(0.5, _0x6E5D, 0.5, _0x9046)
+end, function(_0xF010)
+if _0xF010 then _0x708C() end
+end)
+endlocal _0x2174 = false
+local function _0x5D53()
+_0xC3D7.Visible = not _0x2174
+_0xE0DD.Visible = not _0x2174
+_0x9E47.Size = UDim2.fromOffset(_0xA431, _0x2174 and _0x84A2 or _0x3EF7)
+end
+function _0xE6E9:Toggle(_0x14C1)
+if _0x14C1 == nil then _0x14C1 = not _0xE6E9.Visible end
+if _0x14C1 == _0xE6E9.Visible then return end
+_0xE6E9.Visible = _0x14C1
+if _0x14C1 then
+_0x9E47.Visible = true
+local _0x2246 = _0x10F6()
+_0x6FC0.Scale = _0x2246 * 0.94
+_0x39B4:Create(_0x6FC0, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Scale = _0x2246 }):Play()
+else
+_0x9E47.Visible = false
+end
+end
+_0x996D(_0xA224.MouseButton1Click:Connect(function()
+_0x2174 = not _0x2174
+_0x5D53()
+end))
+_0x996D(_0x9537.MouseButton1Click:Connect(function()
+_0xE6E9:Toggle(false)
+end))local _0x8E81 = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -18, 1, -18), Size = UDim2.fromOffset(300, 420),
+BackgroundTransparency = 1, ZIndex = 20,
+}, _0x4CB3)
+_0x4B5C("UIListLayout", {
+FillDirection = Enum.FillDirection.Vertical, VerticalAlignment = Enum.VerticalAlignment.Bottom,
+HorizontalAlignment = Enum.HorizontalAlignment.Right, SortOrder = Enum.SortOrder.LayoutOrder,
+Padding = UDim.new(0, 8),
+}, _0x8E81)
+local _0xA0A7 = 0
+function _0xE6E9:Notify(_0x895B)
+_0x895B = _0x895B or {}
+local _0xB216 = tostring(_0x895B.Title or"")
+local _0xB460 = tostring(_0x895B.Text or"")
+local _0x7D0E = tonumber(_0x895B.Duration) or 3
+local _0xDFBC = _0xB460 ~=""and _0x2C3E(_0xB460, 12, Enum.Font.Gotham, 252).Y or 0
+local _0x06BD = 14 + 18 + (_0xDFBC > 0 and (4 + _0xDFBC) or 0) + 14
+_0xA0A7 += 1
+local _0x6610 = _0x4B5C("CanvasGroup", {
+Size = UDim2.fromOffset(290, _0x06BD), BackgroundColor3 = Color3.fromRGB(16, 16, 20), BorderSizePixel = 0,
+GroupTransparency = 1, LayoutOrder = _0xA0A7, ZIndex = 20,
+}, _0x8E81)
+_0x11C5(_0x6610, 10)
+_0x6257(_0x6610, Color3.fromRGB(70, 26, 30), 1)
+local _0x233C = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromScale(0, 0.5), Size = UDim2.new(0, 3, 0.7, 0),
+BackgroundColor3 = _0xF996.red, BorderSizePixel = 0,
+}, _0x6610)
+_0x11C5(_0x233C, 2)
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 12), Size = UDim2.fromOffset(256, 18), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd, Text = _0xB216, TextColor3 = _0xF996.text,
+}, _0x6610)
+if _0xB460 ~=""then
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 34), Size = UDim2.fromOffset(256, _0xDFBC), BackgroundTransparency = 1,
+Font = Enum.Font.Gotham, TextSize = 12, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left,
+TextYAlignment = Enum.TextYAlignment.Top, Text = _0xB460, TextColor3 = _0xF996.sub,
+}, _0x6610)
+endlocal _0x84F4 = {}
+for _0x55A0, ch in ipairs(_0x8E81:GetChildren()) do
+if ch:IsA("CanvasGroup") then _0x84F4[#_0x84F4 + 1] = ch end
+end
+table.sort(_0x84F4, function(_0x9C57, _0x7A15) return _0x9C57.LayoutOrder < _0x7A15.LayoutOrder end)
+while #_0x84F4 > 5 do
+table.remove(_0x84F4, 1):Destroy()
+end
+_0x39B4:Create(_0x6610, TweenInfo.new(0.2), { GroupTransparency = 0 }):Play()
+task.delay(_0x7D0E, function()
+if not _0x6610.Parent then return end
+local _0xF6B0 = _0x39B4:Create(_0x6610, TweenInfo.new(0.25), { GroupTransparency = 1 })
+_0xF6B0.Completed:Connect(function() _0x6610:Destroy() end)
+_0xF6B0:Play()
+end)
+end
+function _0xE6E9:SetStatus(message)
+_0xE6E9.Status = tostring(message or"")
+endlocal _0x038D = {}
+local _0x37A8
+local _0x9F24 = 30
+local function _0xC870(_0x164E)
+_0x37A8 = _0x164E
+for _0x55A0, _0xF6B0 in ipairs(_0x038D) do
+local _0xEDFD = (_0xF6B0 == _0x164E)
+_0xF6B0.page.Visible = _0xEDFD
+_0xF6B0.button.TextColor3 = _0xEDFD and _0xF996.text or Color3.fromRGB(176, 176, 184)
+end
+_0x39B4:Create(_0x5100, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+Position = UDim2.new(0, _0x164E.x, 1, 0), Size = UDim2.fromOffset(_0x164E.w, 3),
+}):Play()
+end
+function _0xE6E9:Tab(tabTitle)
+tabTitle = tostring(tabTitle)
+local _0x7B6E = _0x2C3E(tabTitle, 14, Enum.Font.GothamBold, 400).X
+local _0x574D = math.floor(_0x7B6E + 64)
+local _0xAE2F = _0x4B5C("TextButton", {
+Position = UDim2.fromOffset(_0x9F24, 0), Size = UDim2.new(0, _0x574D, 1, -3), BackgroundTransparency = 1,
+AutoButtonColor = false, Font = Enum.Font.GothamBold, TextSize = 14, Text = tabTitle,
+TextColor3 = Color3.fromRGB(176, 176, 184),
+}, _0xC3D7)
+local _0x0167 = _0x4B5C("ScrollingFrame", {
+Name ="Page_".. tabTitle, Size = UDim2.fromScale(1, 1), BackgroundColor3 = Color3.fromRGB(12, 12, 14), BackgroundTransparency = 0, BorderSizePixel = 0,
+ScrollBarThickness = 4, ScrollBarImageColor3 = _0xF996.redDim, CanvasSize = UDim2.new(),
+AutomaticCanvasSize = Enum.AutomaticSize.Y, ScrollingDirection = Enum.ScrollingDirection.Y,
+Visible = false,
+}, _0xE0DD)
+_0x4B5C("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0, 8) }, _0x0167)
+_0x4B5C("UIPadding", {
+PaddingLeft = UDim.new(0, 18), PaddingRight = UDim.new(0, 22), PaddingTop = UDim.new(0, 12), PaddingBottom = UDim.new(0, 18),
+}, _0x0167)
+local _0x164E = { _0xAE2F = _0xAE2F, _0x0167 = _0x0167, x = _0x9F24, _0x574D = _0x574D }
+_0x9F24 += _0x574D + 14
+_0x038D[#_0x038D + 1] = _0x164E
+_0x996D(_0xAE2F.MouseButton1Click:Connect(function() _0xC870(_0x164E) end))
+if #_0x038D == 1 then _0xC870(_0x164E) end
+local _0xF64D = 0
+local function _0xEDD9()
+_0xF64D += 1
+return _0xF64D
+end
+local _0x35F9 = {}
+function _0x35F9:Section(sectionTitle)
+sectionTitle = tostring(sectionTitle)local _0xF617 = _0x4B5C("Frame", { Size = UDim2.new(1, 0, 0, 30), BackgroundTransparency = 1, LayoutOrder = _0xEDD9() }, _0x0167)
+_0x4B5C("Frame", {
+AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0, 7, 0.5, 2), Size = UDim2.fromOffset(9, 9),
+Rotation = 45, BackgroundColor3 = _0xF996.red, BorderSizePixel = 0,
+}, _0xF617)
+local _0x2394 = _0x2C3E(sectionTitle, 12, Enum.Font.GothamBold, 500).X
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(22, 2), Size = UDim2.fromOffset(_0x2394 + 6, 28), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 12, TextXAlignment = Enum.TextXAlignment.Left,
+Text = sectionTitle, TextColor3 = _0xF996.text,
+}, _0xF617)
+_0x4B5C("Frame", {
+Position = UDim2.new(0, 22 + _0x2394 + 16, 0.5, 2), Size = UDim2.new(1, -(22 + _0x2394 + 16), 0, 1),
+BackgroundColor3 = _0xF996.line, BorderSizePixel = 0,
+}, _0xF617)
+local _0x3B89 = {}
+local function _0x064A(_0xF801)
+local _0xE9F8 = _0x4B5C("Frame", {
+Size = UDim2.new(1, 0, 0, _0xF801), BackgroundColor3 = _0xF996.card, BorderSizePixel = 0, LayoutOrder = _0xEDD9(),
+}, _0x0167)
+_0x11C5(_0xE9F8, 10)
+_0x6257(_0xE9F8, _0xF996.cardStroke, 1)
+local _0x233C = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromScale(0, 0.5), Size = UDim2.new(0, 3, 0.66, 0),
+BackgroundColor3 = _0xF996.red, BorderSizePixel = 0,
+}, _0xE9F8)
+_0x11C5(_0x233C, 2)
+return _0xE9F8
+endlocal function _0x5D06(_0xB962, _0x2807, reserve)
+local _0x7B6E = _0x565C - 18 - reserve
+local _0x8CD0 = _0x2807 ~= nil and _0x2807 ~=""local _0x00EA = _0x8CD0 and math.max(15, _0x2C3E(_0x2807, 12, Enum.Font.Gotham, _0x7B6E).Y) or 0
+local _0xF801 = _0x8CD0 and (13 + 19 + 3 + _0x00EA + 13) or 48
+local _0xE9F8 = _0x064A(math.max(_0xF801, 48))
+local _0xB216 = _0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, _0x8CD0 and 13 or 0),
+Size = _0x8CD0 and UDim2.fromOffset(_0x7B6E, 19) or UDim2.new(0, _0x7B6E, 1, 0),
+BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 14,
+TextXAlignment = Enum.TextXAlignment.Left, TextTruncate = Enum.TextTruncate.AtEnd,
+Text = tostring(_0xB962 or""), TextColor3 = _0xF996.text,
+}, _0xE9F8)
+local _0x7F3C
+if _0x8CD0 then
+_0x7F3C = _0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 35), Size = UDim2.fromOffset(_0x7B6E, _0x00EA), BackgroundTransparency = 1,
+Font = Enum.Font.Gotham, TextSize = 12, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left,
+TextYAlignment = Enum.TextYAlignment.Top, Text = tostring(_0x2807), TextColor3 = _0xF996.sub,
+}, _0xE9F8)
+end
+return _0xE9F8, _0xB216, _0x7F3C
+end
+local function _0x7FFC(_0xE9F8, target)
+target = target or _0xE9F8
+_0x996D(target.MouseEnter:Connect(function() _0xE9F8.BackgroundColor3 = _0xF996.cardHover end))
+_0x996D(target.MouseLeave:Connect(function() _0xE9F8.BackgroundColor3 = _0xF996.card end))
+endfunction _0x3B89:Toggle(opts)
+opts = opts or {}
+local _0x14C1 = (opts.Default == true)
+local _0xE9F8 = _0x5D06(opts.Name, opts.Desc, 104)
+local _0xA371 = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -16, 0.5, 0), Size = UDim2.fromOffset(70, 32),
+BackgroundColor3 = _0xF996.off, BorderSizePixel = 0,
+}, _0xE9F8)
+_0x11C5(_0xA371, 8)
+local _0xE667 = _0x4B5C("TextLabel", {
+Size = UDim2.fromOffset(34, 32), BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 13,
+Text ="OFF", TextColor3 = Color3.fromRGB(128, 128, 136),
+}, _0xA371)
+local _0x185C = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(0, 0.5), Size = UDim2.fromOffset(26, 26), Position = UDim2.new(0, 3, 0.5, 0),
+BackgroundColor3 = Color3.fromRGB(96, 96, 104), BorderSizePixel = 0,
+}, _0xA371)
+_0x11C5(_0x185C, 6)
+local _0x2AD9 = TweenInfo.new(0.14, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local function _0x7938(animate)
+local _0x170D = { BackgroundColor3 = _0x14C1 and _0xF996.red or _0xF996.off }
+local _0xF93C = {
+Position = UDim2.new(0, _0x14C1 and 41 or 3, 0.5, 0),
+BackgroundColor3 = _0x14C1 and Color3.fromRGB(248, 248, 250) or Color3.fromRGB(96, 96, 104),
+}
+_0xE667.Text = _0x14C1 and"ON"or"OFF"_0xE667.TextColor3 = _0x14C1 and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(128, 128, 136)
+_0xE667.Position = UDim2.fromOffset(_0x14C1 and 4 or 32, 0)
+if animate then
+_0x39B4:Create(_0xA371, _0x2AD9, _0x170D):Play()
+_0x39B4:Create(_0x185C, _0x2AD9, _0xF93C):Play()
+else
+for _0x6AB9, _0x5957 in pairs(_0x170D) do _0xA371[_0x6AB9] = _0x5957 end
+for _0x6AB9, _0x5957 in pairs(_0xF93C) do _0x185C[_0x6AB9] = _0x5957 end
+end
+end
+_0x7938(false)
+local _0xA449 = {}
+function _0xA449:Set(val, suppressCallback)
+val = (val == true)
+if _0x14C1 == val then return end
+_0x14C1 = val
+_0x7938(true)
+if not suppressCallback then _0xE6A7(opts.Callback, _0x14C1) end
+end
+function _0xA449:Get() return _0x14C1 end
+local _0x4E49 = _0x4B5C("TextButton", {
+Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, Text ="", AutoButtonColor = false, ZIndex = 2,
+}, _0xE9F8)
+_0x7FFC(_0xE9F8, _0x4E49)
+_0x996D(_0x4E49.MouseButton1Click:Connect(function() _0xA449:Set(not _0x14C1) end))
+return _0xA449
+endfunction _0x3B89:Slider(opts)
+opts = opts or {}
+local _0xD90F, _0xDD2E = tonumber(opts.Min) or 0, tonumber(opts.Max) or 100
+local _0xE427 = tonumber(opts.Step) or 1
+local _0x4BF9 = opts.Suffix or""local _0x6F44 = math.clamp(tonumber(opts.Default) or _0xD90F, _0xD90F, _0xDD2E)
+local _0xB3C1 = (_0xDD2E > _0xD90F) and (_0xDD2E - _0xD90F) or 1
+local _0xE9F8 = _0x064A(64)
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 11), Size = UDim2.new(1, -170, 0, 19), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or""), TextColor3 = _0xF996.text,
+}, _0xE9F8)
+local _0xDEF6 = _0x4B5C("TextLabel", {
+AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -16, 0, 11), Size = UDim2.fromOffset(150, 19),
+BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 13, TextXAlignment = Enum.TextXAlignment.Right,
+Text = tostring(_0x6F44) .. _0x4BF9, TextColor3 = _0xF996.red,
+}, _0xE9F8)
+local _0x9EC9 = _0x4B5C("Frame", {
+Position = UDim2.new(0, 18, 0, 43), Size = UDim2.new(1, -36, 0, 6), BackgroundColor3 = Color3.fromRGB(38, 38, 44),
+BorderSizePixel = 0,
+}, _0xE9F8)
+_0x11C5(_0x9EC9, 3)
+local _0xC860 = _0x4B5C("Frame", { Size = UDim2.fromScale((_0x6F44 - _0xD90F) / _0xB3C1, 1), BackgroundColor3 = _0xF996.red, BorderSizePixel = 0 }, _0x9EC9)
+_0x11C5(_0xC860, 3)
+local _0x83E7 = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new((_0x6F44 - _0xD90F) / _0xB3C1, 0, 0.5, 0), Size = UDim2.fromOffset(16, 16),
+BackgroundColor3 = Color3.fromRGB(248, 248, 250), BorderSizePixel = 0, ZIndex = 2,
+}, _0x9EC9)
+_0x11C5(_0x83E7, 8)
+_0x6257(_0x83E7, _0xF996.red, 2)
+local _0xAC59 = _0x6F44
+local function _0x7938()
+local _0x533B = (_0x6F44 - _0xD90F) / _0xB3C1
+_0xC860.Size = UDim2.fromScale(_0x533B, 1)
+_0x83E7.Position = UDim2.new(_0x533B, 0, 0.5, 0)
+_0xDEF6.Text = tostring(_0x6F44) .. _0x4BF9
+end
+local _0xA449 = {}
+function _0xA449:Set(val, suppressCallback)
+val = math.clamp(tonumber(val) or _0x6F44, _0xD90F, _0xDD2E)
+_0x6F44 = val
+_0x7938()
+if not suppressCallback and _0x6F44 ~= _0xAC59 then
+_0xAC59 = _0x6F44
+_0xE6A7(opts.Callback, _0x6F44)
+elseif suppressCallback then
+_0xAC59 = _0x6F44
+end
+end
+function _0xA449:Get() return _0x6F44 end
+local _0x5A76 = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.fromScale(0, 0.5), Size = UDim2.new(1, 0, 0, 26),
+BackgroundTransparency = 1, Active = true, ZIndex = 3,
+}, _0x9EC9)
+local _0x58BC = false
+local function _0xD90C(x)
+local _0x9B91 = math.clamp((x - _0x9EC9.AbsolutePosition.X) / math.max(1, _0x9EC9.AbsoluteSize.X), 0, 1)
+local _0x5957 = math.floor((_0xD90F + _0x9B91 * _0xB3C1 - _0xD90F) / _0xE427 + 0.5) * _0xE427 + _0xD90F
+_0x6F44 = math.clamp(_0x5957, _0xD90F, _0xDD2E)
+_0x7938()
+end
+_0x996D(_0x5A76.InputBegan:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+_0x58BC = true
+_0xD90C(input.Position.X)
+end
+end))
+_0x996D(_0x7D42.InputChanged:Connect(function(input)
+if _0x58BC and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+_0xD90C(input.Position.X)
+end
+end))
+_0x996D(_0x7D42.InputEnded:Connect(function(input)
+if _0x58BC and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+_0x58BC = false
+if _0x6F44 ~= _0xAC59 then
+_0xAC59 = _0x6F44
+_0xE6A7(opts.Callback, _0x6F44)
+end
+end
+end))
+return _0xA449
+endfunction _0x3B89:Button(opts)
+opts = opts or {}
+local _0xE9F8 = _0x5D06(opts.Name, opts.Desc, 60)
+_0x4B5C("TextLabel", {
+AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -18, 0.5, -1), Size = UDim2.fromOffset(24, 28),
+BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 24, Text ="›", TextColor3 = _0xF996.red,
+}, _0xE9F8)
+local _0x4E49 = _0x4B5C("TextButton", {
+Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, Text ="", AutoButtonColor = false, ZIndex = 2,
+}, _0xE9F8)
+_0x7FFC(_0xE9F8, _0x4E49)
+_0x996D(_0x4E49.MouseButton1Click:Connect(function()
+_0xE9F8.BackgroundColor3 = Color3.fromRGB(44, 20, 23)
+_0x39B4:Create(_0xE9F8, TweenInfo.new(0.25), { BackgroundColor3 = _0xF996.card }):Play()
+_0xE6A7(opts.Callback)
+end))
+endfunction _0x3B89:Dropdown(opts)
+opts = opts or {}
+local _0xE76D = opts.Locked == true
+local _0x895B = {}
+for _0x55A0, _0xC41E in ipairs(opts.Options or {}) do _0x895B[#_0x895B + 1] = tostring(_0xC41E) end
+local _0xE025 = opts.Default ~= nil and tostring(opts.Default) or _0x895B[1]
+local _0xE9F8 = _0x064A(48)
+_0xE9F8.ClipsDescendants = true
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 0), Size = UDim2.new(0, 250, 0, 48), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or""), TextColor3 = _0xF996.text,
+}, _0xE9F8)
+local _0xD98E = _0x4B5C("Frame", {
+AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -14, 0, 9), Size = UDim2.fromOffset(300, 30),
+BackgroundColor3 = _0xF996.field, BorderSizePixel = 0,
+}, _0xE9F8)
+_0x11C5(_0xD98E, 7)
+local _0x4AB6 = _0x6257(_0xD98E, _0xF996.chipStroke, 1)
+local _0xC97F = _0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(10, 0), Size = UDim2.new(1, _0xE76D and -20 or -36, 1, 0), BackgroundTransparency = 1,
+Font = Enum.Font.GothamMedium, TextSize = 13, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd, Text = _0xE025 or"-", TextColor3 = _0xF996.text,
+}, _0xD98E)
+local _0xF89A
+if not _0xE76D then
+_0xF89A = _0x4B5C("TextLabel", {
+AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -10, 0.5, 0), Size = UDim2.fromOffset(16, 16),
+BackgroundTransparency = 1, Font = Enum.Font.GothamBold, TextSize = 13, Text ="▾", TextColor3 = _0xF996.red,
+}, _0xD98E)
+end
+local _0xA449 = {}
+if _0xE76D then
+function _0xA449:Set() endfunction _0xA449:Get() return _0xE025 end
+function _0xA449:SetOptions() end
+return _0xA449
+end
+local _0xFAD3 = false
+local _0x74A6 = _0x4B5C("ScrollingFrame", {
+Position = UDim2.fromOffset(14, 54), Size = UDim2.new(1, -28, 0, 0), BackgroundTransparency = 1, BorderSizePixel = 0,
+ScrollBarThickness = 3, ScrollBarImageColor3 = _0xF996.redDim, CanvasSize = UDim2.new(),
+AutomaticCanvasSize = Enum.AutomaticSize.Y, Visible = false,
+}, _0xE9F8)
+_0x4B5C("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder, Padding = UDim.new(0, 2) }, _0x74A6)
+local function _0xCD71() return math.min(#_0x895B, 6) * 32 end
+local function _0x5983()
+if _0xFAD3 then
+_0x74A6.Visible = true
+_0x74A6.Size = UDim2.new(1, -28, 0, _0xCD71())
+_0xE9F8.Size = UDim2.new(1, 0, 0, 54 + _0xCD71() + 10)
+else
+_0x74A6.Visible = false
+_0xE9F8.Size = UDim2.new(1, 0, 0, 48)
+end
+if _0xF89A then _0xF89A.Text = _0xFAD3 and"▴"or"▾"end
+_0x4AB6.Color = _0xFAD3 and _0xF996.red or _0xF996.chipStroke
+end
+local function _0xFDB3()
+for _0x55A0, ch in ipairs(_0x74A6:GetChildren()) do
+if ch:IsA("TextButton") then ch:Destroy() end
+end
+for i, _0xB962 in ipairs(_0x895B) do
+local _0x7A15 = _0x4B5C("TextButton", {
+Size = UDim2.new(1, -6, 0, 30), BackgroundColor3 = (_0xB962 == _0xE025) and Color3.fromRGB(40, 18, 21) or _0xF996.field,
+BorderSizePixel = 0, AutoButtonColor = false, Font = Enum.Font.GothamMedium, TextSize = 13,
+TextXAlignment = Enum.TextXAlignment.Left, TextTruncate = Enum.TextTruncate.AtEnd, Text ="  ".. _0xB962,
+TextColor3 = (_0xB962 == _0xE025) and _0xF996.red or _0xF996.text, LayoutOrder = i,
+}, _0x74A6)
+_0x11C5(_0x7A15, 6)
+_0x996D(_0x7A15.MouseButton1Click:Connect(function()
+_0xA449:Set(_0xB962)
+_0xFAD3 = false
+_0x5983()
+end))
+end
+_0x5983()
+end
+function _0xA449:Set(val, suppressCallback)
+_0xE025 = tostring(val)
+_0xC97F.Text = _0xE025
+_0xFDB3()
+if not suppressCallback then _0xE6A7(opts.Callback, _0xE025) end
+end
+function _0xA449:Get() return _0xE025 end
+function _0xA449:SetOptions(newOpts)
+_0x895B = {}
+for _0x55A0, _0xC41E in ipairs(newOpts or {}) do _0x895B[#_0x895B + 1] = tostring(_0xC41E) end
+if not table.find(_0x895B, _0xE025) then
+_0xE025 = _0x895B[1]
+_0xC97F.Text = _0xE025 or"-"end
+_0xFDB3()
+end
+local _0x4E49 = _0x4B5C("TextButton", {
+Position = UDim2.new(0, 0, 0, 0), Size = UDim2.new(1, 0, 0, 48), BackgroundTransparency = 1, Text ="",
+AutoButtonColor = false, ZIndex = 2,
+}, _0xE9F8)
+_0x996D(_0x4E49.MouseButton1Click:Connect(function()
+_0xFAD3 = not _0xFAD3
+_0x5983()
+end))
+_0xFDB3()
+return _0xA449
+endfunction _0x3B89:Keybind(opts)
+opts = opts or {}
+local _0x9C98 = opts.Default or Enum.KeyCode.RightControl
+local _0x8C20 = false
+local _0xE9F8 = _0x064A(48)
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 0), Size = UDim2.new(1, -200, 1, 0), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or""), TextColor3 = _0xF996.text,
+}, _0xE9F8)
+local _0xE24D = _0x4B5C("TextButton", {
+AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -14, 0.5, 0), Size = UDim2.fromOffset(150, 30),
+BackgroundColor3 = _0xF996.field, BorderSizePixel = 0, AutoButtonColor = false, Font = Enum.Font.GothamBold,
+TextSize = 13, Text = _0x9C98.Name, TextColor3 = _0xF996.red,
+}, _0xE9F8)
+_0x11C5(_0xE24D, 7)
+_0x6257(_0xE24D, _0xF996.chipStroke, 1)
+local _0xA449 = {}
+function _0xA449:Set(newKey)
+_0x9C98 = newKey
+_0xE24D.Text = _0x9C98.Name
+end
+function _0xA449:Get() return _0x9C98 end
+_0x996D(_0xE24D.MouseButton1Click:Connect(function()
+_0x8C20 = true
+_0xE6E9._listening = true
+_0xE24D.Text ="..."end))
+_0x996D(_0x7D42.InputBegan:Connect(function(input)
+if not _0x8C20 or input.UserInputType ~= Enum.UserInputType.Keyboard then return end
+_0x8C20 = false
+task.defer(function() _0xE6E9._listening = false end)
+if input.KeyCode == Enum.KeyCode.Escape then
+_0xE24D.Text = _0x9C98.Name
+return
+end
+_0x9C98 = input.KeyCode
+_0xE24D.Text = _0x9C98.Name
+if opts.Changed then _0xE6A7(opts.Changed, _0x9C98) end
+end))
+return _0xA449
+endfunction _0x3B89:Input(opts)
+opts = opts or {}
+local _0xE9F8 = _0x064A(48)
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 0), Size = UDim2.new(0.38, 0, 1, 0), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or""), TextColor3 = _0xF996.text,
+}, _0xE9F8)
+local _0xD98E = _0x4B5C("TextBox", {
+AnchorPoint = Vector2.new(1, 0.5), Position = UDim2.new(1, -14, 0.5, 0), Size = UDim2.new(0.56, 0, 0, 30),
+BackgroundColor3 = _0xF996.field, BorderSizePixel = 0, ClearTextOnFocus = false, Font = Enum.Font.GothamMedium,
+TextSize = 13, Text = tostring(opts.Default or""), PlaceholderText = opts.Placeholder or"",
+PlaceholderColor3 = Color3.fromRGB(110, 110, 118), TextColor3 = _0xF996.text, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd,
+}, _0xE9F8)
+_0x11C5(_0xD98E, 7)
+local _0xFCDB = _0x6257(_0xD98E, _0xF996.chipStroke, 1)
+_0x4B5C("UIPadding", { PaddingLeft = UDim.new(0, 10), PaddingRight = UDim.new(0, 10) }, _0xD98E)
+_0x996D(_0xD98E.Focused:Connect(function() _0xFCDB.Color = _0xF996.red end))
+_0x996D(_0xD98E.FocusLost:Connect(function()
+_0xFCDB.Color = _0xF996.chipStroke
+_0xE6A7(opts.Callback, _0xD98E.Text)
+end))
+return {
+Set = function(_0x55A0, _0xB460) _0xD98E.Text = tostring(_0xB460 or"") end,
+Get = function() return _0xD98E.Text end,
+}
+endfunction _0x3B89:Paragraph(opts)
+opts = opts or {}
+local _0xE9F8 = _0x064A(66)
+local _0xB216 = _0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 10), Size = UDim2.new(1, -36, 0, 19), BackgroundTransparency = 1,
+Font = Enum.Font.GothamBold, TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left,
+TextTruncate = Enum.TextTruncate.AtEnd, Text = tostring(opts.Name or""), TextColor3 = _0xF996.text,
+}, _0xE9F8)
+local _0x2807 = _0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 31), Size = UDim2.new(1, -36, 0, 28), BackgroundTransparency = 1,
+Font = Enum.Font.Gotham, TextSize = 12, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left,
+TextYAlignment = Enum.TextYAlignment.Top, TextTruncate = Enum.TextTruncate.AtEnd,
+Text = (opts.Desc and opts.Desc ~="") and tostring(opts.Desc) or"-", TextColor3 = _0xF996.sub,
+}, _0xE9F8)
+return {
+TitleLabel = _0xB216,
+SetTitle = function(_0xB460) _0xB216.Text = tostring(_0xB460) end,
+SetDesc = function(_0xB460) _0x2807.Text = tostring(_0xB460) end,
+}
+endfunction _0x3B89:Label(textString)
+local _0xE9F8 = _0x064A(40)
+_0x4B5C("TextLabel", {
+Position = UDim2.fromOffset(18, 0), Size = UDim2.new(1, -36, 1, 0), BackgroundTransparency = 1,
+Font = Enum.Font.GothamMedium, TextSize = 13, TextXAlignment = Enum.TextXAlignment.Left,
+Text = tostring(textString or""), TextColor3 = _0xF996.sub,
+}, _0xE9F8)
+end
+return _0x3B89
+end
+return _0x35F9
+end_0x996D(_0x7D42.InputBegan:Connect(function(input, gameProcessed)
+if gameProcessed or _0xE6E9._listening then return end
+if input.KeyCode == _0xE6E9.ToggleKey then _0xE6E9:Toggle() end
+end))function _0xE6E9:Destroy()
+for i = #_0xDB3B, 1, -1 do
+local _0x3B47 = _0xDB3B[i]
+_0xDB3B[i] = nil
+if typeof(_0x3B47) =="RBXScriptConnection"then
+pcall(function() _0x3B47:Disconnect() end)
+elseif typeof(_0x3B47) =="Instance"then
+pcall(function() _0x3B47:Destroy() end)
+end
+end
+_0xDC87.__TwoKSupportUI = nil
+end
+_0xDC87.__TwoKSupportUI = _0xE6E9function _0xE6E9:BuildSettings(settingsTab)
+local _0x94C8 = settingsTab:Section("WINDOW")
+_0x94C8:Slider({
+Name ="ขนาดหน้าต่าง UI",
+Min = 40, Max = 150, Step = 5,
+Default = math.floor(_0x5537 * 100 + 0.5),
+Suffix ="%",
+Callback = function(val)
+_0x5537 = val / 100
+if _0xE6E9.Visible then _0x6FC0.Scale = _0x10F6() end
+_0x708C()
+end,
+})
+_0x94C8:Keybind({
+Name ="ปุ่มเปิด/ปิดเมนู",
+Default = _0xE6E9.ToggleKey,
+Changed = function(newKey)
+_0xE6E9.ToggleKey = newKey
+_0x708C()
+_0xE6E9:Notify({ Title ="TOGGLE KEY", Text ="เปลี่ยนปุ่มเปิด/ปิดเมนูเป็น ".. newKey.Name, Duration = 3 })
+end,
+})
+_0x94C8:Button({
+Name ="ทำลายสคริปต์ (DESTROY UI)",
+Desc ="ปิดการทำงาน ลบหน้าต่าง และคืนค่าทั้งหมด",
+Callback = function() _0xE6E9:Destroy() end,
+})
+end
+return _0xE6E9
+end)()local _0x5A6A = _0xE6E9.Destroy
+local _0x8057 = false
+function _0xE6E9:Destroy()
+if _0x8057 then return end
+_0x8057 = true
+_0x5A6A(self)
+if _0xE144() then _G.TwoKRaycityCleanup() end
+end
+_0xCE54(function() _0xE6E9:Destroy() end)
+local function _0x210E(_0xB216, _0xB460, _0x7D0E)
+_0xE6E9:Notify({ Title = _0xB216, Text = _0xB460, Duration = _0x7D0E or 3 })
+endlocal _0x6008 = {}
+local function _0x88C8(section, _0x9C98, _0xB962, _0x2807, onChange)
+local _0xA449
+_0xA449 = section:Toggle({
+Name = _0xB962,
+Desc = _0x2807,
+Default = _0x8AD8[_0x9C98],
+Callback = function(_0x5957)
+_0x8AD8[_0x9C98] = _0x5957
+_0x6472()
+if onChange then onChange(_0x5957) end
+end,
+})
+_0x6008[_0x9C98] = _0xA449
+return _0xA449
+endlocal _0xB610 = _0xE6E9:Tab("เมนูปกติ")
+local _0x6DFF = _0xE6E9:Tab("ทำเควส ออโต้")
+local _0x9F51 = _0xE6E9:Tab("ส่งเงิน")local _0xB32A = _0xB610:Section("BOOST / SPEED")
+_0x88C8(_0xB32A,"AutoBoost","บูสต์อัตโนมัติ","กดบูสต์ให้ตอนวิ่งทางตรง (ใช้ SP ของเกม เหลือไว้ 20 SP)")
+_0x88C8(_0xB32A,"FastCorners","เข้าโค้งเร็วขึ้น","ลดการเบรกก่อนเข้าโค้งของระบบขับอัตโนมัติ", function() _0x07F5() end)
+local _0x67A1 = _0xB610:Section("NPC TRAFFIC / PROPS")
+_0x88C8(_0x67A1,"NoTraffic","ลบรถ NPC","รถ NPC หายและชนไม่ได้ (เห็นเฉพาะเครื่องเรา)", function(_0x5957)
+if not _0x3CD9() then
+_0x210E("2K SCRIPT","หาระบบรถ NPC ไม่เจอ")
+else
+_0x210E("2K SCRIPT", _0x5957 and"ลบรถ NPC แล้ว"or"รถ NPC กลับมาแล้ว", 2)
+end
+end)
+_0x88C8(_0x67A1,"NoProps","ทะลุต้นไม้/เสาไฟ","รถวิ่งทะลุต้นไม้และเสาไฟได้ และซ่อนต้นไม้ (เห็นเฉพาะเครื่องเรา)", function(_0x5957)
+if not _0x7EA2() then
+_0x210E("2K SCRIPT","หาระบบชนต้นไม้ไม่เจอ")
+else
+_0x210E("2K SCRIPT", _0x5957 and"ทะลุต้นไม้/เสาไฟแล้ว"or"ชนต้นไม้/เสาไฟตามปกติ", 2)
+end
+end)local _0xF41E = _0x6DFF:Section("WARNING / คำเตือน")
+local _0x44F5 = _0xF41E:Paragraph({
+Name ="⚠ การใช้ฟังก์ชันนี้เสี่ยงโดนแบน",
+Desc ="ออโต้เควส มีโอกาสที่บัญชีจะถูกแบน ผู้ใช้ต้องรับความเสี่ยงที่เกิดขึ้นด้วยตัวเองนะครับ",
+})
+_0x44F5.TitleLabel.TextColor3 = Color3.fromRGB(235, 46, 46)
+local _0x848F = _0x6DFF:Section("AUTO MISSION")
+_0x88C8(_0x848F,"AutoMission","ทำภารกิจอัตโนมัติ","ขับไปหา NPC ภารกิจ รับงาน แล้วขับตามเส้นนำทางจนจบ วนไปเรื่อยๆ", function(_0x5957)
+if not _0x5957 then
+_0x6D9E()
+_0x1D0B()
+end
+end)
+_0x6008.CruiseKmh = _0x848F:Slider({
+Name ="ความเร็วขับอัตโนมัติ",
+Min = 100,
+Max = 200,
+Step = 10,
+Default = _0x8AD8.CruiseKmh,
+Suffix =" กม./ชม.",
+Callback = function(_0x5957)
+_0x8AD8.CruiseKmh = _0x5957
+_0x6472()
+_0xD5A5()
+end,
+})
+do
+local _0x377D = {}
+for _0x55A0, _0xCD2A in ipairs(_0x94C4) do _0x377D[#_0x377D + 1] = _0xCD2A.label end
+_0x8AD8.MissionPick = _0x377D[1]_0x6008.MissionPick = _0x848F:Dropdown({
+Name ="เลือกภารกิจ",
+Options = _0x377D,
+Default = _0x377D[1],
+Locked = true,})
+end
+_0x88C8(_0x848F,"AutoGetItems","รับไอเทมอัตโนมัติ (Get All)","กด Get All ในหน้าต่างไอเทมหลังจบภารกิจให้เอง ก่อนหมดเวลา")
+_0x88C8(_0x848F,"AutoStore","ฝากของเข้าโกดังเมื่อกระเป๋าใกล้เต็ม","เหลือที่ว่าง 2 ช่องจะย้ายของซ้ำเข้าโกดังให้ (ฟรี ทำได้จากทุกที่) กันไอเทมหายตอนกด Get All")
+_0x88C8(_0x848F,"AutoSellAll","ขายทุกอย่างอัตโนมัติ","ขายทุกชิ้นที่ได้มาทันที (รวมอัญมณี/ของมีออปชัน) ทุก 10 วิ เปิดอันนี้แล้วไม่ต้องเปิดขายของซ้ำ")
+_0x88C8(_0x848F,"AutoSell","ขายของซ้ำอัตโนมัติ","ขายของที่มีซ้ำ เหลือไว้ชนิดละ 1 ชิ้น (ขายได้ทุกที่) ไม่ขายอัญมณีและของที่มีออปชันพิเศษ")
+do
+local _0xE286 = 0
+local _0x1B26 = false
+_0x848F:Button({
+Name ="ขายของทั้งหมดในกระเป๋า",
+Desc ="ขายทุกชิ้นที่ขายได้ (รวมอัญมณี/ของมีออปชัน) กด 2 ครั้งภายใน 3 วิ เพื่อยืนยัน",
+Callback = function()
+if _0x1B26 then return end
+if os.clock() - _0xE286 > 3 then
+_0xE286 = os.clock()
+_0x210E("2K SCRIPT","กดอีกครั้งภายใน 3 วิ เพื่อขายของทั้งหมด", 3)
+return
+end
+_0xE286, _0x1B26 = 0, true
+task.spawn(function()
+_0x210E("2K SCRIPT","กำลังขายของทั้งหมด...", 2)
+local _0x05F7, _0x3494, _0x9685 = pcall(_0x8DE2)
+_0x1B26 = false
+if _0x05F7 then
+_0x210E("2K SCRIPT", string.format("ขายแล้ว %d ชิ้น ได้ +%d เงิน", _0x3494 or 0, _0x9685 or 0), 4)
+else
+_0x210E("2K SCRIPT","ขายไม่สำเร็จ: ".. tostring(_0x3494):sub(1, 60), 4)
+end
+end)
+end,
+})
+end
+local _0x3C9C = _0x848F:Paragraph({ Name ="ภารกิจ: ปิดอยู่", Desc ="-"})
+local _0x70FE = _0x6DFF:Section("AUTO PICKUP")
+_0x88C8(_0x70FE,"AutoCoin","เก็บของบนถนนอัตโนมัติ","ขับไปทับของบนถนน (ถ้าเปิดภารกิจไว้ด้วย จะพักไว้ระหว่างทำภารกิจ)", function(_0x5957)
+if not _0x5957 then
+_0x6D9E()
+_0x1D0B()
+end
+end)
+_0x88C8(_0x70FE,"PickMoney","เก็บเหรียญเงิน","เหรียญทองแดง/เงิน/ทอง")
+_0x88C8(_0x70FE,"PickSP","เก็บ SP","ลูกสีฟ้า เติมเกจ SP")
+_0x88C8(_0x70FE,"PickItem","เก็บกล่องไอเทม","กล่องที่โผล่ช่วงอีเวนต์")
+_0x6008.CoinRange = _0x70FE:Slider({
+Name ="ระยะหาเหรียญ",
+Min = 100,
+Max = 1500,
+Step = 50,
+Default = _0x8AD8.CoinRange,
+Suffix =" studs",
+Callback = function(_0x5957)
+_0x8AD8.CoinRange = _0x5957
+_0x6472()
+end,
+})
+local _0xF3EA = _0x70FE:Paragraph({ Name ="เก็บของ: ปิดอยู่", Desc ="-"})
+local _0xA5D6 = _0x6DFF:Section("STATS")
+local _0x1C37 = _0xA5D6:Paragraph({ Name ="กำลังโหลด...", Desc ="-"})local _0xD59B = _0x9F51:Section("SEND MONEY (จดหมาย)")
+_0x6008.SendTarget = _0xD59B:Input({
+Name ="ส่งให้ (ชื่อในเกม)",
+Default = _0x8AD8.SendTarget,
+Placeholder ="ชื่อตัวละคร ไม่ต้องอยู่เซิร์ฟเดียวกัน",
+Callback = function(_0xB460)
+_0x8AD8.SendTarget = tostring(_0xB460 or""):gsub("^%s+",""):gsub("%s+$","")
+_0x6472()
+end,
+})
+_0x6008.SendAmount = _0xD59B:Input({
+Name ="จำนวนเงิน",
+Default = tostring(_0x8AD8.SendAmount),
+Placeholder ="เช่น 50000",
+Callback = function(_0xB460)
+local _0x3494 = tonumber((tostring(_0xB460):gsub("[,%s]","")))
+if _0x3494 and _0x3494 > 0 then
+_0x8AD8.SendAmount = math.floor(_0x3494)
+_0x6472()
+else
+_0x210E("2K SCRIPT","ใส่จำนวนเงินเป็นตัวเลข")
+end
+end,
+})
+_0x6008.SendKeep = _0xD59B:Input({
+Name ="เก็บเงินไว้ขั้นต่ำ",
+Default = tostring(_0x8AD8.SendKeep),
+Placeholder ="0",
+Callback = function(_0xB460)
+local _0x3494 = tonumber((tostring(_0xB460):gsub("[,%s]","")))
+if _0x3494 and _0x3494 >= 0 then
+_0x8AD8.SendKeep = math.floor(_0x3494)
+_0x6472()
+end
+end,
+})
+do
+local _0x1B26 = false
+_0xD59B:Button({
+Name ="ส่งเงินตอนนี้",
+Desc ="ส่งจดหมายแนบ Rain (ข้ามเซิร์ฟได้ เกมคิดค่าส่งเพิ่ม)",
+Callback = function()
+if _0x1B26 then return end
+_0x1B26 = true
+task.spawn(function()
+local _0x05F7, _0xD74F, _0xE46D = pcall(_0x1F99, _0x8AD8.SendTarget, _0x8AD8.SendAmount)
+_0x1B26 = false
+_0x210E("2K SCRIPT", _0x05F7 and tostring(_0xE46D) or ("ผิดพลาด: ".. tostring(_0xD74F):sub(1, 60)), 4)
+end)
+end,
+})
+end
+_0x88C8(_0xD59B,"AutoSend","ส่งเงินอัตโนมัติ","ส่งจำนวนที่ตั้งไว้ทุกครั้งที่เงินพอ (รวมค่าส่งและเงินเก็บขั้นต่ำ) เว้นอย่างน้อย 60 วิ")
+local _0x55B2 = _0x9F51:Section("RECEIVE")
+_0x88C8(_0x55B2,"AutoTakeMail","รับเงินจากจดหมายอัตโนมัติ","ใช้กับไอดีที่รับเงิน: กดรับเงิน/ไอเทมที่แนบมาในจดหมายทุกฉบับให้")
+local _0x82E4 = _0x55B2:Paragraph({ Name ="สถานะการส่ง", Desc ="-"})
+task.spawn(function()
+while _0xE144() do
+pcall(function()
+_0x82E4.SetTitle(string.format("ส่งไปแล้ว %d (ค่าส่ง %d) • เงินตอนนี้ %s", _0xA85B.SentTotal or 0, _0xA85B.SentFee or 0,
+tostring(_0xD643:GetAttribute("RaycityRain") or"-")))
+_0x82E4.SetDesc(_0xA85B.Trade or"-")
+end)
+task.wait(0.5)
+end
+end)local _0x681F = _0xB610_0x8AD8.No3D, _0x8AD8.CapFps = false, false
+local _0x2397 = game:GetService("RunService")
+local _0xA5EF = (getfpscap and getfpscap()) or 60
+local function _0xC2CE()
+pcall(function() _0x2397:Set3dRenderingEnabled(not _0x8AD8.No3D) end)
+if setfpscap then
+pcall(setfpscap, _0x8AD8.CapFps and math.clamp(tonumber(_0x8AD8.FpsCap) or 30, 10, 240) or _0xA5EF)
+end
+end
+_0xC2CE()
+_0xCE54(function()
+pcall(function() _0x2397:Set3dRenderingEnabled(true) end)
+if setfpscap then pcall(setfpscap, _0xA5EF) end
+end)
+local _0xFE5C = _0x681F:Section("SYSTEM")
+_0x88C8(_0xFE5C,"AutoEnter","เข้าเกมอัตโนมัติ","ข้ามอนิเมชัน → เลือก Channel ที่อยู่ → กดเริ่มเกมด้วยตัวละครนี้ (ใส่ hub ไว้ใน auto-execute)")
+_0x88C8(_0xFE5C,"KeepUploading","ส่งตำแหน่งรถแม้สลับหน้าต่าง","ปิดแล้วเซิร์ฟเวอร์จะไม่รับเหรียญ/คุย NPC ตอนหน้าต่างไม่ได้อยู่ด้านหน้า", function()
+_0x4184()
+end)
+_0xFE5C:Button({
+Name ="หยุดรถทันที",
+Desc ="ยกเลิกขับอัตโนมัติและปล่อยคันเร่ง",
+Callback = function()
+_0x8AD8.AutoMission, _0x8AD8.AutoCoin = false, false
+_0x6D9E()
+_0x1D0B()
+_0x210E("2K SCRIPT","หยุดรถแล้ว (ปิดภารกิจและเหรียญ)")
+end,
+})_G.TwoKRaycity = {
+_0x8AD8 = _0x8AD8,
+_0xA85B = _0xA85B,
+_0xE6E9 = _0xE6E9,
+DriveNear = _0x330E,
+AutoDriveTo = _0x9606,
+ApplyTraffic = _0x3CD9,
+StoreNow = function() return pcall(_0xCD36, true) end,
+SellNow = function() return pcall(_0xB565) end,
+SellAll = function() return pcall(_0x8DE2) end,
+SendMoney = function(_0xB962, amount) return _0x1F99(_0xB962, amount) end,
+_0x073B = _0x073B,
+ProfileSave = _0xC0CE,
+ProfileList = _0xE68F,
+ProfileRead = _0xABEC,
+Stop = function()
+_0x6D9E()
+_0x1D0B()
+end,
+}local _0x1580 = _0xD643:GetAttribute("RaycityRain")
+local _0xD478 = os.clock()
+task.spawn(function()
+while _0xE144() do
+pcall(function()
+local _0x9685 = _0xD643:GetAttribute("RaycityRain")
+local _0x32BA = (tonumber(_0x9685) or 0) - (tonumber(_0x1580) or 0)
+local _0x2233 = math.max((os.clock() - _0xD478) / 60, 1 / 60)
+_0x3C9C.SetTitle("ภารกิจ: ".. (_0x8AD8.AutoMission and"เปิด"or"ปิด"))
+_0x3C9C.SetDesc(_0xA85B.Mission)
+_0xF3EA.SetTitle("เก็บของ: ".. (_0x8AD8.AutoCoin and"เปิด"or"ปิด"))
+_0xF3EA.SetDesc(_0xA85B.Coin)
+_0x1C37.SetTitle(string.format("เงิน %s  (%+d • %d/นาที)", tostring(_0x9685 or"-"), _0x32BA, _0x32BA / _0x2233))
+_0x1C37.SetDesc(string.format("ภารกิจ %d/%d (ไอเทม %d) • เหรียญ %d • SP %d • กล่อง %d • Lv %s",
+_0xA85B.MissionsDone, _0xA85B.MissionsDone + _0xA85B.MissionsFailed, _0xA85B.Items or 0,
+_0xA85B.Picked[0], _0xA85B.Picked[1], _0xA85B.Picked[2],
+tostring(_0xD643:GetAttribute("RaycityPlayerLv") or"-"))
+.. (_0xA85B.Store and (" • ".. _0xA85B.Store) or""))
+if _0x8AD8.AutoMission then
+_0xE6E9:SetStatus("MISSION  //  ".. _0xA85B.MissionsDone .." DONE")
+elseif _0x8AD8.AutoCoin then
+_0xE6E9:SetStatus("PICKUP  //  ".. _0xA85B.Coins .." PICKED")
+else
+_0xE6E9:SetStatus("IDLE")
+end
+end)
+task.wait(0.5)
+end
+end)do
+local _0xB52C, _0xB04D = pcall(function() return require(_0xA0CF.RaycityUi.RaycityEscGate) end)
+if _0xB52C and type(_0xB04D) =="table"and _0xB04D.setTrapEnabled then
+local _0x632D = false
+task.spawn(function()
+while _0xE144() do
+local _0x3BE3 = _0xE6E9.Visible == true
+if _0x3BE3 ~= _0x632D or _0x3BE3 then
+pcall(_0xB04D.setTrapEnabled, not _0x3BE3)
+_0x632D = _0x3BE3
+end
+task.wait(0.3)
+end
+end)
+_0xCE54(function() pcall(_0xB04D.setTrapEnabled, true) end)
+end
+end_0xE6E9:Toggle(true)
+_0x210E("SUPPORT S","Raycity RB พร้อมใช้งาน • กด ".. _0xE6E9.ToggleKey.Name .." เปิด/ปิดเมนู", 4)
+_0x210E("⚠ คำเตือน","ฟังก์ชันออโต้เควสเสี่ยงโดนแบน โปรดรับความเสี่ยงเอง", 6)
